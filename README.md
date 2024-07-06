@@ -27,3 +27,7 @@ To see the current and future tasks for this project, please navigate to the [pr
 ## ❤️ Acknowledgments
 
 See the [contributors](https://github.com/rapid-integration/fusion/contributors) who participated in this project and the [dependencies](https://github.com/rapid-integration/fusion/network/dependencies) used.
+
+## 📜 License
+
+This project is licensed under the **CC BY-NC-SA** — see the [`LICENSE.md`](LICENSE.md) file for details.
