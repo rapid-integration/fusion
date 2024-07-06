@@ -1,0 +1,24 @@
+# Web Framework
+fastapi[all]
+
+# ORM Provider
+sqlalchemy
+
+# Migrations Manager
+alembic
+
+# PostgreSQL Database Adapters
+psycopg
+psycopg-binary
+psycopg2
+psycopg2-binary
+
+# Case Converter
+pyheck
+
+# JWT Encoder & Decoder
+pyjwt
+
+# Security
+passlib
+bcrypt==4.0.1  # https://github.com/pyca/bcrypt/issues/684
