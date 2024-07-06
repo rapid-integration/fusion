@@ -22,11 +22,15 @@
 
 ## 🗺️ Roadmap
 
-To see the current and future tasks for this project, please navigate to the [projects](https://github.com/rapid-integration/fusion/projects) tab.
+To see the current and future tasks for this project, please navigate to the [projects](/projects) tab.
+
+## 🚀 Contributing
+
+To contribute to this project, please read the [`CONTRIBUTING.md`](.github/CONTRIBUTING.md) file. It provides details on our code of conduct and the process for submitting pull requests.
 
 ## ❤️ Acknowledgments
 
-See the [contributors](https://github.com/rapid-integration/fusion/contributors) who participated in this project and the [dependencies](https://github.com/rapid-integration/fusion/network/dependencies) used.
+See the [contributors](/contributors) who participated in this project and the [dependencies](/network/dependencies) used.
 
 ## 📜 License
 
