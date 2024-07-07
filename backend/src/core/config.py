@@ -23,6 +23,8 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str
     POSTGRES_PATH: str
 
+    FILES_PATH: str
+
     @computed_field
     @property
     def DATABASE_URI(self) -> PostgresDsn:
