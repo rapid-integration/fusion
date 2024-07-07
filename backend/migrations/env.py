@@ -3,7 +3,7 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import create_engine
 
-from src.api import *  # https://github.com/sqlalchemy/alembic/issues/712
+from src.api import *  # noqa: F403 https://github.com/sqlalchemy/alembic/issues/712
 from src.core.config import settings
 from src.core.db import Base
 

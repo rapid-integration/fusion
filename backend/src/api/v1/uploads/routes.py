@@ -1,6 +1,6 @@
-from fastapi import APIRouter, UploadFile, status, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile, status
 
-from src.core.files import save_files, get_file
+from src.core.files import get_file, save_files
 
 router = APIRouter(prefix="/uploads", tags=["Uploads"])
 
