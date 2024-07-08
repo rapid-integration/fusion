@@ -8,18 +8,22 @@ from fastapi.responses import FileResponse
 from src.core.config import settings
 
 
-def generate_name(file: UploadFile):
+def generate_name(file_type: str):
+    return f"{secrets.token_hex(nbytes=12)}.{file_type}"
+
+
+def generate_unique_name(file: UploadFile):
     file_type = file.filename.split(".")[-1]
-    filename = f"{secrets.token_hex(nbytes=12)}.{file_type}"
+    filename = generate_name(file_type)
     while os.path.exists(os.path.join(settings.UPLOADS_PATH, filename)):
-        filename = f"{secrets.token_hex(nbytes=12)}.{file_type}"
+        filename = generate_name(file_type)
     return filename
 
 
 async def save_files(files: list[UploadFile]) -> list[str]:
     filenames = []
     for file in files:
-        filename = generate_name(file)
+        filename = generate_unique_name(file)
         await save_file(file, filename)
         filenames.append(filename)
     return filenames
