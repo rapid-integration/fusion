@@ -11,7 +11,7 @@ from src.core.config import settings
 def generate_name(file: UploadFile):
     file_type = file.filename.split(".")[-1]
     filename = f"{secrets.token_hex(nbytes=12)}.{file_type}"
-    while os.path.exists(os.path.join(settings.FILES_PATH, filename)):
+    while os.path.exists(os.path.join(settings.UPLOADS_PATH, filename)):
         filename = f"{secrets.token_hex(nbytes=12)}.{file_type}"
     return filename
 
@@ -26,15 +26,15 @@ async def save_files(files: list[UploadFile]) -> list[str]:
 
 
 async def save_file(file: UploadFile, filename: str) -> None:
-    async with aiofiles.open(os.path.join(settings.FILES_PATH, filename), "wb") as out_file:
+    async with aiofiles.open(os.path.join(settings.UPLOADS_PATH, filename), "wb") as out_file:
         content = await file.read()
         await out_file.write(content)
 
 
 async def get_file(filename: str):
-    if os.path.exists(os.path.join(settings.FILES_PATH, filename)):
+    if os.path.exists(os.path.join(settings.UPLOADS_PATH, filename)):
         return FileResponse(
-            path=os.path.join(os.path.join(settings.FILES_PATH, filename)),
+            path=os.path.join(os.path.join(settings.UPLOADS_PATH, filename)),
             media_type="application/octet-stream",
             filename=filename,
         )

@@ -23,7 +23,7 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str
     POSTGRES_PATH: str
 
-    FILES_PATH: str
+    UPLOADS_PATH: str
 
     @computed_field
     @property
