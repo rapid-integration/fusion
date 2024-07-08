@@ -23,8 +23,6 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str
     POSTGRES_PATH: str
 
-    UPLOADS_PATH: str
-
     @computed_field
     @property
     def DATABASE_URI(self) -> PostgresDsn:
@@ -36,6 +34,8 @@ class Settings(BaseSettings):
             port=self.POSTGRES_PORT,
             path=self.POSTGRES_PATH,
         )
+
+    UPLOADS_PATH: str
 
 
 settings = Settings()  # type: ignore
