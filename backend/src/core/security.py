@@ -20,7 +20,7 @@ def create_access_token(subject: int | str, expire=settings.ACCESS_TOKEN_EXPIRE_
 def decode_access_token(token: str):
     try:
         decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=settings.ALGORITHM)
-        return str(decoded_token["sub"])
+        return data.sub
     except InvalidTokenError:
         return None
 
