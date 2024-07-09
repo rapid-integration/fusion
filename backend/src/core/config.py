@@ -73,7 +73,7 @@ class Settings(BaseSettings):
     PORT: int = 8000
     ENVIRONMENT: Literal["local", "staging", "production"] = "local"
 
-    @computed_field  # type: ignore[misc]
+    @computed_field
     @property
     def server_host(self) -> str:
         # Use HTTPS for anything other than local development
