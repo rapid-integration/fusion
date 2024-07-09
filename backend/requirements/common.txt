@@ -18,6 +18,7 @@ pyheck
 
 # JWT Encoder & Decoder
 pyjwt
+jwt
 
 # Security
 passlib
@@ -25,3 +26,9 @@ bcrypt==4.0.1  # https://github.com/pyca/bcrypt/issues/684
 
 # Async files
 aiofiles
+
+# HTML-templases
+jinja2
+
+# emails
+emails

@@ -37,5 +37,15 @@ class Settings(BaseSettings):
 
     UPLOADS_PATH: str
 
+    SMTP_HOST: str
+    SMTP_USER: str
+    SMTP_PASSWORD: str
+    EMAILS_FROM_EMAIL: str
+    EMAILS_FROM_NAME: str
+    SMTP_TLS: bool
+    SMTP_SSL: bool
+    SMTP_PORT: int
+    EMAIL_RESET_TOKEN_EXPIRE_HOURS: int
+
 
 settings = Settings()  # type: ignore
