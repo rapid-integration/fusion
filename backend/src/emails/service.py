@@ -14,7 +14,7 @@ def generate_email(subject: str, recipients: list, template_body: dict,
     return message
 
 
-async def send_email(message: MessageSchema, template_name: str):
+async def send_email(message: MessageSchema, template_name: str) -> None:
     fm = FastMail(settings.MAIL_CONNECTION_CONF)
     await fm.send_message(message, template_name=template_name)
     return JSONResponse(status_code=200, content={"message": "email has been sent"})
