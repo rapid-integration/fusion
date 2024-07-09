@@ -1,6 +1,6 @@
 # Web Framework
 fastapi[all]
-fastapi_mail
+fastapi-mail
 
 # ORM Provider
 sqlalchemy
