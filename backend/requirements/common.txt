@@ -19,7 +19,6 @@ pyheck
 
 # JWT Encoder & Decoder
 pyjwt
-jwt
 
 # Security
 passlib
