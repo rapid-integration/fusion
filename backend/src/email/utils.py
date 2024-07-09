@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 import emails  # type: ignore
 from jinja2 import Template
