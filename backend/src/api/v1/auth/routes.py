@@ -11,7 +11,7 @@ from src.api.v1.auth.service import (
 )
 from src.core.config import settings
 from src.core.security import create_access_token, decode_access_token, is_valid_password
-from src.emails.service import generate_verify_user_email_email, send_email
+from src.emails.service import generate_user_verification_email, send_email
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -42,22 +42,21 @@ def login(form: OAuth2Form, session: TransactionalSession) -> Any:
     return TokenPayload(access_token=access_token)
 
 
-@router.post("/verify-email")
-async def verify_email(email: str, session: TransactionalSession) -> Any:
-    email = str(email)
-    user = get_user_by_email(session, email)
+@router.post("/verify-user")
+async def send_email_to_verify_user(email_to: str, session: TransactionalSession) -> Any:
+    user = get_user_by_email(session, email_to)
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
     if user.is_verified:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Email already verified")
-    token = create_access_token(email, expire=settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
-    message = generate_verify_user_email_email(email, token, settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
+    token = create_access_token(email_to, expire=settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
+    message = generate_user_verification_email(email_to, token, settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
     ans = await send_email(message, "verify_email.html")
     return ans
 
 
 @router.get("/verify-user")
-async def verify_user(token: str, session: TransactionalSession):
+async def verify_user_by_token(token: str, session: TransactionalSession):
     email = decode_access_token(token)
     if not email:
         raise HTTPException(status_code=400, detail="Invalid token")
