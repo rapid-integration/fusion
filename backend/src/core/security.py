@@ -20,6 +20,7 @@ def create_access_token(subject: int | str, expire=settings.ACCESS_TOKEN_EXPIRE_
 def decode_access_token(token: str) -> str | None:
     try:
         decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=settings.ALGORITHM)
+        data = JWTPayload(**decoded_token)
         return data.sub
     except InvalidTokenError:
         return None

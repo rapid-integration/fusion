@@ -1,5 +1,4 @@
 import secrets
-from typing import Literal
 
 from fastapi_mail import ConnectionConfig
 from pydantic import PostgresDsn, computed_field
@@ -50,7 +49,7 @@ class Settings(BaseSettings):
     VALIDATE_CERTS: bool
     MAIL_PORT: int
     EMAIL_RESET_TOKEN_EXPIRE_MINUTES: int
-    TEMPLATE_FOLDER: str
+    TEMPLATES_PATH: str
 
     @computed_field
     @property
@@ -66,12 +65,11 @@ class Settings(BaseSettings):
             MAIL_SSL_TLS=self.MAIL_SSL_TLS,
             USE_CREDENTIALS=self.USE_CREDENTIALS,
             VALIDATE_CERTS=self.VALIDATE_CERTS,
-            TEMPLATE_FOLDER=self.TEMPLATE_FOLDER
+            TEMPLATE_FOLDER=self.TEMPLATES_PATH
         )
 
     DOMAIN: str = "localhost"
     PORT: int = 8000
-    ENVIRONMENT: Literal["local", "staging", "production"] = "local"
 
     @computed_field
     @property

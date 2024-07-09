@@ -1,6 +1,7 @@
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, status
+from starlette.responses import JSONResponse
 
 from src.api.deps import OAuth2Form, TransactionalSession
 from src.api.v1.auth.schemas import TokenPayload, UserCreate
@@ -51,12 +52,12 @@ async def send_email_to_verify_user(email_to: str, session: TransactionalSession
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Email already verified")
     token = create_access_token(email_to, expire=settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
     message = generate_user_verification_email(email_to, token, settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
-    ans = await send_email(message, "verify_email.html")
-    return ans
+    await send_email(message, "verification-email.html")
+    return JSONResponse(status_code=200, content={"message": "email has been sent"})
 
 
 @router.get("/verify-user")
-async def verify_user_by_token(token: str, session: TransactionalSession):
+async def verify_user_by_token(token: str, session: TransactionalSession) -> dict:
     email = decode_access_token(token)
     if not email:
         raise HTTPException(status_code=400, detail="Invalid token")
