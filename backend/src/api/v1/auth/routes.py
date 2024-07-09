@@ -11,7 +11,7 @@ from src.api.v1.auth.service import (
 )
 from src.core.config import settings
 from src.core.security import create_access_token, decode_access_token, is_valid_password
-from src.email.service import generate_verify_user_email_email, send_email
+from src.emails.service import generate_verify_user_email_email, send_email
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
