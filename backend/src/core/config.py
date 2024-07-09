@@ -77,7 +77,7 @@ class Settings(BaseSettings):
     @property
     def server_host(self) -> str:
         # Use HTTPS for anything other than local development
-        if self.ENVIRONMENT == "local":
+        if self.DEBUG:
             return f"http://{self.DOMAIN}:{self.PORT}"
         return f"https://{self.DOMAIN}"
 
