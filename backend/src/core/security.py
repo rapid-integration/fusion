@@ -17,7 +17,7 @@ def create_access_token(subject: int | str, expire=settings.ACCESS_TOKEN_EXPIRE_
     return encoded_jwt
 
 
-def decode_access_token(token: str):
+def decode_access_token(token: str) -> str | None:
     try:
         decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=settings.ALGORITHM)
         return data.sub
