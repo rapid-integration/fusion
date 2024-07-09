@@ -9,7 +9,9 @@ from src.api.v1.auth.service import (
     get_user_by_email,
     is_email_registered,
 )
-from src.core.security import create_access_token, is_valid_password
+from src.core.config import settings
+from src.core.security import create_access_token, decode_access_token, is_valid_password
+from src.email.service import generate_verify_user_email_email, send_email
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
 
@@ -38,3 +40,30 @@ def login(form: OAuth2Form, session: TransactionalSession) -> Any:
 
     access_token = create_access_token(user.id)
     return TokenPayload(access_token=access_token)
+
+
+@router.post("/verify-email")
+async def verify_email(email: str, session: TransactionalSession) -> Any:
+    email = str(email)
+    user = get_user_by_email(session, email)
+    if not user:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+    if user.is_verified:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Email already verified")
+    token = create_access_token(email, expire=settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
+    message = generate_verify_user_email_email(email, token, settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
+    ans = await send_email(message, "verify_email.html")
+    return ans
+
+
+@router.get("/verify-user")
+async def verify_user(token: str, session: TransactionalSession):
+    email = decode_access_token(token)
+    if not email:
+        raise HTTPException(status_code=400, detail="Invalid token")
+    user = get_user_by_email(session, email)
+    if not user:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+    user.is_verified = True
+    session.commit()
+    return {"detail": "Email verified"}

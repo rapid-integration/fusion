@@ -1,5 +1,6 @@
 # Web Framework
 fastapi[all]
+fastapi_mail
 
 # ORM Provider
 sqlalchemy
@@ -29,6 +30,3 @@ aiofiles
 
 # HTML-templases
 jinja2
-
-# emails
-emails
