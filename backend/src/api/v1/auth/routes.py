@@ -1,7 +1,6 @@
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, status
-from starlette.responses import JSONResponse
 
 from src.api.deps import OAuth2Form, TransactionalSession
 from src.api.v1.auth.schemas import TokenPayload, UserCreate
