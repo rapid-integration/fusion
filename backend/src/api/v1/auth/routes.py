@@ -53,7 +53,7 @@ async def send_email_to_verify_user(email_to: str, session: TransactionalSession
     token = create_access_token(email_to, expire=settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
     message = generate_user_verification_email(email_to, token, settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
     await send_email(message, "verification-email.html")
-    return JSONResponse(status_code=200, content={"message": "email has been sent"})
+    return {"detail": "Email has been sent"}
 
 
 @router.get("/verify-user")
