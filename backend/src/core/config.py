@@ -1,5 +1,6 @@
 import secrets
 
+from fastapi_mail import ConnectionConfig
 from pydantic import PostgresDsn, computed_field
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -36,6 +37,47 @@ class Settings(BaseSettings):
         )
 
     UPLOADS_PATH: str
+
+    MAIL_SERVER: str
+    MAIL_USERNAME: str
+    MAIL_PASSWORD: str
+    MAIL_FROM: str
+    MAIL_FROM_NAME: str
+    MAIL_STARTTLS: bool
+    MAIL_SSL_TLS: bool
+    USE_CREDENTIALS: bool
+    VALIDATE_CERTS: bool
+    MAIL_PORT: int
+    EMAIL_RESET_TOKEN_EXPIRE_MINUTES: int
+    TEMPLATES_PATH: str
+
+    @computed_field
+    @property
+    def MAIL_CONNECTION_CONF(self) -> ConnectionConfig:
+        return ConnectionConfig(
+            MAIL_USERNAME=self.MAIL_USERNAME,
+            MAIL_PASSWORD=self.MAIL_PASSWORD,
+            MAIL_FROM=self.MAIL_FROM,
+            MAIL_PORT=self.MAIL_PORT,
+            MAIL_SERVER=self.MAIL_SERVER,
+            MAIL_FROM_NAME=self.MAIL_FROM_NAME,
+            MAIL_STARTTLS=self.MAIL_STARTTLS,
+            MAIL_SSL_TLS=self.MAIL_SSL_TLS,
+            USE_CREDENTIALS=self.USE_CREDENTIALS,
+            VALIDATE_CERTS=self.VALIDATE_CERTS,
+            TEMPLATE_FOLDER=self.TEMPLATES_PATH
+        )
+
+    DOMAIN: str = "localhost"
+    PORT: int = 8000
+
+    @computed_field
+    @property
+    def server_host(self) -> str:
+        # Use HTTPS for anything other than local development
+        if self.DEBUG:
+            return f"http://{self.DOMAIN}:{self.PORT}"
+        return f"https://{self.DOMAIN}"
 
 
 settings = Settings()  # type: ignore

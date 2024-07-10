@@ -14,7 +14,7 @@ class JWTPayload(BaseModel):
     """Contents of JWT."""
 
     exp: datetime | None = None
-    sub: int | None = None
+    sub: int | str | None = None
 
 
 class UserResponse(BaseModel):

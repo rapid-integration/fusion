@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, timezone
 
 import jwt
+from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
 
 from src.api.v1.auth.schemas import JWTPayload
@@ -9,11 +10,20 @@ from src.core.config import settings
 __crypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-def create_access_token(subject: int) -> str:
-    expires_at = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+def create_access_token(subject: int | str, expire=settings.ACCESS_TOKEN_EXPIRE_MINUTES) -> str:
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=expire)
     to_encode = JWTPayload(exp=expires_at, sub=subject)
     encoded_jwt = jwt.encode(to_encode.model_dump(), settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     return encoded_jwt
+
+
+def decode_access_token(token: str) -> str | None:
+    try:
+        decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=settings.ALGORITHM)
+        data = JWTPayload(**decoded_token)
+        return data.sub
+    except InvalidTokenError:
+        return None
 
 
 def is_valid_password(plain_password: str, hashed_password: str) -> bool:
