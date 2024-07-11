@@ -1,16 +1,16 @@
+from typing import Any
 from fastapi_mail import FastMail, MessageSchema, MessageType
 
 from src.core.config import settings
 
 
-def generate_email(subject: str, recipients: list, template_body: dict,
-                   subtype: MessageType = MessageType.html) -> MessageSchema:
-    message = MessageSchema(
-        subject=subject,
-        recipients=recipients,
-        template_body=template_body,
-        subtype=subtype)
-    return message
+def generate_email(
+    subject: str,
+    recipients: list[str],
+    template_body: dict[str, Any],
+    subtype: MessageType = MessageType.html,
+) -> MessageSchema:
+    return MessageSchema(subject=subject, recipients=recipients, template_body=template_body, subtype=subtype)
 
 
 async def send_email(message: MessageSchema, template_name: str) -> None:

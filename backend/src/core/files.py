@@ -42,5 +42,4 @@ async def get_file(filename: str):
             media_type="application/octet-stream",
             filename=filename,
         )
-    else:
-        return None
+    return None
