@@ -1,43 +1,74 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Verification</title>
-    <style>
-        .container {
-            font-family: Arial, sans-serif;
-            margin: 0 auto;
-            max-width: 600px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            text-align: center;
-        }
-        .button {
-            display: inline-block;
-            margin: 20px 0;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .link {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #555;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Please verify your email address</title>
+  <style>
+    :root {
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --font-size-base: 0.875rem;
+      --font-size-small: 0.75rem;
+      --font-size-large: 1.5rem;
+      --line-height-base: 1.4;
+      --color-link: #1E88E5;
+      --color-dark: #212121;
+      --color-light: #F5F5F5;
+      --color-secondary: #757575;
+    }
+
+    html {
+      font-family: var(--font-sans);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-base);
+      color: var(--color-dark);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      place-items: center;
+      gap: 0.25em;
+      padding: 0.5em;
+    }
+
+    h1 {
+      font-size: var(--font-size-large);
+    }
+
+    small {
+      display: block;
+      font-size: var(--font-size-small);
+      color: var(--color-secondary);
+    }
+
+    a {
+      color: var(--color-link);
+    }
+
+    .button {
+      display: inline-block;
+      margin-bottom: 1.25em;
+      padding: 0.75em 2em;
+      line-height: 1;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--color-light);
+      background: var(--color-link);
+      box-shadow: 0 1px 0 0 rgba(0 0 0 / 15%), inset 0 0 0 1px rgba(0 0 0 / 25%);
+      border-radius: 0.5em;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h2>Verify your email address</h2>
-        <p>Hi {{ email }},</p>
-        <p>Please click the button below to verify your email address:</p>
-        <a href="{{ link }}" class="button">Verify Email</a>
-        <p class="link">If the button doesn't work, please <a href="{{ link }}">click here</a></p>
-        <p>This link will expire in {{ expires_at }} minutes.</p>
-    </div>
+  <img src="https://i.ibb.co/WtPCGfJ/Logo.png" alt="Logo" />
+  <h1>Please verify your email address</h1>
+  <p>You recently added a new email address to your Fusion profile. Please verify this email address by clicking the button below:</p>
+  <a href="{{ link }}" class="button">Verify Email</a>
+  <p>The link will expire in {{ expires_at }} minutes.</p>
+  <small>You are receiving this email because you have a Fusion account associated with <a href="mailto:mail@{{ email }}">{{ email }}</a>.</small>
+  <small>Fusion by the Rapid Integration team.</small>
 </body>
+
 </html>
