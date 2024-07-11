@@ -65,7 +65,7 @@ class Settings(BaseSettings):
             MAIL_SSL_TLS=self.MAIL_SSL_TLS,
             USE_CREDENTIALS=self.USE_CREDENTIALS,
             VALIDATE_CERTS=self.VALIDATE_CERTS,
-            TEMPLATE_FOLDER=self.TEMPLATES_PATH
+            TEMPLATE_FOLDER=self.TEMPLATES_PATH,  # type: ignore
         )
 
     DOMAIN: str = "localhost"
