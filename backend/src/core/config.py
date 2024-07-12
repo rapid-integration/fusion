@@ -38,18 +38,18 @@ class Settings(BaseSettings):
 
     UPLOADS_PATH: str
 
-    MAIL_SERVER: str
     MAIL_USERNAME: str
     MAIL_PASSWORD: str
-    MAIL_FROM: str
-    MAIL_FROM_NAME: str
+    MAIL_PORT: int
+    MAIL_SERVER: str
     MAIL_STARTTLS: bool
     MAIL_SSL_TLS: bool
+    MAIL_FROM: str
+    MAIL_FROM_NAME: str
+    TEMPLATES_PATH: str
     USE_CREDENTIALS: bool
     VALIDATE_CERTS: bool
-    MAIL_PORT: int
     EMAIL_RESET_TOKEN_EXPIRE_MINUTES: int
-    TEMPLATES_PATH: str
 
     @computed_field
     @property
@@ -57,15 +57,15 @@ class Settings(BaseSettings):
         return ConnectionConfig(
             MAIL_USERNAME=self.MAIL_USERNAME,
             MAIL_PASSWORD=self.MAIL_PASSWORD,
-            MAIL_FROM=self.MAIL_FROM,
             MAIL_PORT=self.MAIL_PORT,
             MAIL_SERVER=self.MAIL_SERVER,
-            MAIL_FROM_NAME=self.MAIL_FROM_NAME,
             MAIL_STARTTLS=self.MAIL_STARTTLS,
             MAIL_SSL_TLS=self.MAIL_SSL_TLS,
+            MAIL_FROM=self.MAIL_FROM,
+            MAIL_FROM_NAME=self.MAIL_FROM_NAME,
+            TEMPLATE_FOLDER=self.TEMPLATES_PATH,  # type: ignore
             USE_CREDENTIALS=self.USE_CREDENTIALS,
             VALIDATE_CERTS=self.VALIDATE_CERTS,
-            TEMPLATE_FOLDER=self.TEMPLATES_PATH
         )
 
     DOMAIN: str = "localhost"
@@ -73,7 +73,7 @@ class Settings(BaseSettings):
 
     @computed_field
     @property
-    def server_host(self) -> str:
+    def SERVER_HOST(self) -> str:
         # Use HTTPS for anything other than local development
         if self.DEBUG:
             return f"http://{self.DOMAIN}:{self.PORT}"

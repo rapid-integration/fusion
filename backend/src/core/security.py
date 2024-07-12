@@ -10,8 +10,8 @@ from src.core.config import settings
 __crypt_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-def create_access_token(subject: int | str, expire=settings.ACCESS_TOKEN_EXPIRE_MINUTES) -> str:
-    expires_at = datetime.now(timezone.utc) + timedelta(minutes=expire)
+def create_access_token(subject: int | str, minutes: int = settings.ACCESS_TOKEN_EXPIRE_MINUTES) -> str:
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=minutes)
     to_encode = JWTPayload(exp=expires_at, sub=subject)
     encoded_jwt = jwt.encode(to_encode.model_dump(), settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     return encoded_jwt
@@ -19,9 +19,9 @@ def create_access_token(subject: int | str, expire=settings.ACCESS_TOKEN_EXPIRE_
 
 def decode_access_token(token: str) -> str | None:
     try:
-        decoded_token = jwt.decode(token, settings.SECRET_KEY, algorithms=settings.ALGORITHM)
-        data = JWTPayload(**decoded_token)
-        return data.sub
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        data = JWTPayload(**payload)
+        return str(data.sub)
     except InvalidTokenError:
         return None
 

@@ -13,7 +13,7 @@ def generate_name(file_type: str):
 
 
 def generate_unique_name(file: UploadFile):
-    file_type = file.filename.split(".")[-1]
+    file_type = file.filename.split(".")[-1]  # type: ignore
     filename = generate_name(file_type)
     while os.path.exists(os.path.join(settings.UPLOADS_PATH, filename)):
         filename = generate_name(file_type)
@@ -42,5 +42,4 @@ async def get_file(filename: str):
             media_type="application/octet-stream",
             filename=filename,
         )
-    else:
-        return None
+    return None
