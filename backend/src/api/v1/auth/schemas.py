@@ -8,6 +8,7 @@ class TokenPayload(BaseModel):
 
     access_token: str
     token_type: str = "bearer"
+    expires_at: datetime
 
 
 class JWTPayload(BaseModel):
