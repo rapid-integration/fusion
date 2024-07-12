@@ -1,4 +1,5 @@
 from typing import Any
+
 from fastapi_mail import FastMail, MessageSchema, MessageType
 
 from src.core.config import settings
@@ -21,6 +22,6 @@ async def send_email(message: MessageSchema, template_name: str) -> None:
 def generate_user_verification_email(email_to: str, token: str, expires_at: int) -> MessageSchema:
     subject = f"Verify email for {settings.APP_NAME}"
     recipients = [email_to]
-    link = f"{settings.server_host}/api/v1/auth/verify-user?token={token}"
+    link = f"{settings.SERVER_HOST}/api/v1/auth/verify-user?token={token}"
     template_body = {"email": email_to, "link": link, "expires_at": expires_at}
     return generate_email(subject, recipients, template_body)
