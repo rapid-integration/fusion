@@ -25,3 +25,9 @@ def get_user_by_email(session: Session, email: str) -> User | None:
 
 def is_email_registered(session: Session, email: str) -> bool:
     return session.query(exists().where(User.email == email)).scalar()
+
+
+def verify_user(session: Session, user: User) -> None:
+    user.is_verified = True
+    session.commit()
+    session.refresh(user)

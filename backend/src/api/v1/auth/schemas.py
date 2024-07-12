@@ -26,8 +26,13 @@ class UserResponse(BaseModel):
     updated_at: datetime
 
 
-class UserCreate(BaseModel):
-    """Represents user registration details."""
+class UserEmail(BaseModel):
+    """Represents user with email."""
 
     email: EmailStr = Field(max_length=255)
+
+
+class UserCreate(UserEmail):
+    """Represents user registration details."""
+
     password: str = Field(min_length=8, max_length=128)
