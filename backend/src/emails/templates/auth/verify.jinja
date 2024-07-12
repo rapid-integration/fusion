@@ -1,0 +1,20 @@
+{% extends "base.jinja" %}
+
+{% block heading %}
+Please verify your email address
+{% endblock %}
+
+{% block main %}
+<p>
+  You recently added a new email address to your Fusion profile.
+  Please verify this email address by clicking the button below:
+</p>
+
+<a href="{{ url }}" class="button">
+  Verify Email
+</a>
+
+<p>
+  The link will expire in {{ expires_at }} minutes.
+</p>
+{% endblock %}
