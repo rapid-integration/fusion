@@ -1,4 +1,3 @@
-import datetime
 from typing import Any
 
 from fastapi import APIRouter, HTTPException, status
@@ -12,7 +11,6 @@ from src.api.v1.auth.service import (
     is_email_registered,
     verify_user,
 )
-from src.core.config import settings
 from src.core.security import create_access_token, decode_access_token, is_valid_password
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -25,9 +23,7 @@ async def register(user_create_model: UserCreate, session: TransactionalSession)
 
     user = create_user(session, user_create_model)
     access_token = create_access_token(user.id)
-    expires_at = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(
-        minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    return TokenPayload(access_token=access_token, expires_at=expires_at)
+    return access_token
 
 
 @router.post("/login", response_model=TokenPayload)
@@ -43,9 +39,7 @@ async def login(form: OAuth2Form, session: TransactionalSession) -> Any:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Inactive user")
 
     access_token = create_access_token(user.id)
-    expires_at = datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(
-        minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-    return TokenPayload(access_token=access_token, expires_at=expires_at)
+    return access_token
 
 
 @router.post("/verify")

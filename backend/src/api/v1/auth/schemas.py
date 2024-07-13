@@ -18,19 +18,18 @@ class JWTPayload(BaseModel):
     sub: int | str | None = None
 
 
-class UserResponse(BaseModel):
-    """Represents the public response data for a user."""
-
-    is_active: bool
-    is_verified: bool
-    created_at: datetime
-    updated_at: datetime
-
-
 class UserEmail(BaseModel):
     """Represents user with email."""
 
     email: EmailStr = Field(max_length=255)
+
+
+class UserResponse(BaseModel):
+    """Represents the public response data for a user."""
+    is_active: bool
+    is_verified: bool
+    created_at: datetime
+    updated_at: datetime
 
 
 class UserCreate(UserEmail):
