@@ -1,4 +1,3 @@
-import secrets
 
 from fastapi_mail import ConnectionConfig
 from pydantic import PostgresDsn, computed_field
@@ -14,7 +13,7 @@ class Settings(BaseSettings):
     APP_NAME: str
     APP_VERSION: str
 
-    SECRET_KEY: str = secrets.token_urlsafe(32)
+    SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
     ALGORITHM: str = "HS256"
 
