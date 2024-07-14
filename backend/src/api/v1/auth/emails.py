@@ -9,7 +9,7 @@ VERIFY_TEMPLATE_PATH = "auth/verify.jinja"
 
 async def send_user_verification_message(email: str) -> None:
     token = create_access_token(email, minutes=settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
-    message = generate_user_verification_message(email, token, settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
+    message = generate_user_verification_message(email, token.access_token, settings.EMAIL_RESET_TOKEN_EXPIRE_MINUTES)
 
     await send_message(message, VERIFY_TEMPLATE_PATH)
 
