@@ -36,3 +36,10 @@ class UserCreate(UserEmail):
     """Represents user registration details."""
 
     password: str = Field(min_length=8, max_length=128)
+
+
+class NewPassword(BaseModel):
+    """Represents new password"""
+
+    token: str
+    new_password: str = Field(min_length=8, max_length=128)

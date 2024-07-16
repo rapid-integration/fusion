@@ -3,12 +3,13 @@ from typing import Any
 from fastapi import APIRouter, HTTPException, status
 
 from src.api.deps import OAuth2Form, TransactionalSession
-from src.api.v1.auth.emails import send_user_verification_message
-from src.api.v1.auth.schemas import TokenPayload, UserCreate, UserEmail
+from src.api.v1.auth.emails import send_reset_password_message, send_user_verification_message
+from src.api.v1.auth.schemas import NewPassword, TokenPayload, UserCreate, UserEmail
 from src.api.v1.auth.service import (
     create_user,
     get_user_by_email,
     is_email_registered,
+    reset_password,
     verify_user,
 )
 from src.core.security import create_access_token, decode_access_token, is_valid_password
@@ -48,6 +49,8 @@ async def request_user_verification(schema: UserEmail, session: TransactionalSes
 
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+    if not user.is_active:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "User isn't active")
     if user.is_verified:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Email already verified")
 
@@ -68,3 +71,33 @@ async def confirm_user_verification(token: str, session: TransactionalSession) -
     verify_user(session, user)
 
     return {"detail": "Email verified"}
+
+
+@router.post("/password-recovery")
+async def recovery_password(schema: UserEmail, session: TransactionalSession) -> Any:
+    user = get_user_by_email(session, schema.email)
+
+    if not user:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+    if not user.is_active:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "User isn't active")
+    if user.is_verified:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Email already verified")
+
+    await send_reset_password_message(schema.email)
+
+    return {"detail": "Email has been sent"}
+
+
+@router.post("/reset-password")
+async def password_reset(body: NewPassword, session: TransactionalSession) -> Any:
+    email = decode_access_token(body.token)
+    if not email:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid token")
+    user = get_user_by_email(session, email)
+    if not user:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+
+    reset_password(session, user, body.new_password)
+
+    return {"detail": "Password reset successful"}
