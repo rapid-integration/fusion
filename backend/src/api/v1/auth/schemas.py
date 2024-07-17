@@ -38,15 +38,14 @@ class UserCreate(UserEmail):
     password: str = Field(min_length=8, max_length=128)
 
 
-class NewPassword(BaseModel):
-    """Represents new password"""
-
-    token: str
-    new_password: str = Field(min_length=8, max_length=128)
-
-
 class VerifyUser(UserEmail):
     code: int
+
+
+class NewPassword(VerifyUser):
+    """Represents new password"""
+
+    new_password: str = Field(min_length=8, max_length=128)
 
 
 class SuccessVerifyMessage(BaseModel):

@@ -38,3 +38,4 @@ def reset_password(session: Session, user: User, new_password: str) -> None:
     hashed_password = get_password_hash(password=new_password)
     user.password = hashed_password
     session.commit()
+    delete_verify_code(user.email)
