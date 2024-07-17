@@ -89,7 +89,7 @@ async def recovery_password(schema: UserEmail, session: TransactionalSession) ->
     return {"detail": "Email has been sent"}
 
 
-@router.post("/reset-password")
+@router.patch("/reset-password")
 async def password_reset(body: NewPassword, session: TransactionalSession) -> Any:
     email = decode_access_token(body.token)
     if not email:
