@@ -31,3 +31,10 @@ def verify_user(session: Session, user: User) -> None:
     user.is_verified = True
     session.commit()
     session.refresh(user)
+
+
+def reset_password(session: Session, user: User, new_password: str) -> None:
+    hashed_password = get_password_hash(password=new_password)
+    user.password = hashed_password
+    session.commit()
+    session.refresh(user)
