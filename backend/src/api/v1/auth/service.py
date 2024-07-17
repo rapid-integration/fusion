@@ -3,7 +3,6 @@ from sqlalchemy.sql import exists
 
 from src.api.v1.auth.models import User
 from src.api.v1.auth.schemas import UserCreate
-from src.api.v1.auth.verify_codes import delete_verify_code
 from src.core.security import get_password_hash
 
 
@@ -26,16 +25,3 @@ def get_user_by_email(session: Session, email: str) -> User | None:
 
 def is_email_registered(session: Session, email: str) -> bool:
     return session.query(exists().where(User.email == email)).scalar()
-
-
-def verify_user(session: Session, user: User) -> None:
-    user.is_verified = True
-    session.commit()
-    delete_verify_code(user.email)
-
-
-def reset_password(session: Session, user: User, new_password: str) -> None:
-    hashed_password = get_password_hash(password=new_password)
-    user.password = hashed_password
-    session.commit()
-    delete_verify_code(user.email)

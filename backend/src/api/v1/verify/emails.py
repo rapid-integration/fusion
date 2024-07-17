@@ -1,6 +1,6 @@
 from fastapi_mail import MessageSchema
 
-from src.api.v1.auth.verify_codes import generate_verify_code
+from src.api.v1.verify.service import generate_verify_code
 from src.core.config import settings
 from src.emails.service import generate_message, send_message
 
