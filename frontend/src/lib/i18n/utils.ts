@@ -1,5 +1,5 @@
 import { getRequestEvent, isServer } from "solid-js/web";
-import { type Locale, DEFAULT_LOCALE } from "~/i18n";
+import { type Locale, DEFAULT_LOCALE } from "~/lib/i18n";
 
 /**
  * Gets the user locale based on where the code is running:

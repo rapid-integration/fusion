@@ -1,7 +1,6 @@
-import { type DictionaryMap } from "~/i18n";
+import { type DictionaryMap } from "~/lib/i18n";
 
 export const dict: DictionaryMap = {
-  hi: "Привет",
   locales: {
     en: "Английский",
     ru: "Русский",
