@@ -4,10 +4,13 @@ from fastapi import APIRouter, HTTPException, status
 
 from src.api.deps import TransactionalSession
 from src.api.v1.auth.service import is_email_registered
-from src.api.v1.verify.emails import send_reset_password_message, send_user_verification_message, \
-    send_reset_email_message
-from src.api.v1.verify.schemas import NewPassword, SuccessVerifyMessage, UserEmail, VerifyUser, NewEmail
-from src.api.v1.verify.service import check_verify_code, get_user_by_email, reset_password, verify_email, reset_email
+from src.api.v1.verify.emails import (
+    send_reset_email_message,
+    send_reset_password_message,
+    send_user_verification_message,
+)
+from src.api.v1.verify.schemas import NewEmail, NewPassword, SuccessVerifyMessage, UserEmail, VerifyUser
+from src.api.v1.verify.service import check_verify_code, get_user_by_email, reset_email, reset_password, verify_email
 
 router = APIRouter(prefix="/verify", tags=["Verification"])
 
