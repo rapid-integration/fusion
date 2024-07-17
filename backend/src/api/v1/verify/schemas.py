@@ -17,5 +17,11 @@ class NewPassword(VerifyUser):
     new_password: str = Field(min_length=8, max_length=128)
 
 
+class NewEmail(VerifyUser):
+    """Represents new password"""
+
+    new_email: EmailStr = Field(max_length=255)
+
+
 class SuccessVerifyMessage(BaseModel):
     detail: str = "The code is accepted"

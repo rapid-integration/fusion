@@ -47,3 +47,11 @@ def reset_password(session: Session, user: User, new_password: str) -> None:
     user.password = hashed_password
     session.commit()
     delete_verify_code(user.email)
+
+
+def reset_email(session: Session, user: User, new_email: str) -> None:
+    user.is_verified = False
+    session.commit()
+    user.email = new_email
+    session.commit()
+    delete_verify_code(user.email)

@@ -3,9 +3,11 @@ from typing import Any
 from fastapi import APIRouter, HTTPException, status
 
 from src.api.deps import TransactionalSession
-from src.api.v1.verify.emails import send_reset_password_message, send_user_verification_message
-from src.api.v1.verify.schemas import NewPassword, SuccessVerifyMessage, UserEmail, VerifyUser
-from src.api.v1.verify.service import check_verify_code, get_user_by_email, reset_password, verify_email
+from src.api.v1.auth.service import is_email_registered
+from src.api.v1.verify.emails import send_reset_password_message, send_user_verification_message, \
+    send_reset_email_message
+from src.api.v1.verify.schemas import NewPassword, SuccessVerifyMessage, UserEmail, VerifyUser, NewEmail
+from src.api.v1.verify.service import check_verify_code, get_user_by_email, reset_password, verify_email, reset_email
 
 router = APIRouter(prefix="/verify", tags=["Verification"])
 
@@ -39,11 +41,8 @@ async def request_email_verification(schema: UserEmail, session: TransactionalSe
 
 @router.patch("/verify-email")
 def verification_email(schema: VerifyUser, session: TransactionalSession) -> Any:
-    email = schema.email
+    user = get_user_by_email(session, schema.email)
 
-    if not email:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid email")
-    user = get_user_by_email(session, email)
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
 
@@ -70,11 +69,8 @@ async def recovery_password(schema: UserEmail, session: TransactionalSession) ->
 
 @router.patch("/reset-password")
 def password_reset(schema: NewPassword, session: TransactionalSession) -> Any:
-    email = schema.email
+    user = get_user_by_email(session, schema.email)
 
-    if not email:
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Invalid token")
-    user = get_user_by_email(session, email)
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
 
@@ -82,5 +78,35 @@ def password_reset(schema: NewPassword, session: TransactionalSession) -> Any:
     if isinstance(res, SuccessVerifyMessage):
         reset_password(session, user, schema.new_password)
         return {"detail": "Password reset successful"}
+
+    return res
+
+
+@router.post("/reset-email")
+async def recovery_email(schema: UserEmail, session: TransactionalSession) -> Any:
+    user = get_user_by_email(session, schema.email)
+
+    if not user:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+    if not user.is_active:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "User isn't active")
+
+    await send_reset_email_message(schema.email)
+    return {"detail": "Email has been sent"}
+
+
+@router.patch("/reset-email")
+def email_reset(schema: NewEmail, session: TransactionalSession) -> Any:
+    user = get_user_by_email(session, schema.email)
+
+    if not user:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+    if is_email_registered(session, schema.new_email):
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "Email already taken")
+
+    res = verify(schema)
+    if isinstance(res, SuccessVerifyMessage):
+        reset_email(session, user, schema.new_email)
+        return {"detail": "Email reset successful. Please verify new email"}
 
     return res
