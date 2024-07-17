@@ -1,8 +1,9 @@
 import { type Component, For } from "solid-js";
-import { type Locale, SUPPORTED_LOCALES, useI18n } from "~/i18n";
+import { type Locale, SUPPORTED_LOCALES, useI18n } from "~/lib/i18n";
 
 export const LocaleSwitcher: Component = () => {
   const i18n = useI18n();
+  // TODO: Add option to set system default.
   const locales = () => SUPPORTED_LOCALES.map((locale) => ({ locale: locale, label: i18n.t.locales[locale] }));
 
   return (
