@@ -1,4 +1,3 @@
-
 from fastapi_mail import ConnectionConfig
 from pydantic import PostgresDsn, computed_field
 from pydantic_core import MultiHostUrl
@@ -48,7 +47,7 @@ class Settings(BaseSettings):
     TEMPLATES_PATH: str
     USE_CREDENTIALS: bool
     VALIDATE_CERTS: bool
-    EMAIL_RESET_TOKEN_EXPIRE_MINUTES: int
+    EMAIL_VERIFY_CODE_EXPIRE_MINUTES: int
 
     @computed_field
     @property
@@ -77,6 +76,11 @@ class Settings(BaseSettings):
         if self.DEBUG:
             return f"http://{self.DOMAIN}:{self.PORT}"
         return f"https://{self.DOMAIN}"
+
+    REDIS_HOST: str
+    CODES_KEY: str
+    MIN_NUM_FOR_VERIFY_CODE: int
+    MAX_NUM_FOR_VERIFY_CODE: int
 
 
 settings = Settings()  # type: ignore

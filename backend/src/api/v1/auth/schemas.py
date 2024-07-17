@@ -43,3 +43,11 @@ class NewPassword(BaseModel):
 
     token: str
     new_password: str = Field(min_length=8, max_length=128)
+
+
+class VerifyUser(UserEmail):
+    code: int
+
+
+class SuccessVerifyMessage(BaseModel):
+    detail: str = "The code is accepted"
