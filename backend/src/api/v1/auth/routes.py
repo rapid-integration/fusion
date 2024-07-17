@@ -81,7 +81,6 @@ async def recovery_password(schema: UserEmail, session: TransactionalSession) ->
         raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
     if not user.is_active:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "User isn't active")
-    if user.is_verified:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Email already verified")
 
     await send_reset_password_message(schema.email)
