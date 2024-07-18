@@ -7,14 +7,14 @@
 {% block main %}
     <p>
         You recently added a new email address to your Fusion profile.
-        Please verify this email address by clicking the button below:
+        Please confirm this email address by entering the code on the website:
     </p>
 
-    <a href="{{ url }}" class="button">
-        Verify Email
-    </a>
+    <p>
+        Your verify code is {{ code }}
+    </p>
 
     <p>
-        The link will expire in {{ expires_at }} minutes.
+        The code will expire in {{ expires_at }} minutes.
     </p>
 {% endblock %}

@@ -26,3 +26,6 @@ bcrypt==4.0.1  # https://github.com/pyca/bcrypt/issues/684
 
 # Async files
 aiofiles
+
+# Redis
+redis
