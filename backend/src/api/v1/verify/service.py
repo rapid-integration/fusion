@@ -50,8 +50,7 @@ def reset_password(session: Session, user: User, new_password: str) -> None:
 
 
 def reset_email(session: Session, user: User, new_email: str) -> None:
-    user.is_verified = False
-    session.commit()
     user.email = new_email
+    user.is_verified = False
     session.commit()
     delete_verify_code(user.email)
