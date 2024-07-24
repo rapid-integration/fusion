@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     ALGORITHM: str
     SECRET_KEY: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 30  # 30 days
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
 
     VERIFICATION_CODE_MIN: int = 100_000
     VERIFICATION_CODE_MAX: int = 999_999
