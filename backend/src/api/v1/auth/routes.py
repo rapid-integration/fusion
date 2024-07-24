@@ -36,7 +36,7 @@ async def login(form: PasswordForm, session: Session) -> Token:
     return create_access_token(user.id)
 
 
-@router.patch("/reset")
+@router.patch("/reset-password")
 def reset_password(schema: UserPasswordReset, session: Session) -> Message:
     user = get_user_by_email(session, schema.email)
 
