@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     UPLOADS_PATH: DirectoryPath
     TEMPLATES_PATH: DirectoryPath
 
-    ALGORITHM: str = "HS256"
+    ALGORITHM: str
     SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 30  # 30 days
 
