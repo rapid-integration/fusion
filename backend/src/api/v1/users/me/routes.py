@@ -1,0 +1,43 @@
+from fastapi import APIRouter, HTTPException, status
+
+from src.api.deps import Session
+from src.api.v1.users.deps import CurrentUser
+from src.api.v1.users.me.schemas import CurrentUserResponse
+from src.api.v1.users.models import User
+from src.api.v1.users.schemas import UserEmail, UserPassword
+from src.api.v1.users.service import is_email_registered, update_email, update_password, verify_user
+from src.api.v1.verification.schemas import Code
+from src.api.v1.verification.service import expire_code_if_valid
+
+router = APIRouter(prefix="/me")
+
+
+@router.get("", response_model=CurrentUserResponse)
+def get_current_user(current_user: CurrentUser) -> User:
+    return current_user
+
+
+@router.patch("/verify", response_model=CurrentUserResponse)
+def verify_current_user(current_user: CurrentUser, schema: Code, session: Session) -> User:
+    if current_user.is_verified:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "User has already been verified")
+    if not expire_code_if_valid(current_user.email, schema.code):
+        raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, "The code is invalid")
+
+    verify_user(session, current_user)
+    return current_user
+
+
+@router.patch("/email", response_model=CurrentUserResponse)
+def update_current_user_email(current_user: CurrentUser, schema: UserEmail, session: Session) -> User:
+    if is_email_registered(session, schema.email):
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "Email is already taken")
+
+    update_email(session, current_user, schema.email)
+    return current_user
+
+
+@router.patch("/password", response_model=CurrentUserResponse)
+def update_current_user_password(current_user: CurrentUser, schema: UserPassword, session: Session) -> User:
+    update_password(session, current_user, schema.password)
+    return current_user

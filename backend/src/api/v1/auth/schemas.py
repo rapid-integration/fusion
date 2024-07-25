@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel
 
 
-class TokenPayload(BaseModel):
+class Token(BaseModel):
     """JSON payload containing access token."""
 
     access_token: str
@@ -11,28 +11,8 @@ class TokenPayload(BaseModel):
     expires_at: datetime
 
 
-class JWTPayload(BaseModel):
+class JWT(BaseModel):
     """Contents of JWT."""
 
     exp: datetime | None = None
     sub: int | str | None = None
-
-
-class UserEmail(BaseModel):
-    """Represents user with email."""
-
-    email: EmailStr = Field(max_length=255)
-
-
-class UserResponse(BaseModel):
-    """Represents the public response data for a user."""
-    is_active: bool
-    is_verified: bool
-    created_at: datetime
-    updated_at: datetime
-
-
-class UserCreate(UserEmail):
-    """Represents user registration details."""
-
-    password: str = Field(min_length=8, max_length=128)

@@ -1,5 +1,5 @@
 from fastapi_mail import ConnectionConfig
-from pydantic import PostgresDsn, computed_field
+from pydantic import DirectoryPath, PostgresDsn, computed_field
 from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -12,9 +12,18 @@ class Settings(BaseSettings):
     APP_NAME: str
     APP_VERSION: str
 
+    UPLOADS_PATH: DirectoryPath
+    TEMPLATES_PATH: DirectoryPath
+
+    ALGORITHM: str
     SECRET_KEY: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440
-    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
+
+    VERIFICATION_CODE_MIN: int
+    VERIFICATION_CODE_MAX: int
+    VERIFICATION_CODE_EXPIRE_MINUTES: int
+
+    REDIS_HOST: str
 
     POSTGRES_USERNAME: str
     POSTGRES_PASSWORD: str
@@ -34,8 +43,6 @@ class Settings(BaseSettings):
             path=self.POSTGRES_PATH,
         )
 
-    UPLOADS_PATH: str
-
     MAIL_USERNAME: str
     MAIL_PASSWORD: str
     MAIL_PORT: int
@@ -43,11 +50,8 @@ class Settings(BaseSettings):
     MAIL_STARTTLS: bool
     MAIL_SSL_TLS: bool
     MAIL_FROM: str
-    MAIL_FROM_NAME: str
-    TEMPLATES_PATH: str
     USE_CREDENTIALS: bool
     VALIDATE_CERTS: bool
-    EMAIL_VERIFY_CODE_EXPIRE_MINUTES: int
 
     @computed_field
     @property
@@ -60,27 +64,11 @@ class Settings(BaseSettings):
             MAIL_STARTTLS=self.MAIL_STARTTLS,
             MAIL_SSL_TLS=self.MAIL_SSL_TLS,
             MAIL_FROM=self.MAIL_FROM,
-            MAIL_FROM_NAME=self.MAIL_FROM_NAME,
-            TEMPLATE_FOLDER=self.TEMPLATES_PATH,  # type: ignore
+            MAIL_FROM_NAME=self.APP_NAME,
+            TEMPLATE_FOLDER=self.TEMPLATES_PATH,
             USE_CREDENTIALS=self.USE_CREDENTIALS,
             VALIDATE_CERTS=self.VALIDATE_CERTS,
         )
-
-    DOMAIN: str = "localhost"
-    PORT: int = 8000
-
-    @computed_field
-    @property
-    def SERVER_HOST(self) -> str:
-        # Use HTTPS for anything other than local development
-        if self.DEBUG:
-            return f"http://{self.DOMAIN}:{self.PORT}"
-        return f"https://{self.DOMAIN}"
-
-    REDIS_HOST: str
-    CODES_KEY: str
-    MIN_NUM_FOR_VERIFY_CODE: int
-    MAX_NUM_FOR_VERIFY_CODE: int
 
 
 settings = Settings()  # type: ignore

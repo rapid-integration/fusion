@@ -1,0 +1,16 @@
+{% extends "base.jinja" %}
+
+{% block heading %}
+Dear user,
+{% endblock %}
+
+{% block main %}
+<p>
+  Fusion verification code: <code>{{ code }}</code>. This code expires at
+  <strong>{{ expires_at.strftime('%H:%M') }} UTC</strong>. Do not share it with anyone!
+</p>
+
+<p>
+  If you didn't request the code, just ignore this message.
+</p>
+{% endblock %}
