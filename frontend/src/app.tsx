@@ -1,7 +1,9 @@
-import { MetaProvider, Title } from "@solidjs/meta";
+import { MetaProvider } from "@solidjs/meta";
 import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
+import { Portal } from "solid-js/web";
+import { Toaster } from "solid-sonner";
 import { CurrentUserProvider } from "~/lib/auth";
 import { I18nProvider } from "~/lib/i18n";
 import { PreferencesProvider } from "~/lib/preferences";
@@ -15,7 +17,13 @@ export default function App() {
           <CurrentUserProvider>
             <PreferencesProvider>
               <I18nProvider>
-                <Suspense>{props.children}</Suspense>
+                <Suspense>
+                  {props.children}
+
+                  <Portal>
+                    <Toaster />
+                  </Portal>
+                </Suspense>
               </I18nProvider>
             </PreferencesProvider>
           </CurrentUserProvider>

@@ -1,11 +1,4 @@
-import {
-  type Accessor,
-  type ParentComponent,
-  createContext,
-  createEffect,
-  startTransition,
-  useContext
-} from "solid-js";
+import { type Accessor, type ParentComponent, createContext, createEffect, useContext, useTransition } from "solid-js";
 import { type Locale, type LocalizedTranslator, makeTranslator } from "~/lib/i18n";
 import { usePreferences } from "~/lib/preferences";
 
@@ -23,6 +16,11 @@ export type I18nContextValue = {
   setLocale: (locale: Locale) => void;
 
   /**
+   * Determines whether the locale is currently changing.
+   */
+  isSettingLocale: Accessor<boolean>;
+
+  /**
    * Provides access to a dictionary translated to the specified locale.
    */
   t: LocalizedTranslator;
@@ -34,7 +32,8 @@ export const I18nProvider: ParentComponent = (props) => {
   const preferences = usePreferences();
 
   const locale = () => preferences.settings.locale;
-  const setLocale = (locale: Locale) => startTransition(() => preferences.set("locale", locale));
+  const setLocale = (locale: Locale) => startSettingLocale(() => preferences.set("locale", locale));
+  const [isSettingLocale, startSettingLocale] = useTransition();
 
   const t = makeTranslator(locale);
 
@@ -42,7 +41,9 @@ export const I18nProvider: ParentComponent = (props) => {
     document.documentElement.lang = locale();
   });
 
-  return <I18nContext.Provider value={{ locale, setLocale, t }}>{props.children}</I18nContext.Provider>;
+  return (
+    <I18nContext.Provider value={{ locale, setLocale, isSettingLocale, t }}>{props.children}</I18nContext.Provider>
+  );
 };
 
 export const useI18n = () => useContext(I18nContext);

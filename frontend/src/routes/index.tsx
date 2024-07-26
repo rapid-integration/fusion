@@ -1,22 +1,21 @@
-import { AppTitle } from "~/components/app-title";
-import LocaleSwitcher from "~/components/locale-switcher";
-import { useI18n } from "~/i18n";
+import { A } from "@solidjs/router";
+import { Button, Title } from "~/components";
 
 export default function Index() {
-  const i18n = useI18n();
-
-  // * Example * //
   return (
     <>
-      <AppTitle>{i18n.t.hi()}</AppTitle>
+      <Title>Home</Title>
 
-      <main class="mx-auto space-y-4 p-4 text-center text-neutral-900">
-        <h1 class="my-16 text-6xl uppercase text-sky-600">{i18n.t.hi()}</h1>
-
-        <p>{Intl.DateTimeFormat(i18n.locale()).format(new Date(Date.UTC(2020, 10, 20, 8)))}</p>
-        <p>{Intl.NumberFormat(i18n.locale()).format(55_555)}</p>
-
-        <LocaleSwitcher />
+      <main class="mx-auto my-4 max-w-96 space-x-4 text-center">
+        <Button as={A} href="/login" variant="primary">
+          Sign in
+        </Button>
+        <Button as={A} href="/settings">
+          Settings
+        </Button>
+        <Button as={A} href="/404">
+          404
+        </Button>
       </main>
     </>
   );

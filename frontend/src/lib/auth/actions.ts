@@ -2,23 +2,25 @@ import { action, redirect } from "@solidjs/router";
 import { login } from "~/lib/auth";
 import { changeSession, resetSession } from "~/lib/auth/session";
 
-export const signin = action(async (form: FormData) => {
+export type LoginForm = {
+  email: string;
+  password: string;
+  redirect: string | undefined;
+};
+
+export const signin = action(async (form: LoginForm) => {
   "use server";
 
-  const username = String(form.get("email"));
-  const password = String(form.get("password"));
-
-  const { data, error } = await login(username, password);
+  const { data, error, response } = await login(form.email, form.password);
 
   if (data) {
     await changeSession({ token: data.access_token, expires_at: data.expires_at });
   }
   if (error) {
-    // TODO: Localize based on `response` status code.
-    return error;
+    return { error, code: response.status };
   }
 
-  throw redirect(String(form.get("redirect") || "/"));
+  throw redirect(String(form.redirect || "/"));
 });
 
 export const signout = action(async () => {
