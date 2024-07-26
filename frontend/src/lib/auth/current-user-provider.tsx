@@ -3,7 +3,7 @@ import { type Accessor, type ParentComponent, createContext, useContext } from "
 import { type components } from "~/lib/api/schema";
 import { getCurrentUser } from "~/lib/auth";
 
-export type CurrentUserContextValue = Accessor<components["schemas"]["UserMe"] | undefined>;
+export type CurrentUserContextValue = Accessor<components["schemas"]["CurrentUserResponse"] | undefined>;
 
 export const CurrentUserContext = createContext<CurrentUserContextValue>(() => undefined);
 

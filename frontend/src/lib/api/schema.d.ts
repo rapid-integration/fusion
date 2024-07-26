@@ -38,41 +38,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  "/api/v1/auth/verify": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Confirm User Verification */
-    get: operations["confirm_user_verification_api_v1_auth_verify_get"];
-    put?: never;
-    /** Request User Verification */
-    post: operations["request_user_verification_api_v1_auth_verify_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/api/v1/auth/password-recovery": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /** Recovery Password */
-    post: operations["recovery_password_api_v1_auth_password_recovery_post"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   "/api/v1/auth/reset-password": {
     parameters: {
       query?: never;
@@ -86,8 +51,59 @@ export interface paths {
     delete?: never;
     options?: never;
     head?: never;
-    /** Password Reset */
-    patch: operations["password_reset_api_v1_auth_reset_password_patch"];
+    /** Reset Password */
+    patch: operations["reset_password_api_v1_auth_reset_password_patch"];
+    trace?: never;
+  };
+  "/api/v1/verification/verify": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Verify Code */
+    post: operations["verify_code_api_v1_verification_verify_post"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/v1/verification/request": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** Request Code */
+    post: operations["request_code_api_v1_verification_request_post"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/api/v1/users/exists": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** User Exists */
+    get: operations["user_exists_api_v1_users_exists_get"];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
     trace?: never;
   };
   "/api/v1/users/me": {
@@ -97,14 +113,65 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Me */
-    get: operations["me_api_v1_users_me_get"];
+    /** Get Current User */
+    get: operations["get_current_user_api_v1_users_me_get"];
     put?: never;
     post?: never;
     delete?: never;
     options?: never;
     head?: never;
     patch?: never;
+    trace?: never;
+  };
+  "/api/v1/users/me/verify": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /** Verify Current User */
+    patch: operations["verify_current_user_api_v1_users_me_verify_patch"];
+    trace?: never;
+  };
+  "/api/v1/users/me/email": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /** Update Current User Email */
+    patch: operations["update_current_user_email_api_v1_users_me_email_patch"];
+    trace?: never;
+  };
+  "/api/v1/users/me/password": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /** Update Current User Password */
+    patch: operations["update_current_user_password_api_v1_users_me_password_patch"];
     trace?: never;
   };
   "/api/v1/uploads": {
@@ -168,68 +235,34 @@ export interface components {
       /** Files */
       files: string[];
     };
-    /** HTTPValidationError */
-    HTTPValidationError: {
-      /** Detail */
-      detail?: components["schemas"]["ValidationError"][];
+    /** Code */
+    Code: {
+      /** Code */
+      code: number;
     };
-    /**
-     * NewPassword
-     * @description Represents new password
-     */
-    NewPassword: {
-      /** Token */
-      token: string;
-      /** New Password */
-      new_password: string;
-    };
-    /**
-     * TokenPayload
-     * @description JSON payload containing access token.
-     */
-    TokenPayload: {
-      /** Access Token */
-      access_token: string;
-      /**
-       * Token Type
-       * @default bearer
-       */
-      token_type: string;
+    /** CodeResponse */
+    CodeResponse: {
       /**
        * Expires At
        * Format: date-time
        */
       expires_at: string;
     };
-    /**
-     * UserCreate
-     * @description Represents user registration details.
-     */
-    UserCreate: {
+    /** CodeVerify */
+    CodeVerify: {
       /**
        * Email
        * Format: email
        */
       email: string;
-      /** Password */
-      password: string;
+      /** Code */
+      code: number;
     };
     /**
-     * UserEmail
-     * @description Represents user with email.
-     */
-    UserEmail: {
-      /**
-       * Email
-       * Format: email
-       */
-      email: string;
-    };
-    /**
-     * UserMe
+     * CurrentUserResponse
      * @description Represents the public response data for a user.
      */
-    UserMe: {
+    CurrentUserResponse: {
       /** Is Active */
       is_active: boolean;
       /** Is Verified */
@@ -248,6 +281,81 @@ export interface components {
       id: number;
       /** Email */
       email: string;
+    };
+    /** HTTPValidationError */
+    HTTPValidationError: {
+      /** Detail */
+      detail?: components["schemas"]["ValidationError"][];
+    };
+    /** Message */
+    Message: {
+      /** Detail */
+      detail: string;
+    };
+    /**
+     * Token
+     * @description JSON payload containing access token.
+     */
+    Token: {
+      /** Access Token */
+      access_token: string;
+      /**
+       * Token Type
+       * @default bearer
+       */
+      token_type: string;
+      /**
+       * Expires At
+       * Format: date-time
+       */
+      expires_at: string;
+    };
+    /**
+     * UserCreate
+     * @description Represents user registration details.
+     */
+    UserCreate: {
+      /** Password */
+      password: string;
+      /**
+       * Email
+       * Format: email
+       */
+      email: string;
+    };
+    /**
+     * UserEmail
+     * @description Represents user with email.
+     */
+    UserEmail: {
+      /**
+       * Email
+       * Format: email
+       */
+      email: string;
+    };
+    /**
+     * UserPassword
+     * @description Represents user with password.
+     */
+    UserPassword: {
+      /** Password */
+      password: string;
+    };
+    /**
+     * UserPasswordReset
+     * @description Represents user password reset details
+     */
+    UserPasswordReset: {
+      /** Password */
+      password: string;
+      /**
+       * Email
+       * Format: email
+       */
+      email: string;
+      /** Code */
+      code: number;
     };
     /** ValidationError */
     ValidationError: {
@@ -286,7 +394,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": components["schemas"]["TokenPayload"];
+          "application/json": components["schemas"]["Token"];
         };
       };
       /** @description Validation Error */
@@ -319,7 +427,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": components["schemas"]["TokenPayload"];
+          "application/json": components["schemas"]["Token"];
         };
       };
       /** @description Validation Error */
@@ -333,16 +441,51 @@ export interface operations {
       };
     };
   };
-  confirm_user_verification_api_v1_auth_verify_get: {
+  reset_password_api_v1_auth_reset_password_patch: {
     parameters: {
-      query: {
-        token: string;
-      };
+      query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    requestBody?: never;
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserPasswordReset"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["Message"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  verify_code_api_v1_verification_verify_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["CodeVerify"];
+      };
+    };
     responses: {
       /** @description Successful Response */
       200: {
@@ -364,7 +507,7 @@ export interface operations {
       };
     };
   };
-  request_user_verification_api_v1_auth_verify_post: {
+  request_code_api_v1_verification_request_post: {
     parameters: {
       query?: never;
       header?: never;
@@ -383,7 +526,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": unknown;
+          "application/json": components["schemas"]["CodeResponse"];
         };
       };
       /** @description Validation Error */
@@ -397,7 +540,7 @@ export interface operations {
       };
     };
   };
-  recovery_password_api_v1_auth_password_recovery_post: {
+  user_exists_api_v1_users_exists_get: {
     parameters: {
       query?: never;
       header?: never;
@@ -416,7 +559,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": unknown;
+          "application/json": boolean;
         };
       };
       /** @description Validation Error */
@@ -430,40 +573,7 @@ export interface operations {
       };
     };
   };
-  password_reset_api_v1_auth_reset_password_patch: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["NewPassword"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": unknown;
-        };
-      };
-      /** @description Validation Error */
-      422: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
-    };
-  };
-  me_api_v1_users_me_get: {
+  get_current_user_api_v1_users_me_get: {
     parameters: {
       query?: never;
       header?: never;
@@ -478,7 +588,106 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": components["schemas"]["UserMe"];
+          "application/json": components["schemas"]["CurrentUserResponse"];
+        };
+      };
+    };
+  };
+  verify_current_user_api_v1_users_me_verify_patch: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["Code"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CurrentUserResponse"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  update_current_user_email_api_v1_users_me_email_patch: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserEmail"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CurrentUserResponse"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  update_current_user_password_api_v1_users_me_password_patch: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["UserPassword"];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["CurrentUserResponse"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
         };
       };
     };
