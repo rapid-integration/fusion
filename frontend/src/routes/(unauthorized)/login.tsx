@@ -100,7 +100,7 @@ export default function Login() {
               </Show>
 
               <Button
-                variant="primary"
+                color="primary"
                 type="submit"
                 class="w-full"
                 aria-busy={submission.pending}

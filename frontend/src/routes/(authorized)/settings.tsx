@@ -18,7 +18,7 @@ export default function Settings() {
         <JsonDisplay data={currentUser()} />
         <LocaleSwitcher />
         <form action={signout} method="post">
-          <Button variant="dark" type="submit" disabled={loggingOut.pending} aria-busy={loggingOut.pending}>
+          <Button color="dark" type="submit" disabled={loggingOut.pending} aria-busy={loggingOut.pending}>
             Logout
           </Button>
         </form>
