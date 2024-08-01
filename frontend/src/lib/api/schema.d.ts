@@ -96,10 +96,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** User Exists */
-    get: operations["user_exists_api_v1_users_exists_get"];
+    get?: never;
     put?: never;
-    post?: never;
+    /** User Exists */
+    post: operations["user_exists_api_v1_users_exists_post"];
     delete?: never;
     options?: never;
     head?: never;
@@ -287,11 +287,6 @@ export interface components {
       /** Detail */
       detail?: components["schemas"]["ValidationError"][];
     };
-    /** Message */
-    Message: {
-      /** Detail */
-      detail: string;
-    };
     /**
      * Token
      * @description JSON payload containing access token.
@@ -460,7 +455,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          "application/json": components["schemas"]["Message"];
+          "application/json": components["schemas"]["Token"];
         };
       };
       /** @description Validation Error */
@@ -540,7 +535,7 @@ export interface operations {
       };
     };
   };
-  user_exists_api_v1_users_exists_get: {
+  user_exists_api_v1_users_exists_post: {
     parameters: {
       query?: never;
       header?: never;
