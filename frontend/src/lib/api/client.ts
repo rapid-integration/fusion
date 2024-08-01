@@ -1,5 +1,5 @@
 import createClient from "openapi-fetch";
-import { AUTH_MIDDLEWARE } from "~/lib/api";
+import { AUTH_MIDDLEWARE, DEBUG_MIDDLEWARE } from "~/lib/api";
 import type { paths } from "~/lib/api/schema";
 
 export const getClient = async () => {
@@ -8,6 +8,10 @@ export const getClient = async () => {
   const client = createClient<paths>({ baseUrl: import.meta.env.VITE_API_URL });
 
   client.use(AUTH_MIDDLEWARE);
+
+  if (import.meta.env.DEV) {
+    client.use(DEBUG_MIDDLEWARE);
+  }
 
   return client;
 };

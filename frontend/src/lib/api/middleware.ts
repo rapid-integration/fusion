@@ -16,3 +16,9 @@ export const AUTH_MIDDLEWARE: Middleware = {
     return request;
   },
 };
+
+export const DEBUG_MIDDLEWARE: Middleware = {
+  onResponse: (options) => {
+    console.debug(`${options.request.method} ${options.schemaPath} - ${options.response.status} ${options.response.statusText}`);
+  },
+};
