@@ -3,7 +3,6 @@ from fastapi import APIRouter, HTTPException, status
 from src.api.deps import Session
 from src.api.v1.auth.deps import PasswordForm
 from src.api.v1.auth.schemas import Token
-from src.api.v1.schemas import Message
 from src.api.v1.users.schemas import UserCreate, UserPasswordReset
 from src.api.v1.users.service import create_user, get_user_by_email, is_email_registered, update_password
 from src.api.v1.verification.service import expire_code_if_valid
@@ -37,7 +36,7 @@ async def login(form: PasswordForm, session: Session) -> Token:
 
 
 @router.patch("/reset-password")
-def reset_password(schema: UserPasswordReset, session: Session) -> Message:
+def reset_password(schema: UserPasswordReset, session: Session) -> Token:
     user = get_user_by_email(session, schema.email)
 
     if not user:
@@ -47,4 +46,4 @@ def reset_password(schema: UserPasswordReset, session: Session) -> Message:
 
     update_password(session, user, schema.password)
 
-    return Message(detail="Password updated")
+    return create_access_token(user.id)
