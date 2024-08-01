@@ -14,19 +14,19 @@ export default function App() {
     <MetaProvider>
       <Router
         root={(props) => (
-          <CurrentUserProvider>
-            <PreferencesProvider>
-              <I18nProvider>
-                <Suspense>
+          <Suspense>
+            <CurrentUserProvider>
+              <PreferencesProvider>
+                <I18nProvider>
                   {props.children}
 
                   <Portal>
                     <Toaster />
                   </Portal>
-                </Suspense>
-              </I18nProvider>
-            </PreferencesProvider>
-          </CurrentUserProvider>
+                </I18nProvider>
+              </PreferencesProvider>
+            </CurrentUserProvider>
+          </Suspense>
         )}
       >
         <FileRoutes />
