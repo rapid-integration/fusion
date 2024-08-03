@@ -1,10 +1,10 @@
-import { type JSX } from "solid-js";
+import { type Accessor, type JSX } from "solid-js";
 
 export type TextFieldProps = {
   name: string;
   type?: string | undefined;
   label?: string | undefined;
-  description?: string | undefined;
+  description?: string | Accessor<JSX.Element> | undefined;
   placeholder?: string | undefined;
   value?: string | undefined;
   error?: string | undefined;
