@@ -4,7 +4,7 @@ import { createEffect, on, Show } from "solid-js";
 import { createForm, email, minLength, required } from "@modular-forms/solid";
 import { toast } from "solid-sonner";
 
-import { Button, FormControl, Separator, Slogan, Title } from "~/components";
+import { Button, FormControl, Link, Separator, Slogan, Title } from "~/components";
 import { LoginForm, signin } from "~/lib/auth";
 import { useI18n } from "~/lib/i18n";
 
@@ -25,14 +25,14 @@ export default function Login() {
       const code = response()?.code;
 
       if (code === 401 || code === 404) {
-        toast.error(i18n.t.pages.login.errors[code]());
+        toast.error(i18n.t.routes.login.form.errors[code]());
       }
     }),
   );
 
   return (
     <>
-      <Title>{i18n.t.pages.login.title()}</Title>
+      <Title>{i18n.t.routes.login.title()}</Title>
 
       <div class="mx-auto flex min-h-dvh max-w-xs flex-col items-center justify-center gap-6 py-6">
         <header class="flex w-full flex-col items-center justify-center space-y-12">
@@ -42,29 +42,29 @@ export default function Login() {
 
           <hgroup class="w-full text-left font-semibold">
             <Slogan />
-            <p class="text-2xl text-neutral-500">{i18n.t.pages.login.header()}</p>
+            <p class="text-2xl text-neutral-500">{i18n.t.routes.login.heading()}</p>
           </hgroup>
         </header>
 
         <Separator orientation="horizontal" />
 
-        <main>
+        <main class="space-y-2">
           <Login.Form onSubmit={action} method="post">
-            <fieldset disabled={submission.pending} class="space-y-3">
+            <fieldset disabled={submission.pending} class="space-y-4">
               <Login.Field
                 name="email"
                 validate={[
-                  required(i18n.t.pages.login.form.email.required()),
-                  email(i18n.t.pages.login.form.email.error()),
+                  required(i18n.t.routes.login.form.fields.email.required()),
+                  email(i18n.t.routes.login.form.fields.email.error()),
                 ]}
               >
                 {(field, props) => (
                   <FormControl
                     {...props}
                     type="email"
-                    label={i18n.t.pages.login.form.email.label()}
-                    placeholder={i18n.t.pages.login.form.email.placeholder()}
-                    description={i18n.t.pages.login.form.email.description()}
+                    label={i18n.t.routes.login.form.fields.email.label()}
+                    placeholder={i18n.t.routes.login.form.fields.email.placeholder()}
+                    description={i18n.t.routes.login.form.fields.email.description()}
                     value={field.value}
                     error={field.error}
                     required
@@ -75,17 +75,24 @@ export default function Login() {
               <Login.Field
                 name="password"
                 validate={[
-                  required(i18n.t.pages.login.form.password.required()),
-                  minLength(8, i18n.t.pages.login.form.password.minLength()),
+                  required(i18n.t.routes.login.form.fields.password.required()),
+                  minLength(8, i18n.t.routes.login.form.fields.password.minLength({ length: 8 })),
                 ]}
               >
                 {(field, props) => (
                   <FormControl
                     {...props}
                     type="password"
-                    label={i18n.t.pages.login.form.password.label()}
-                    placeholder={i18n.t.pages.login.form.password.placeholder()}
-                    description={i18n.t.pages.login.form.password.description()}
+                    label={i18n.t.routes.login.form.fields.password.label()}
+                    placeholder={i18n.t.routes.login.form.fields.password.placeholder()}
+                    description={() => (
+                      <>
+                        <span>{i18n.t.routes.login.form.fields.password.description()}</span>
+                        <Link as={A} href="/reset-password">
+                          {i18n.t.routes.login.form.fields.password.forgot()}
+                        </Link>
+                      </>
+                    )}
                     value={field.value}
                     error={field.error}
                     required
@@ -106,14 +113,14 @@ export default function Login() {
                 aria-busy={submission.pending}
                 disabled={form.invalid}
               >
-                {i18n.t.continue()}
+                {i18n.t.routes.login.form.submit()}
               </Button>
             </fieldset>
           </Login.Form>
         </main>
 
         <footer class="mt-8 text-center text-xs text-neutral-500">
-          <p>{i18n.t.pages.login.footer()}</p>
+          <p>{i18n.t.routes.login.footer()}</p>
         </footer>
       </div>
     </>
