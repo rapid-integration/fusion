@@ -14,7 +14,7 @@ export const styles = tv({
     input: "block w-full px-1.5 leading-none outline-none disabled:cursor-not-allowed",
     textarea: "flex w-full resize-none px-1.5 py-1 text-sm outline-none disabled:cursor-not-allowed",
     label: "mb-1.5 text-xs font-semibold leading-none",
-    description: "mt-1 text-xs text-neutral-500",
+    description: "mt-1 flex justify-between text-xs text-neutral-500",
     error: "mt-1 text-xs text-red-600",
   },
 });
