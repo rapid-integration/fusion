@@ -56,6 +56,9 @@ dependencies:
   solid-sonner:
     specifier: ^0.2.8
     version: 0.2.8(solid-js@1.8.18)
+  solid-transition-group:
+    specifier: ^0.2.3
+    version: 0.2.3(solid-js@1.8.18)
   tailwind-merge:
     specifier: ^2.4.0
     version: 2.4.0
@@ -1513,6 +1516,14 @@ packages:
         optional: true
     dependencies:
       '@solid-primitives/utils': 6.2.3(solid-js@1.8.18)
+      solid-js: 1.8.18
+    dev: false
+
+  /@solid-primitives/transition-group@1.0.5(solid-js@1.8.18):
+    resolution: {integrity: sha512-G3FuqvL13kQ55WzWPX2ewiXdZ/1iboiX53195sq7bbkDbXqP6TYKiadwEdsaDogW5rPnPYAym3+xnsNplQJRKQ==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
       solid-js: 1.8.18
     dev: false
 
@@ -4418,6 +4429,17 @@ packages:
     peerDependencies:
       solid-js: ^1.6.0
     dependencies:
+      solid-js: 1.8.18
+    dev: false
+
+  /solid-transition-group@0.2.3(solid-js@1.8.18):
+    resolution: {integrity: sha512-iB72c9N5Kz9ykRqIXl0lQohOau4t0dhel9kjwFvx81UZJbVwaChMuBuyhiZmK24b8aKEK0w3uFM96ZxzcyZGdg==}
+    engines: {node: '>=18.0.0', pnpm: '>=8.6.0'}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/refs': 1.0.8(solid-js@1.8.18)
+      '@solid-primitives/transition-group': 1.0.5(solid-js@1.8.18)
       solid-js: 1.8.18
     dev: false
 
