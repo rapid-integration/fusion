@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@corvu/otp-field':
+    specifier: ^0.1.2
+    version: 0.1.2(solid-js@1.8.18)
   '@kobalte/core':
     specifier: ^0.13.3
     version: 0.13.3(solid-js@1.8.18)
@@ -337,8 +340,26 @@ packages:
       mime: 3.0.0
     dev: false
 
+  /@corvu/otp-field@0.1.2(solid-js@1.8.18):
+    resolution: {integrity: sha512-R7Ks4EoIY6/ptY0W4ewO6wtSSqYGvz30eIsQBffc+6zOWAL4tc/qEKxUCLpOdAUyxp28ODCLHg1/ZpzNjgZBZw==}
+    peerDependencies:
+      solid-js: ^1.8
+    dependencies:
+      '@corvu/utils': 0.4.0(solid-js@1.8.18)
+      solid-js: 1.8.18
+    dev: false
+
   /@corvu/utils@0.3.2(solid-js@1.8.18):
     resolution: {integrity: sha512-ZWlyWEE8qV9+CB9OAyo2bTrZGXQN9ZeM+JfYv89zoR+lRACKTDuoOZEdiyL8Uc7U5dUSH1uTqKhTTnaHWb+wZA==}
+    peerDependencies:
+      solid-js: ^1.8
+    dependencies:
+      '@floating-ui/dom': 1.6.7
+      solid-js: 1.8.18
+    dev: false
+
+  /@corvu/utils@0.4.0(solid-js@1.8.18):
+    resolution: {integrity: sha512-LTjH/gSf4t/slzGoQdFYWrAykHp3A7JZYH+KjM5KCppVjDEY7pLjZkMTHU/vPF7gvjiXDYgA+6q68eiHRiJ8wA==}
     peerDependencies:
       solid-js: ^1.8
     dependencies:
