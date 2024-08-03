@@ -8,6 +8,7 @@ export * from "./locale-switcher";
 export * from "./select";
 export * from "./separator";
 export * from "./slogan";
+export * from "./stepper";
 export * from "./text-field";
 export * from "./title";
 export * from "./typer";
