@@ -21,7 +21,7 @@ export default createHandler((event) => {
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons/css/flag-icons.min.css" />
             {assets}
           </head>
-          <body class="overflow-x-hidden">
+          <body class="overflow-x-hidden text-sm">
             <div id="app">{children}</div>
             {scripts}
           </body>
