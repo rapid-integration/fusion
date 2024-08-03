@@ -21,7 +21,7 @@ export default function App() {
                   {props.children}
 
                   <Portal>
-                    <Toaster />
+                    <Toaster richColors />
                   </Portal>
                 </I18nProvider>
               </PreferencesProvider>
