@@ -11,3 +11,4 @@ export * from "./slogan";
 export * from "./text-field";
 export * from "./title";
 export * from "./typer";
+export * from "./sticker";

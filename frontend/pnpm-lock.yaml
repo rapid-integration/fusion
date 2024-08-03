@@ -11,9 +11,15 @@ dependencies:
   '@modular-forms/solid':
     specifier: ^0.22.1
     version: 0.22.1(solid-js@1.8.18)
+  '@solid-primitives/event-listener':
+    specifier: ^2.3.3
+    version: 2.3.3(solid-js@1.8.18)
   '@solid-primitives/i18n':
     specifier: ^2.1.1
     version: 2.1.1(solid-js@1.8.18)
+  '@solid-primitives/intersection-observer':
+    specifier: ^2.1.6
+    version: 2.1.6(solid-js@1.8.18)
   '@solid-primitives/storage':
     specifier: ^3.7.1
     version: 3.7.1(solid-js@1.8.18)
@@ -32,6 +38,9 @@ dependencies:
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
+  lottie-web:
+    specifier: ^5.12.2
+    version: 5.12.2
   openapi-fetch:
     specifier: ^0.10.2
     version: 0.10.2
@@ -1414,6 +1423,15 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
     dependencies:
+      solid-js: 1.8.18
+    dev: false
+
+  /@solid-primitives/intersection-observer@2.1.6(solid-js@1.8.18):
+    resolution: {integrity: sha512-SeiCmN/R46Z+o9+5HhIQzSor0DqVPyo4ROLQMvCI8AsGZl/5nHlWzHTTbWPeukVUXTgb04wfC3DUo9IzF/XloA==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.2.3(solid-js@1.8.18)
       solid-js: 1.8.18
     dev: false
 
@@ -3283,6 +3301,10 @@ packages:
 
   /lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    dev: false
+
+  /lottie-web@5.12.2:
+    resolution: {integrity: sha512-uvhvYPC8kGPjXT3MyKMrL3JitEAmDMp30lVkuq/590Mw9ok6pWcFCwXJveo0t5uqYw1UREQHofD+jVpdjBv8wg==}
     dev: false
 
   /lru-cache@10.4.0:
