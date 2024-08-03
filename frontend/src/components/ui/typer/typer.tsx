@@ -3,7 +3,7 @@ import { createSignal, mergeProps, onCleanup, onMount, Show, splitProps, ValidCo
 import { Polymorphic, PolymorphicProps } from "@kobalte/core";
 
 import { Cursor } from "~/components";
-import { cn } from "~/lib/utils";
+import { merge } from "~/lib/utils/css/merge";
 
 import { TyperProps, TypingDirection } from "./typer.props";
 import { styles } from "./typer.styles";
@@ -134,7 +134,7 @@ export const Typer = <T extends ValidComponent = "span">(props: PolymorphicProps
   }
 
   return (
-    <Polymorphic as="span" class={cn(styles().root(), local.class)} {...others}>
+    <Polymorphic as="span" class={merge(styles().root(), local.class)} {...others}>
       {currentText()}
       &ZeroWidthSpace;
       <Show when={local.cursor && !isFinished()}>

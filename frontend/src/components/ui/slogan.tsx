@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 import { useI18n } from "~/lib/i18n";
 import { Typer } from "~/components";
-import { shuffled } from "~/lib/array";
+import { shuffled } from "~/lib/utils/array/shuffle";
 
 export const Slogan: Component = () => {
   const i18n = useI18n();
