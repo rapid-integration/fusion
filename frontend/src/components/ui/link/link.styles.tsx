@@ -2,7 +2,7 @@ import { tv } from "tailwind-variants";
 
 export const styles = tv({
   base: [
-    "text-blue-600 text-sm cursor-pointer",
+    "text-blue-600 cursor-pointer",
     "hover:text-blue-700 hover:underline active:text-blue-800",
     "transition-color duration-75",
     "focus-visible:ring active:hover:duration-0",
