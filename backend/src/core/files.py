@@ -4,6 +4,7 @@ import secrets
 import aiofiles
 from fastapi import UploadFile
 from fastapi.responses import FileResponse
+from PIL import Image
 
 from src.core.config import settings
 
@@ -43,3 +44,32 @@ async def get_file(filename: str):
             filename=filename,
         )
     return None
+
+
+def image_cropping(file: UploadFile) -> str | None:
+    try:
+        image = Image.open(file.file)
+        width, height = image.size
+        new_side = min(width, height)
+        left = (width - new_side) / 2
+        top = (height - new_side) / 2
+        right = (width + new_side) / 2
+        bottom = (height + new_side) / 2
+        cropped_image = image.crop((left, top, right, bottom))
+
+        filename = generate_unique_name(file)
+        cropped_image.save(os.path.join(settings.UPLOADS_PATH, filename))
+        return filename
+
+    except Exception:
+        return None
+
+
+async def check_file_size(file: UploadFile, max_size: int) -> bool:
+    contents = await file.read()
+    return len(contents) < max_size
+
+
+def delete_file(filename: str) -> None:
+    if os.path.exists(os.path.join(settings.UPLOADS_PATH, filename)):
+        os.remove(os.path.join(settings.UPLOADS_PATH, filename))
