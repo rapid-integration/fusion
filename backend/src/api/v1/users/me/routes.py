@@ -52,7 +52,7 @@ async def update_current_user_avatar(current_user: CurrentUser, session: Session
         raise HTTPException(status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, "File size exceeds limit")
 
     if "image" not in file.content_type:
-        raise HTTPException(status.HTTP_415_UNSUPPORTED_MEDIA_TYPE, "Check the file type, there should be an image")
+        raise HTTPException(status.HTTP_415_UNSUPPORTED_MEDIA_TYPE, "Unsupported avatar image type. Make sure you're uploading a correct file")
 
     image_url = image_cropping(file)
     if image_url is None:
