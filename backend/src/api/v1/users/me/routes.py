@@ -9,7 +9,7 @@ from src.api.v1.users.service import is_email_registered, update_avatar, update_
 from src.api.v1.verification.schemas import Code
 from src.api.v1.verification.service import expire_code_if_valid
 from src.core.config import settings
-from src.core.files import check_file_size, check_is_image, crop_image_to_square
+from src.core.files import check_file_size, check_is_image, generate_cropped_image
 
 router = APIRouter(prefix="/me")
 
@@ -56,7 +56,7 @@ async def update_current_user_avatar(current_user: CurrentUser, session: Session
         raise HTTPException(status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
                             "Unsupported avatar image type. Make sure you're uploading a correct file")
 
-    image_url = crop_image_to_square(file)
+    image_url = generate_cropped_image(file)
     if image_url is None:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY,
                             "Exception occurred whilst attempting to crop image. Make sure your file has no defects")
