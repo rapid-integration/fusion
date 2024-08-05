@@ -28,6 +28,11 @@ To see the current and future tasks for this project, please navigate to the [pr
 
 To contribute to this project, please read the [`CONTRIBUTING.md`](.github/CONTRIBUTING.md) file. It provides details on our code of conduct and the process for submitting pull requests.
 
+After that, make sure to read the following setup instructions in the given order:
+
+1. [Back-end](./backend/README.md)
+2. [Front-end](./frontend/README.md)
+
 ## ❤️ Acknowledgments
 
 See the [contributors](https://github.com/rapid-integration/fusion/contributors) who participated in this project and the [dependencies](https://github.com/rapid-integration/fusion/network/dependencies) used.
