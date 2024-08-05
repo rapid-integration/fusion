@@ -24,7 +24,11 @@ pnpm i
 Create `.env` file in the [frontend](.) root directory with the following contents:
 
 ```properties
+VITE_APP_NAME=$npm_package_name
+VITE_APP_VERSION=$npm_package_version
+
 VITE_API_URL="http://127.0.0.1:8000/"
+
 VITE_SESSION_SECRET="9aCbXMa1%pJcCMubS^HuprJ5YjS&#xY5"
 VITE_SECURE_COOKIES=
 ```
@@ -33,6 +37,8 @@ These settings are suitable for the most who want to run the app **locally**. He
 
 | Option                | Description                                                                                                                                                                                                                         | Type      | Default | Required |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------- | -------- |
+| `VITE_APP_NAME`       | The web app name.                                                                                                                                                                                                                   | `string`  |         | ✓        |
+| `VITE_APP_VERSION`    | The web app version.                                                                                                                                                                                                                | `string`  |         | ✓        |
 | `VITE_API_URL`        | URL of the API server that the web app will interact with. You may also want to [setup back-end](../backend/README) to get it first.                                                                                                | `string`  |         | ✓        |
 | `VITE_SESSION_SECRET` | Private key used to encrypt sessions. **Must be at least 32 characters long**.                                                                                                                                                      | `string`  |         | ✓        |
 | `VITE_SECURE_COOKIES` | Determines whether the cookies sent to browser should be marked as [secure](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#block_access_to_your_cookies). Make sure to enable this when have an SSL (HTTPS) certificate. | `boolean` | `false` | ✗        |
