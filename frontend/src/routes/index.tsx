@@ -6,7 +6,7 @@ export default function Index() {
     <>
       <Title>Home</Title>
 
-      <main class="mx-auto my-4 max-w-96 space-x-4 text-center">
+      <main class="m-auto max-w-96 space-x-4">
         <Button as={A} href="/login" color="primary">
           Sign in
         </Button>

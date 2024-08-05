@@ -34,7 +34,7 @@ export default function Login() {
     <>
       <Title>{i18n.t.routes.login.title()}</Title>
 
-      <div class="mx-auto flex min-h-dvh max-w-xs flex-col items-center justify-center gap-6 py-6">
+      <div class="m-auto flex w-full max-w-xs flex-col items-center justify-center gap-6 py-6">
         <header class="flex w-full flex-col items-center justify-center space-y-12">
           <A href="/" class="select-none">
             <img src="/logo.svg" alt="Logo" class="pointer-events-none drop-shadow-md" />

@@ -11,7 +11,7 @@ export default function Settings() {
     <>
       <Title>Settings</Title>
 
-      <main class="mx-auto my-4 max-w-md space-y-4">
+      <main class="m-auto w-full max-w-xl space-y-4 py-6">
         <Button as={A} href="/">
           Home
         </Button>

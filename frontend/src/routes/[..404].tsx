@@ -13,7 +13,7 @@ export default function Page() {
     <>
       <Title>{i18n.t.routes[404].title()}</Title>
 
-      <main class="flex min-h-dvh flex-col items-center justify-center gap-6 text-center text-neutral-900">
+      <main class="m-auto flex flex-col items-center justify-center gap-6 px-4 py-6 text-center">
         <Sticker path="tgs/eyes.json" class="size-24" />
 
         <hgroup class="space-y-4">

@@ -12,7 +12,7 @@ export default function ResetPassword() {
       <Title>{i18n.t.routes.resetPassword.title()}</Title>
 
       <Verifier.Provider>
-        <Stepper as={"main"} class="mx-auto flex min-h-dvh max-w-xs flex-col items-center justify-center py-6">
+        <Stepper as={"main"} class="m-auto flex w-full max-w-xs flex-col items-center justify-center py-6">
           <Stepper.Steps>
             <Stepper.Step as={ResetPasswordEmailStep} />
             <Stepper.Step as={Verifier.Steps.Otp} />
