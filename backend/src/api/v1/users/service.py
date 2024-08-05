@@ -3,6 +3,7 @@ from sqlalchemy.sql import exists
 
 from src.api.v1.users.models import User
 from src.api.v1.users.schemas import UserCreate
+from src.core.files import delete_file
 from src.core.security import get_password_hash
 
 
@@ -40,5 +41,14 @@ def update_email(session: Session, user: User, new_email: str):
 def update_password(session: Session, user: User, new_password: str) -> None:
     hashed_password = get_password_hash(password=new_password)
     user.password = hashed_password
+    session.commit()
+    session.refresh(user)
+
+
+def update_avatar(session: Session, user: User, new_avatar_url: str) -> None:
+    if user.avatar_url:
+        delete_file(user.avatar_url)
+
+    user.avatar_url = new_avatar_url
     session.commit()
     session.refresh(user)

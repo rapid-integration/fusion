@@ -6,3 +6,4 @@ class CurrentUserResponse(UserResponse):
 
     id: int
     email: str
+    avatar_url: str

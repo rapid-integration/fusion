@@ -7,7 +7,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_ignore_empty=True, extra="ignore")
 
-    DEBUG: bool = True
+    DEBUG: bool
 
     APP_NAME: str
     APP_VERSION: str
@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     ALGORITHM: str
     SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int
+    MAX_AVATAR_SIZE: int
 
     VERIFICATION_CODE_MIN: int
     VERIFICATION_CODE_MAX: int
@@ -27,7 +28,7 @@ class Settings(BaseSettings):
 
     POSTGRES_USERNAME: str
     POSTGRES_PASSWORD: str
-    POSTGRES_PORT: int = 5432
+    POSTGRES_PORT: int
     POSTGRES_HOST: str
     POSTGRES_PATH: str
 
