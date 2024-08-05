@@ -12,7 +12,7 @@ export const Version: Component = () => {
         {import.meta.env.VITE_APP_NAME}
       </h6>
       <p class="flex items-center gap-0.5">
-        <Show when={!import.meta.env.PROD}>
+        <Show when={import.meta.env.PROD}>
           <Icon path={checkBadge} class="size-3.5 text-green-700" />
         </Show>
         <span class="select-all">Version {import.meta.env.VITE_APP_VERSION}</span>
