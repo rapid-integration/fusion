@@ -56,7 +56,7 @@ async def update_current_user_avatar(current_user: CurrentUser, session: Session
 
     image_url = image_cropping(file)
     if image_url is None:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Error while cropping image, check your image")
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Exception occurred whilst attempting to crop image. Make sure your file has no defects")
 
     update_avatar(session, current_user, image_url)
     return current_user
