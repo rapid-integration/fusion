@@ -46,7 +46,7 @@ async def get_file(filename: str):
     return None
 
 
-def image_cropping(file: UploadFile) -> str | None:
+def crop_image_to_square(file: UploadFile) -> str | None:
     try:
         image = Image.open(file.file)
         width, height = image.size
