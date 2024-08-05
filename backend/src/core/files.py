@@ -46,7 +46,7 @@ async def get_file(filename: str):
     return None
 
 
-def crop_image_to_square(file: UploadFile) -> Image | None:
+def crop_image_to_square(file: UploadFile) -> Image.Image | None:
     try:
         image = Image.open(file.file)
         width, height = image.size
@@ -77,7 +77,7 @@ async def check_file_size(file: UploadFile, max_size: int) -> bool:
 
 
 def check_is_image(file: UploadFile) -> bool:
-    return "image" in file.content_type
+    return file.content_type is not None and "image" in file.content_type
 
 
 def delete_file(filename: str) -> None:
