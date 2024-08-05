@@ -81,5 +81,6 @@ def check_is_image(file: UploadFile) -> bool:
 
 
 def delete_file(filename: str) -> None:
-    if os.path.exists(os.path.join(settings.UPLOADS_PATH, filename)):
-        os.remove(os.path.join(settings.UPLOADS_PATH, filename))
+    filepath = os.path.join(settings.UPLOADS_PATH, filename)
+    if os.path.exists(filepath):
+        os.remove(filepath)
