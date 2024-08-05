@@ -2,9 +2,9 @@ import os
 import secrets
 
 import aiofiles
+from PIL import Image
 from fastapi import UploadFile
 from fastapi.responses import FileResponse
-from PIL import Image
 
 from src.core.config import settings
 
@@ -68,6 +68,10 @@ def image_cropping(file: UploadFile) -> str | None:
 async def check_file_size(file: UploadFile, max_size: int) -> bool:
     contents = await file.read()
     return len(contents) < max_size
+
+
+def check_is_image(file: UploadFile) -> bool:
+    return "image" in file.content_type
 
 
 def delete_file(filename: str) -> None:

@@ -9,7 +9,7 @@ from src.api.v1.users.service import is_email_registered, update_avatar, update_
 from src.api.v1.verification.schemas import Code
 from src.api.v1.verification.service import expire_code_if_valid
 from src.core.config import settings
-from src.core.files import check_file_size, image_cropping
+from src.core.files import check_file_size, image_cropping, check_is_image
 
 router = APIRouter(prefix="/me")
 
@@ -52,7 +52,7 @@ async def update_current_user_avatar(current_user: CurrentUser, session: Session
         raise HTTPException(status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
                             f"File size exceeded maximum avatar size: {settings.MAX_AVATAR_SIZE} bytes")
 
-    if "image" not in file.content_type:
+    if not check_is_image(file):
         raise HTTPException(status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
                             "Unsupported avatar image type. Make sure you're uploading a correct file")
 
