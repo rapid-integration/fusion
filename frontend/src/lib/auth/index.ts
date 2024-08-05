@@ -7,7 +7,7 @@ export const SESSION_COOKIE_OPTIONS: SessionConfig = {
   name: SESSION_COOKIE_NAME,
   cookie: {
     sameSite: "lax",
-    secure: import.meta.env.PROD,
+    secure: (/true/i).test(import.meta.env.VITE_SECURE_COOKIES),
   },
 };
 

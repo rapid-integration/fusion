@@ -7,7 +7,7 @@ export const PREFERENCES_COOKIE_OPTIONS: storage.PersistenceOptions<any, storage
   storage: storage.cookieStorage,
   storageOptions: {
     sameSite: "Lax",
-    secure: import.meta.env.PROD,
+    secure: (/true/i).test(import.meta.env.VITE_SECURE_COOKIES),
   },
 };
 
