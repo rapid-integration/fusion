@@ -49,14 +49,17 @@ def update_current_user_password(current_user: CurrentUser, schema: UserPassword
 async def update_current_user_avatar(current_user: CurrentUser, session: Session, file: UploadFile = File(...)):
     is_correct_size = await check_file_size(file, settings.MAX_AVATAR_SIZE)
     if not is_correct_size:
-        raise HTTPException(status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, f"File size exceeded maximum avatar size: {settings.MAX_AVATAR_SIZE} bytes")
+        raise HTTPException(status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                            f"File size exceeded maximum avatar size: {settings.MAX_AVATAR_SIZE} bytes")
 
     if "image" not in file.content_type:
-        raise HTTPException(status.HTTP_415_UNSUPPORTED_MEDIA_TYPE, "Unsupported avatar image type. Make sure you're uploading a correct file")
+        raise HTTPException(status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
+                            "Unsupported avatar image type. Make sure you're uploading a correct file")
 
     image_url = image_cropping(file)
     if image_url is None:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Exception occurred whilst attempting to crop image. Make sure your file has no defects")
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY,
+                            "Exception occurred whilst attempting to crop image. Make sure your file has no defects")
 
     update_avatar(session, current_user, image_url)
     return current_user
