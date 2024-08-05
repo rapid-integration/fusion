@@ -9,7 +9,7 @@ from src.api.v1.users.service import is_email_registered, update_avatar, update_
 from src.api.v1.verification.schemas import Code
 from src.api.v1.verification.service import expire_code_if_valid
 from src.core.config import settings
-from src.core.files import check_file_size, image_cropping, check_is_image
+from src.core.files import check_file_size, check_is_image, image_cropping
 
 router = APIRouter(prefix="/me")
 

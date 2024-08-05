@@ -2,9 +2,9 @@ import os
 import secrets
 
 import aiofiles
-from PIL import Image
 from fastapi import UploadFile
 from fastapi.responses import FileResponse
+from PIL import Image
 
 from src.core.config import settings
 
