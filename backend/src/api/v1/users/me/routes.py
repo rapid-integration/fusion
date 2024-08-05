@@ -45,7 +45,7 @@ def update_current_user_password(current_user: CurrentUser, schema: UserPassword
     return current_user
 
 
-@router.patch("/image", response_model=CurrentUserResponse)
+@router.patch("/avatar", response_model=CurrentUserResponse)
 async def update_current_user_avatar(current_user: CurrentUser, session: Session, file: UploadFile = File(...)):
     is_correct_size = await check_file_size(file, settings.MAX_AVATAR_SIZE)
     if not is_correct_size:
