@@ -47,7 +47,7 @@ def update_password(session: Session, user: User, new_password: str) -> None:
 
 def update_avatar(session: Session, user: User, new_avatar_url: str) -> None:
     avatar_url = user.avatar_url
-    if avatar_url is not None:
+    if user.avatar_url:
         delete_file(avatar_url)
 
     user.avatar_url = new_avatar_url
