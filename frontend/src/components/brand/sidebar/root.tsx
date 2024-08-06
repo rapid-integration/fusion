@@ -1,6 +1,10 @@
 import { Component, Show } from "solid-js";
-import { bookmark, folder, home, userCircle } from "solid-heroicons/solid-mini";
+
+import { bookmark, cog, folder, home, userCircle } from "solid-heroicons/solid-mini";
+
+import { formatResourceURL } from "~/lib/api/uploads";
 import { useCurrentUser } from "~/lib/auth";
+
 import { SidebarItem } from "./item";
 
 export const Sidebar: Component = () => {
@@ -32,11 +36,16 @@ export const Sidebar: Component = () => {
         >
           {(user) => (
             <SidebarItem href="/settings" class="flex md:mt-auto" activeClass="[&>img]:ring-blue-500">
-              <SidebarItem.Icon
-                as={"img"}
-                src={`${import.meta.env.VITE_API_URL}uploads/${user().avatar_url}`}
-                class="rounded-full ring-1 ring-neutral-200"
-              />
+              <Show when={user().avatar_url} fallback={<SidebarItem.Icon path={cog} />}>
+                {(avatar_url) => (
+                  <SidebarItem.Icon
+                    as={"img"}
+                    src={formatResourceURL(avatar_url())}
+                    class="rounded-full ring-1 ring-neutral-200"
+                  />
+                )}
+              </Show>
+
               <SidebarItem.Label>Settings</SidebarItem.Label>
             </SidebarItem>
           )}
