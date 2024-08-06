@@ -24,6 +24,7 @@ class UserResponse(BaseModel):
     is_verified: bool
     created_at: datetime
     updated_at: datetime
+    avatar_url: str | None
 
 
 class UserCreate(UserEmail, UserPassword):
