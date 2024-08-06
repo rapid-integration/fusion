@@ -17,13 +17,13 @@ export const Sidebar: Component = () => {
           <SidebarItem.Icon path={home} />
           <SidebarItem.Label>Home</SidebarItem.Label>
         </SidebarItem>
-        <SidebarItem href="/library">
-          <SidebarItem.Icon path={folder} />
-          <SidebarItem.Label>Library</SidebarItem.Label>
-        </SidebarItem>
         <SidebarItem href="/saved">
           <SidebarItem.Icon path={bookmark} />
           <SidebarItem.Label>Saved</SidebarItem.Label>
+        </SidebarItem>
+        <SidebarItem href="/library">
+          <SidebarItem.Icon path={folder} />
+          <SidebarItem.Label>Library</SidebarItem.Label>
         </SidebarItem>
         <Show
           when={currentUser()}
@@ -35,7 +35,7 @@ export const Sidebar: Component = () => {
           }
         >
           {(user) => (
-            <SidebarItem href="/settings" class="flex md:mt-auto" activeClass="[&>img]:ring-blue-500">
+            <SidebarItem href="/settings" class="flex md:mt-auto" activeClass="max-md:[&>img]:ring-blue-500">
               <Show when={user().avatar_url} fallback={<SidebarItem.Icon path={cog} />}>
                 {(avatar_url) => (
                   <SidebarItem.Icon
