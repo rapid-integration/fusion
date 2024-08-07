@@ -5,7 +5,14 @@ from src.api.v1.users.deps import CurrentUser
 from src.api.v1.users.me.schemas import CurrentUserResponse
 from src.api.v1.users.models import User
 from src.api.v1.users.schemas import UserEmail, UserPassword
-from src.api.v1.users.service import is_email_registered, update_avatar, update_email, update_password, verify_user
+from src.api.v1.users.service import (
+    delete_avatar,
+    is_email_registered,
+    update_avatar,
+    update_email,
+    update_password,
+    verify_user,
+)
 from src.api.v1.verification.schemas import Code
 from src.api.v1.verification.service import expire_code_if_valid
 from src.core.config import settings
@@ -62,4 +69,10 @@ async def update_current_user_avatar(current_user: CurrentUser, session: Session
                             "Exception occurred whilst attempting to crop image. Make sure your file has no defects")
 
     update_avatar(session, current_user, image_url)
+    return current_user
+
+
+@router.delete("/avatar", response_model=CurrentUserResponse)
+def delete_current_user_avatar(current_user: CurrentUser, session: Session):
+    delete_avatar(session, current_user)
     return current_user
