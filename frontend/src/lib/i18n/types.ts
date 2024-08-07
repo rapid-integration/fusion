@@ -43,6 +43,53 @@ export type DictionaryMap = {
     resetPassword: {
       title: string;
     };
+    settings: {
+      heading: string;
+      sections: {
+        personal: {
+          heading: string;
+          fields: {
+            avatar: {
+              heading: string;
+              description: string;
+            };
+            email: {
+              heading: string;
+              change: string;
+            };
+            password: {
+              heading: string;
+              description: string;
+              change: string;
+            };
+          };
+        };
+        appearance: {
+          heading: string;
+          fields: {
+            language: {
+              heading: string;
+              description: string;
+            };
+          };
+        };
+        danger: {
+          heading: string;
+          fields: {
+            logout: {
+              heading: string;
+              description: string;
+              action: string;
+            };
+            deactivate: {
+              heading: string;
+              description: string;
+              action: string;
+            };
+          };
+        };
+      };
+    };
   };
   steps: {
     verification: {

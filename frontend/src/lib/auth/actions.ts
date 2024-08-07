@@ -21,7 +21,7 @@ export const signin = action(async (form: LoginForm) => {
     return { error, code: response.status };
   }
 
-  throw redirect(form.redirect || "/");
+  throw redirect(form.redirect || "/settings");
 });
 
 export const resetUserPassword = action(async (body: components["schemas"]["UserPasswordReset"]) => {

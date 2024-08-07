@@ -41,6 +41,53 @@ export const dict: DictionaryMap = {
     resetPassword: {
       title: "Reset password",
     },
+    settings: {
+      heading: "Settings",
+      sections: {
+        personal: {
+          heading: "Personal",
+          fields: {
+            avatar: {
+              heading: "Avatar",
+              description: "Profile picture visible to everyone.",
+            },
+            email: {
+              heading: "Email",
+              change: "Change email",
+            },
+            password: {
+              heading: "Password",
+              description: "Permanent password to login to your account.",
+              change: "Change password",
+            },
+          },
+        },
+        appearance: {
+          heading: "Appearance",
+          fields: {
+            language: {
+              heading: "Language",
+              description: "Change the language used in the user interface.",
+            },
+          },
+        },
+        danger: {
+          heading: "Danger",
+          fields: {
+            logout: {
+              heading: "Sign out",
+              description: "Logout from this account on this device.",
+              action: "Logout",
+            },
+            deactivate: {
+              heading: "Close account",
+              description: "Delete your account and all the data.",
+              action: "Delete my account",
+            },
+          },
+        },
+      },
+    },
   },
   steps: {
     resetPassword: {

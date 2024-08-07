@@ -6,8 +6,10 @@ import { formatResourceURL } from "~/lib/api/uploads";
 import { useCurrentUser } from "~/lib/auth";
 
 import { SidebarItem } from "./item";
+import { useI18n } from "~/lib/i18n";
 
 export const Sidebar: Component = () => {
+  const i18n = useI18n();
   const currentUser = useCurrentUser();
 
   return (
@@ -30,7 +32,7 @@ export const Sidebar: Component = () => {
           fallback={
             <SidebarItem href="/login" class="flex md:mt-auto">
               <SidebarItem.Icon path={userCircle} />
-              <SidebarItem.Label>Log in</SidebarItem.Label>
+              <SidebarItem.Label>{i18n.t.routes.login.title()}</SidebarItem.Label>
             </SidebarItem>
           }
         >
@@ -46,7 +48,7 @@ export const Sidebar: Component = () => {
                 )}
               </Show>
 
-              <SidebarItem.Label>Settings</SidebarItem.Label>
+              <SidebarItem.Label>{i18n.t.routes.settings.heading()}</SidebarItem.Label>
             </SidebarItem>
           )}
         </Show>

@@ -41,6 +41,53 @@ export const dict: DictionaryMap = {
     resetPassword: {
       title: "Сброс пароля",
     },
+    settings: {
+      heading: "Настройки",
+      sections: {
+        personal: {
+          heading: "Личные",
+          fields: {
+            avatar: {
+              heading: "Аватарка",
+              description: "Картинка пользователя, видная всем.",
+            },
+            email: {
+              heading: "Электронная почта",
+              change: "Изменить адресс",
+            },
+            password: {
+              heading: "Пароль",
+              description: "Постоянный пароль для входа в ваш аккаунт.",
+              change: "Изменить пароль",
+            },
+          },
+        },
+        appearance: {
+          heading: "Внешний вид",
+          fields: {
+            language: {
+              heading: "Язык",
+              description: "Используемый в пользовательском интерфейсе язык.",
+            },
+          },
+        },
+        danger: {
+          heading: "Опасное",
+          fields: {
+            logout: {
+              heading: "Выход",
+              description: "Выйти из этого аккаунта на этом устройстве.",
+              action: "Выйти из системы",
+            },
+            deactivate: {
+              heading: "Закрыть аккаунт",
+              description: "Удалить ваш аккаунт и все связанные с ним данные.",
+              action: "Удалить мой аккаунт",
+            },
+          },
+        },
+      },
+    },
   },
   steps: {
     verification: {
