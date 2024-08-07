@@ -5,6 +5,7 @@ export const styles = tv({
   variants: {
     size: {
       default: "text-2xl",
+      subheading: "text-xl",
     },
   },
   defaultVariants: {
