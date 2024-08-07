@@ -2,7 +2,7 @@ import { tv } from "tailwind-variants";
 
 export const styles = tv({
   base: [
-    "text-sm leading-none outline-none",
+    "text-sm leading-none outline-none text-nowrap",
     "transition-all duration-75",
     "focus-visible:ring active:hover:duration-0",
     "disabled:cursor-not-allowed disabled:opacity-75",
