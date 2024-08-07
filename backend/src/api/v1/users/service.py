@@ -45,10 +45,18 @@ def update_password(session: Session, user: User, new_password: str) -> None:
     session.refresh(user)
 
 
-def update_avatar(session: Session, user: User, new_avatar_url: str) -> None:
+def record_avatar(session: Session, user: User, avatar_url=None) -> None:
     if user.avatar_url:
         delete_file(user.avatar_url)
 
-    user.avatar_url = new_avatar_url
+    user.avatar_url = avatar_url
     session.commit()
     session.refresh(user)
+
+
+def update_avatar(session: Session, user: User, new_avatar_url: str) -> None:
+    record_avatar(session, user, new_avatar_url)
+
+
+def delete_avatar(session: Session, user: User) -> None:
+    record_avatar(session, user)
