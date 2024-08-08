@@ -6,6 +6,26 @@ module.exports = {
   },
   theme: {
     extend: {
+      colors: {
+        fg: {
+          body: "var(--fg-color-body)",
+          soft: "var(--fg-color-soft)",
+          muted: "var(--fg-color-muted)",
+          accent: "var(--fg-color-accent)",
+        },
+        bg: {
+          body: "color-mix(in srgb, var(--bg-color-body) calc(<alpha-value> * 100%), transparent)",
+          default: "color-mix(in srgb, var(--bg-color-default) calc(<alpha-value> * 100%), transparent)",
+          secondary: "color-mix(in srgb, var(--bg-color-secondary) calc(<alpha-value> * 100%), transparent)",
+          tertiary: "color-mix(in srgb, var(--bg-color-tertiary) calc(<alpha-value> * 100%), transparent)",
+        },
+        ring: {
+          accent: "color-mix(in srgb, var(--ring-color-accent) calc(<alpha-value> * 100%), transparent)"
+        },
+        border: {
+          accent: "color-mix(in srgb, var(--border-color-accent) calc(<alpha-value> * 100%), transparent)"
+        }
+      },
       fontFamily: {
         sans: ["Inter", { fontFeatureSettings: '"cv11"', }],
       },
