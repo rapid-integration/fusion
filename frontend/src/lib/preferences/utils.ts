@@ -3,4 +3,5 @@ import { Settings } from "~/lib/preferences";
 
 export const getDefaultSettings = (): Settings => ({
   locale: getDefaultLocale(),
+  theme: "system",
 });
