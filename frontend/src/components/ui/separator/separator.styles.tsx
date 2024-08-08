@@ -1,7 +1,7 @@
 import { tv } from "tailwind-variants";
 
 export const styles = tv({
-  base: "shrink-0 bg-neutral-600",
+  base: "shrink-0 border-bg-tertiary transition-colors",
   variants: {
     orientation: {
       vertical: "h-full w-px",

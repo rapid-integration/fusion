@@ -9,7 +9,7 @@ export const Slogan: Component = () => {
   return (
     <Typer
       as="h1"
-      class="text-2xl text-neutral-900"
+      class="text-2xl"
       text={shuffled([
         i18n.t.slogan.share(),
         i18n.t.slogan.analyze(),

@@ -10,7 +10,7 @@ import { toast } from "solid-sonner";
 import { Button, Heading, Motion, OtpField, Sticker, TextField, Stepper } from "~/components";
 import { useVerification } from "~/components/steps/verification/provider";
 
-import { requestVerification, verifyCode } from "~/lib/auth";
+import { $requestVerification, $verifyCode } from "~/lib/auth";
 import { useI18n } from "~/lib/i18n";
 
 const OTP_LENGTH = 6;
@@ -30,12 +30,12 @@ export const OtpStep = () => {
   const [otpInputRef, setOtpInputRef] = createSignal<HTMLInputElement>();
 
   const email = () => context.store.email;
-  const [resourse, { refetch }] = createResource(email, requestVerification);
+  const [resourse, { refetch }] = createResource(email, $requestVerification);
 
   const onSubmit = async (form: OtpForm) => {
     const otp = Number(form.otp);
 
-    if (!(await verifyCode({ email: email(), code: otp }))) {
+    if (!(await $verifyCode({ email: email(), code: otp }))) {
       toast.error(i18n.t.steps.verification.otp.incorrect());
 
       reset();
@@ -63,7 +63,7 @@ export const OtpStep = () => {
 
       <hgroup class="w-full space-y-4">
         <Heading>{i18n.t.steps.verification.otp.heading()}</Heading>
-        <p class="text-sm text-neutral-500">
+        <p class="text-sm text-fg-muted">
           <Suspense fallback={i18n.t.steps.verification.otp.sending()}>
             <Show when={resourse()}>{i18n.t.steps.verification.otp.sent()}</Show>
           </Suspense>

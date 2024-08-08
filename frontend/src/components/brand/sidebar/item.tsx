@@ -4,19 +4,22 @@ import { Icon } from "solid-heroicons";
 import { JSX, ParentComponent, splitProps, ValidComponent } from "solid-js";
 import { merge } from "~/lib/utils/css/merge";
 
-export const BottonRoot: ParentComponent<AnchorProps> = (props) => {
+export const SidebarItemRoot: ParentComponent<AnchorProps> = (props) => {
   const [local, others] = splitProps(props, ["class", "activeClass"]);
   return (
     <A
       class={merge(
-        "flex w-full items-center justify-center gap-1",
-        "transition-[color,opacity] active:duration-0",
+        "text-fg-soft flex w-full items-center justify-center gap-1",
+        "transition-[opacity,color,background-color] active:duration-0",
         "max-md:hover:opacity-75 max-md:active:opacity-50",
         "max-sm:flex-col",
-        "md:flex-row md:justify-start md:gap-2 md:rounded-lg md:p-2 md:hover:bg-neutral-200",
+        "md:flex-row md:justify-start md:gap-2 md:rounded-lg md:p-2 md:hover:bg-bg-secondary",
         local.class,
       )}
-      activeClass={merge("max-md:text-blue-500 md:bg-neutral-300 md:hover:bg-neutral-300", local.activeClass)}
+      activeClass={merge(
+        "max-md:text-fg-accent md:text-fg-body md:bg-bg-tertiary md:hover:bg-bg-tertiary",
+        local.activeClass,
+      )}
       end
       {...others}
     />
@@ -42,7 +45,7 @@ export const SidebarItemIcon = <T extends ValidComponent>(props: PolymorphicProp
   return <Polymorphic as={Icon} class={merge("size-6 md:size-4", local.class)} {...others} />;
 };
 
-export const SidebarItem = Object.assign(BottonRoot, {
+export const SidebarItem = Object.assign(SidebarItemRoot, {
   Icon: SidebarItemIcon,
   Label: SidebarItemLabel,
 });

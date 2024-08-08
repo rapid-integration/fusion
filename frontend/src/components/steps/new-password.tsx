@@ -3,7 +3,7 @@ import { useAction } from "@solidjs/router";
 import { toast } from "solid-sonner";
 import { Button, FormControl, Heading, Stepper, Sticker } from "~/components";
 import { Verifier } from "~/components/steps/verification";
-import { resetUserPassword } from "~/lib/auth";
+import { resetPassword } from "~/lib/auth";
 import { useI18n } from "~/lib/i18n";
 
 export type NewPasswordForm = {
@@ -18,7 +18,7 @@ export function NewPasswordStep() {
   const context = Verifier.useContext();
 
   const [form, NewPassword] = createForm<NewPasswordForm>();
-  const reset = useAction(resetUserPassword);
+  const reset = useAction(resetPassword);
 
   const onSubmit = async (form: NewPasswordForm) => {
     if (form.password !== form.confirm) {
@@ -41,7 +41,7 @@ export function NewPasswordStep() {
 
       <hgroup class="space-y-4">
         <Heading>{i18n.t.steps.resetPassword.password.heading()}</Heading>
-        <p class="text-sm text-neutral-500">
+        <p class="text-sm text-fg-muted">
           {i18n.t.steps.resetPassword.password.paragraph()}
           <Button variant="hyperlink" onClick={() => stepper.setCurrentIndex((_) => 0)}>
             {context.store.email}

@@ -5,7 +5,7 @@ import { createForm, email, minLength, required } from "@modular-forms/solid";
 import { toast } from "solid-sonner";
 
 import { Button, FormControl, Link, Separator, Slogan, Title } from "~/components";
-import { LoginForm, signin } from "~/lib/auth";
+import { LoginForm, login } from "~/lib/auth";
 import { useI18n } from "~/lib/i18n";
 
 export default function Login() {
@@ -13,8 +13,8 @@ export default function Login() {
 
   const i18n = useI18n();
 
-  const action = useAction(signin);
-  const submission = useSubmission(signin);
+  const action = useAction(login);
+  const submission = useSubmission(login);
 
   const [form, Login] = createForm<LoginForm>();
 
@@ -42,7 +42,7 @@ export default function Login() {
 
           <hgroup class="w-full text-left font-semibold">
             <Slogan />
-            <p class="text-2xl text-neutral-500">{i18n.t.routes.login.heading()}</p>
+            <p class="text-2xl text-fg-muted">{i18n.t.routes.login.heading()}</p>
           </hgroup>
         </header>
 
@@ -119,7 +119,7 @@ export default function Login() {
           </Login.Form>
         </main>
 
-        <footer class="mt-8 text-center text-xs text-neutral-500">
+        <footer class="mt-8 text-center text-xs text-fg-muted">
           <p>{i18n.t.routes.login.footer()}</p>
         </footer>
       </div>

@@ -23,10 +23,10 @@ export const LocaleSwitcher: Component = () => {
       itemComponent={(props) => (
         <Select.Item item={props.item}>
           <Select.ItemLabel class="flex items-center gap-1.5 capitalize">
-            <span class={`${getFlagClass(props.item.rawValue)} rounded-sm ring-1 ring-neutral-400`} />
+            <span class={`${getFlagClass(props.item.rawValue)} rounded-sm ring-1 ring-bg-tertiary`} />
             <span>{getNativeLanguageName(props.item.rawValue)}</span>
             <span>—</span>
-            <span class="text-neutral-500">{languageNames().of(props.item.rawValue)}</span>
+            <span class="text-fg-muted">{languageNames().of(props.item.rawValue)}</span>
           </Select.ItemLabel>
           <Select.ItemIndicator>
             <Icon path={check} width={14} />

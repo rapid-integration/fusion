@@ -1,5 +1,5 @@
 import { action, redirect } from "@solidjs/router";
-import { login, resetPassword } from "~/lib/auth";
+import { $login, $resetPassword } from "~/lib/auth";
 import { changeSession, resetSession } from "~/lib/auth/session";
 import { components } from "~/lib/api/schema";
 
@@ -9,10 +9,10 @@ export type LoginForm = {
   redirect: string | undefined;
 };
 
-export const signin = action(async (form: LoginForm) => {
+export const login = action(async (form: LoginForm) => {
   "use server";
 
-  const { data, error, response } = await login(form.email, form.password);
+  const { data, error, response } = await $login(form.email, form.password);
 
   if (data) {
     await changeSession({ token: data.access_token, expires_at: data.expires_at });
@@ -24,10 +24,10 @@ export const signin = action(async (form: LoginForm) => {
   throw redirect(form.redirect || "/settings");
 });
 
-export const resetUserPassword = action(async (body: components["schemas"]["UserPasswordReset"]) => {
+export const resetPassword = action(async (body: components["schemas"]["UserPasswordReset"]) => {
   "use server";
 
-  const data = await resetPassword({ password: body.password, email: body.email, code: body.code});
+  const data = await $resetPassword({ password: body.password, email: body.email, code: body.code});
 
   if (data) {
     await changeSession({ token: data.access_token, expires_at: data.expires_at });
@@ -37,7 +37,7 @@ export const resetUserPassword = action(async (body: components["schemas"]["User
   return true;
 });
 
-export const signout = action(async () => {
+export const logout = action(async () => {
   "use server";
 
   await resetSession();

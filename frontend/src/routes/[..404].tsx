@@ -18,7 +18,7 @@ export default function Page() {
 
         <hgroup class="space-y-4">
           <Heading>{i18n.t.routes[404].heading()}</Heading>
-          <p class="text-sm text-neutral-500">{i18n.t.routes[404].paragraph()}</p>
+          <p class="text-sm text-fg-muted">{i18n.t.routes[404].paragraph()}</p>
         </hgroup>
 
         <section class="flex gap-2">

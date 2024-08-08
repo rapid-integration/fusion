@@ -2,7 +2,7 @@ import { cache } from "@solidjs/router";
 import { formDataSerializer, getClient } from "~/lib/api";
 import { components } from "~/lib/api/schema";
 
-export const login = async (username: string, password: string) => {
+export const $login = async (username: string, password: string) => {
   "use server";
 
   const client = await getClient();
@@ -17,7 +17,7 @@ export const login = async (username: string, password: string) => {
   });
 };
 
-export const requestVerification = async (email: string) => {
+export const $requestVerification = async (email: string) => {
   "use server";
 
   const client = await getClient();
@@ -31,7 +31,7 @@ export const requestVerification = async (email: string) => {
   ).data;
 };
 
-export const verifyCode = async (body: components["schemas"]["CodeVerify"]) => {
+export const $verifyCode = async (body: components["schemas"]["CodeVerify"]) => {
   "use server";
 
   const client = await getClient();
@@ -45,7 +45,7 @@ export const verifyCode = async (body: components["schemas"]["CodeVerify"]) => {
   );
 };
 
-export const resetPassword = async (body: { password: string; email: string; code: number }) => {
+export const $resetPassword = async (body: { password: string; email: string; code: number }) => {
   "use server";
 
   const client = await getClient();
