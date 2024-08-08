@@ -4,7 +4,7 @@ import { type ValidComponent, createEffect, createSignal, onCleanup, onMount, sp
 
 import { type PolymorphicProps, Polymorphic } from "@kobalte/core";
 
-import Lottie, { type AnimationConfigWithPath, type RendererType } from "lottie-web";
+import { type AnimationConfigWithPath, type RendererType } from "lottie-web";
 
 export type StickerProps<T extends RendererType = "svg"> = Omit<AnimationConfigWithPath<T>, "container">;
 
@@ -27,24 +27,25 @@ export const Sticker = <T extends ValidComponent = "div", R extends RendererType
   );
   const [ref, setRef] = createSignal<Element>();
 
-  onMount(() => {
+  onMount(async () => {
     const container = ref();
     if (!container) return;
-
-    const animation = Lottie.loadAnimation({ ...config, container: container });
+    
+    const Lottie = await import("lottie-web");
+    const animation = Lottie.default.loadAnimation({ ...config, container: container });
 
     makeEventListener(window, "blur", () => animation.pause());
     makeEventListener(window, "focus", () => animation.play());
-    
+
     const visible = createVisibilityObserver()(() => container);
 
     createEffect(() => {
       visible() ? animation.play() : animation.pause();
-    })
+    });
 
     onCleanup(() => {
       animation.destroy();
-    })
+    });
   });
 
   return <Polymorphic as={"div"} ref={setRef} {...others} />;
