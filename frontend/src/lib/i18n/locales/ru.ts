@@ -69,6 +69,15 @@ export const dict: DictionaryMap = {
               heading: "Язык",
               description: "Используемый в пользовательском интерфейсе язык.",
             },
+            theme: {
+              heading: "Тема",
+              options: {
+                light: "Светлая",
+                dark: "Тёмная",
+                night: "Ночная",
+                system: "Системная",
+              },
+            },
           },
         },
         danger: {

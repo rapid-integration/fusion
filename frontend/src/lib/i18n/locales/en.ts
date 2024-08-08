@@ -69,6 +69,15 @@ export const dict: DictionaryMap = {
               heading: "Language",
               description: "Change the language used in the user interface.",
             },
+            theme: {
+              heading: "Theme",
+              options: {
+                light: "Light",
+                dark: "Dark",
+                night: "Night",
+                system: "System",
+              },
+            },
           },
         },
         danger: {

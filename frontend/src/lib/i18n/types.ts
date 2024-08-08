@@ -1,4 +1,5 @@
 import * as i18n from "@solid-primitives/i18n";
+import { Theme } from "~/lib/color-scheme";
 import { SUPPORTED_CULTURES } from "~/lib/i18n";
 
 export type Locale = keyof typeof SUPPORTED_CULTURES;
@@ -70,6 +71,10 @@ export type DictionaryMap = {
             language: {
               heading: string;
               description: string;
+            };
+            theme: {
+              heading: string;
+              options: { [K in Theme]: string };
             };
           };
         };
