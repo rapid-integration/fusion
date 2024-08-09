@@ -45,7 +45,7 @@ def update_password(session: Session, user: User, new_password: str) -> None:
     session.refresh(user)
 
 
-def record_avatar(session: Session, user: User, avatar_url=None) -> None:
+def record_avatar(session: Session, user: User, avatar_url: str | None = None) -> None:
     if user.avatar_url:
         delete_file(user.avatar_url)
 
