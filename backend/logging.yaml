@@ -27,5 +27,5 @@ loggers:
     level: DEBUG
     handlers: [file]
   sqlalchemy.engine:
-    level: INFO
+    level: WARNING
     handlers: [file]
