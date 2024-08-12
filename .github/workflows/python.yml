@@ -23,8 +23,8 @@ jobs:
     - name: Install dependencies
       run: |
         cd ./backend
-        python -m venv ./.venv
-        source ./.venv/bin/activate
+        python -m venv venv
+        source ./venv/bin/activate
         python -m pip install --upgrade pip
         python -m pip install pdm
         pdm install
@@ -32,5 +32,5 @@ jobs:
     - name: Lint with Ruff
       run: |
         cd ./backend
-        source ./.venv/bin/activate
+        source ./venv/bin/activate
         pdm lint
