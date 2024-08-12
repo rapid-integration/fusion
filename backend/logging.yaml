@@ -1,0 +1,31 @@
+version: 1
+disable_existing_loggers: no
+formatters:
+  basic:
+    class: uvicorn.logging.ColourizedFormatter
+    format: "%(levelprefix)s %(message)s"
+  verbose:
+    class: src.core.logging.RelativePathFormatter
+    format: "%(asctime)s %(pathname)s:%(lineno)d %(levelprefix)s %(message)s"
+    datefmt: "%d.%m.%Y %H:%M:%S"
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: basic
+    stream: ext://sys.stdout
+  file:
+    class: logging.handlers.TimedRotatingFileHandler
+    formatter: verbose
+    when: D
+    backupCount: 0
+    filename: ./server.log
+loggers:
+  root:
+    level: INFO
+    handlers: [console]
+  app:
+    level: DEBUG
+    handlers: [file]
+  sqlalchemy.engine:
+    level: INFO
+    handlers: [file]

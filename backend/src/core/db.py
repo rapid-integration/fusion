@@ -8,7 +8,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 from src.core.config import settings
 
-ENGINE = create_engine(str(settings.DATABASE_URI), echo=settings.DEBUG)
+ENGINE = create_engine(str(settings.DATABASE_URI))
 
 
 class Base(DeclarativeBase):

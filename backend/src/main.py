@@ -1,11 +1,17 @@
+import logging.config
 import os
 
+import yaml
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from src.api import api_router
 from src.core.config import settings
+
+with open("logging.yaml", "r") as file:
+    config = yaml.safe_load(file)
+    logging.config.dictConfig(config)
 
 if not os.path.exists(settings.UPLOADS_PATH):
     os.mkdir(settings.UPLOADS_PATH)
