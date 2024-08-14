@@ -2,7 +2,7 @@ from typing import Any
 
 from fastapi_mail import FastMail, MessageSchema, MessageType
 
-from src.core.config import settings
+from src.config import settings
 
 __fm = FastMail(settings.MAIL_CONNECTION_CONF)
 
