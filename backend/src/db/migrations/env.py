@@ -1,16 +1,13 @@
-from logging.config import fileConfig
+from logging.config import dictConfig as configure_logging
 
 from alembic import context
 from sqlalchemy import create_engine
 
 from src.api import *  # noqa: F403 https://github.com/sqlalchemy/alembic/issues/712
-from src.core.config import settings
-from src.core.db import Base
+from src.config import settings
+from src.db.models import Base
 
-config = context.config
-
-if config.config_file_name is not None:
-    fileConfig(config.config_file_name)
+configure_logging(settings.logging)
 
 
 def run_migrations_offline() -> None:
@@ -23,10 +20,10 @@ def run_migrations_offline() -> None:
 
     Calls to context.execute() here emit the given string to the
     script output.
-
     """
+
     context.configure(
-        url=str(settings.DATABASE_URI),
+        url=str(settings.postgres.uri),
         target_metadata=Base.metadata,
     )
 
@@ -39,9 +36,9 @@ def run_migrations_online() -> None:
 
     In this scenario we need to create an Engine
     and associate a connection with the context.
-
     """
-    engine = create_engine(str(settings.DATABASE_URI))
+
+    engine = create_engine(str(settings.postgres.uri))
 
     with engine.connect() as connection:
         context.configure(
