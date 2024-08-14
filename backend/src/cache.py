@@ -2,9 +2,9 @@ from typing import Any
 
 from redis import Redis
 
-from src.core.config import settings
+from src.config import settings
 
-redis = Redis(settings.REDIS_HOST)
+redis = Redis(settings.redis.host)
 
 CACHE_KEYS_SEPARATOR = ":"
 
