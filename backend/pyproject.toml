@@ -14,13 +14,12 @@ dependencies = [
   "pyjwt>=2.9.0",
   "passlib>=1.7.4",
   "bcrypt==4.0.1",
-  "aiofiles>=24.1.0",
   "redis>=5.0.8",
   "pillow>=10.4.0",
 ]
 requires-python = "==3.11.*"
 readme = "README.md"
-license = {text = "CC BY-NC-SA 3.0"}
+license = { text = "CC BY-NC-SA 3.0" }
 
 
 [tool.pdm]
@@ -28,13 +27,11 @@ distribution = false
 
 
 [tool.pdm.dev-dependencies]
-dev = [
-  "ruff>=0.5.7",
-]
+dev = ["ruff>=0.5.7"]
 
 
 [tool.pdm.scripts]
-"dev" = "uvicorn --reload src.main:app"
+"dev" = "uvicorn --reload src.server:app"
 "migrate" = "alembic upgrade head"
 "fix" = "ruff check src --fix"
 "lint" = "ruff check src"
