@@ -2,8 +2,8 @@ from datetime import timedelta
 from random import randint
 from typing import Any
 
-from src.core.cache import redis, separate
-from src.core.config import settings
+from src.cache import redis, separate
+from src.config import settings
 
 __CACHE_KEY_PREFIX = "codes"
 
@@ -12,7 +12,7 @@ def set_code(email: str) -> int:
     code = generate_code()
     name = generate_code_key(email)
     redis.set(name, code)
-    redis.expire(name, timedelta(minutes=settings.VERIFICATION_CODE_EXPIRE_MINUTES))
+    redis.expire(name, timedelta(minutes=settings.otp.expire_minutes))
     return code
 
 
@@ -36,7 +36,7 @@ def is_valid_code(email: str, code: int) -> bool:
 
 
 def generate_code() -> int:
-    return randint(settings.VERIFICATION_CODE_MIN, settings.VERIFICATION_CODE_MAX)
+    return randint(settings.otp.min, settings.otp.max)
 
 
 def generate_code_key(email: str) -> str:

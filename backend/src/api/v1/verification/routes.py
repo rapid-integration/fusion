@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Response, status
 
 from src.api.v1.users.schemas import UserEmail
-from src.api.v1.verification.emails import send_verification_message
+from src.api.v1.verification.mailings import send_verification_message
 from src.api.v1.verification.schemas import CodeResponse, CodeVerify
 from src.api.v1.verification.service import is_valid_code
 

@@ -1,10 +1,12 @@
+from PIL.ImageFile import ImageFile
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import exists
 
 from src.api.v1.users.models import User
 from src.api.v1.users.schemas import UserCreate
-from src.core.files import delete_file
-from src.core.security import get_password_hash
+from src.security import get_password_hash
+from src.storage import fs
+from src.storage.images import crop_image_to_square
 
 
 def get_user_by_email(session: Session, email: str) -> User | None:
@@ -16,7 +18,10 @@ def is_email_registered(session: Session, email: str) -> bool:
 
 
 def create_user(session: Session, schema: UserCreate) -> User:
-    user = User(email=schema.email, password=get_password_hash(schema.password))
+    user = User(
+        email=schema.email,
+        password=get_password_hash(schema.password),
+    )
 
     session.add(user)
     session.commit()
@@ -47,15 +52,22 @@ def update_password(session: Session, user: User, new_password: str) -> None:
 
 def record_avatar(session: Session, user: User, avatar_url: str | None = None) -> None:
     if user.avatar_url:
-        delete_file(user.avatar_url)
+        fs.remove(user.avatar_url)
 
     user.avatar_url = avatar_url
     session.commit()
     session.refresh(user)
 
 
-def update_avatar(session: Session, user: User, new_avatar_url: str) -> None:
-    record_avatar(session, user, new_avatar_url)
+def update_avatar(session: Session, user: User, image: ImageFile) -> None:
+    cropped_image = crop_image_to_square(image)
+
+    extension = cropped_image.format or "PNG"
+    name = fs.generate_unique_file_name_from_extension(extension)
+    path = fs.get_system_path(name)
+    cropped_image.save(path, extension)
+
+    record_avatar(session, user, name)
 
 
 def delete_avatar(session: Session, user: User) -> None:

@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.core.db import AuditMixin, Base
+from src.db.mixins import AuditMixin
+from src.db.models import Base
 
 
 class User(Base, AuditMixin):

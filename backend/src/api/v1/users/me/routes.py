@@ -1,4 +1,5 @@
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
+from PIL import Image
 
 from src.api.deps import Session
 from src.api.v1.users.deps import CurrentUser
@@ -15,8 +16,8 @@ from src.api.v1.users.service import (
 )
 from src.api.v1.verification.schemas import Code
 from src.api.v1.verification.service import expire_code_if_valid
-from src.core.config import settings
-from src.core.files import check_file_size, check_is_image, generate_cropped_image
+from src.config import settings
+from src.storage import fs, mimetype
 
 router = APIRouter(prefix="/me")
 
@@ -53,32 +54,28 @@ def update_current_user_password(current_user: CurrentUser, schema: UserPassword
 
 
 @router.patch("/avatar", response_model=CurrentUserResponse)
-async def update_current_user_avatar(current_user: CurrentUser, session: Session, file: UploadFile = File(...)):
-    is_correct_size = await check_file_size(file, settings.MAX_AVATAR_SIZE)
-    if not is_correct_size:
+async def update_current_user_avatar(current_user: CurrentUser, session: Session, file: UploadFile = File()):
+    if not fs.is_size_in_range(file.file, max_size=settings.api.max_avatar_size):
         raise HTTPException(
             status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
-            f"File size exceeded maximum avatar size: {settings.MAX_AVATAR_SIZE} bytes",
+            f"File size exceeded maximum avatar size: {settings.api.max_avatar_size} bytes",
         )
 
-    if not check_is_image(file):
+    if not mimetype.is_image(file.content_type):
         raise HTTPException(
             status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
             "Unsupported avatar image type. Make sure you're uploading a correct file",
         )
 
-    image_url = generate_cropped_image(file)
-    if image_url is None:
-        raise HTTPException(
-            status.HTTP_422_UNPROCESSABLE_ENTITY,
-            "Exception occurred whilst attempting to crop image. Make sure your file has no defects",
-        )
-
-    update_avatar(session, current_user, image_url)
+    image = Image.open(file.file)
+    update_avatar(session, current_user, image)
     return current_user
 
 
 @router.delete("/avatar", response_model=CurrentUserResponse)
 def delete_current_user_avatar(current_user: CurrentUser, session: Session):
+    if not current_user.avatar_url:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Avatar not found")
+
     delete_avatar(session, current_user)
     return current_user

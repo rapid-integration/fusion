@@ -3,11 +3,11 @@ from datetime import datetime
 from pydantic import BaseModel, Field
 
 from src.api.v1.users.schemas import UserEmail
-from src.core.config import settings
+from src.config import settings
 
 
 class Code(BaseModel):
-    code: int = Field(ge=settings.VERIFICATION_CODE_MIN, le=settings.VERIFICATION_CODE_MAX)
+    code: int = Field(ge=settings.otp.min, le=settings.otp.max)
 
 
 class CodeVerify(Code, UserEmail):

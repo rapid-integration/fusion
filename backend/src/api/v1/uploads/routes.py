@@ -1,19 +1,15 @@
-from fastapi import APIRouter, HTTPException, UploadFile, status
+from fastapi import APIRouter, HTTPException, status
+from fastapi.responses import FileResponse
 
-from src.core.files import get_file, save_files
+from src.storage import fs
 
 router = APIRouter(prefix="/uploads", tags=["Uploads"])
 
 
-@router.post("", status_code=status.HTTP_201_CREATED)
-async def upload_files(files: list[UploadFile]):
-    filenames = await save_files(files)
-    return {"filenames": filenames}
-
-
-@router.get("/{filename}")
-async def download_file(filename: str):
-    file = await get_file(filename)
-    if file is None:
+@router.get("/{name}")
+def get_file(name: str):
+    if not fs.exists(name):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "File not found")
-    return file
+
+    path = fs.get_system_path(name)
+    return FileResponse(path=path, media_type="application/octet-stream", filename=name)
