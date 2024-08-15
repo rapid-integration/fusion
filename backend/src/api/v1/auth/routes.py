@@ -5,7 +5,7 @@ from src.api.v1.auth.deps import PasswordForm
 from src.api.v1.auth.schemas import Token
 from src.api.v1.users.schemas import UserCreate, UserPasswordReset
 from src.api.v1.users.service import create_user, get_user_by_email, is_email_registered, update_password
-from src.api.v1.verification.service import expire_code_if_valid
+from src.api.v1.verification.service import expire_code_if_correct
 from src.security import create_access_token, is_valid_password
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -41,7 +41,7 @@ def reset_password(schema: UserPasswordReset, session: Session) -> Token:
 
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
-    if not expire_code_if_valid(schema.email, schema.code):
+    if not expire_code_if_correct(schema.email, schema.code):
         raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, "The code is invalid")
 
     update_password(session, user, schema.password)

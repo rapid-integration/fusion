@@ -15,7 +15,7 @@ from src.api.v1.users.service import (
     verify_user,
 )
 from src.api.v1.verification.schemas import Code
-from src.api.v1.verification.service import expire_code_if_valid
+from src.api.v1.verification.service import expire_code_if_correct
 from src.config import settings
 from src.storage import fs, mimetype
 
@@ -31,7 +31,7 @@ def get_current_user(current_user: CurrentUser) -> User:
 def verify_current_user(current_user: CurrentUser, schema: Code, session: Session) -> User:
     if current_user.is_verified:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "User has already been verified")
-    if not expire_code_if_valid(current_user.email, schema.code):
+    if not expire_code_if_correct(current_user.email, schema.code):
         raise HTTPException(status.HTTP_406_NOT_ACCEPTABLE, "The code is invalid")
 
     verify_user(session, current_user)
