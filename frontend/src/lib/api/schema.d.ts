@@ -192,32 +192,15 @@ export interface paths {
         patch: operations["update_current_user_avatar_api_v1_users_me_avatar_patch"];
         trace?: never;
     };
-    "/api/v1/uploads": {
+    "/api/v1/uploads/{name}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
-        put?: never;
-        /** Upload Files */
-        post: operations["upload_files_api_v1_uploads_post"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v1/uploads/{filename}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Download File */
-        get: operations["download_file_api_v1_uploads__filename__get"];
+        /** Get File */
+        get: operations["get_file_api_v1_uploads__name__get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -255,11 +238,6 @@ export interface components {
              * Format: binary
              */
             file: string;
-        };
-        /** Body_upload_files_api_v1_uploads_post */
-        Body_upload_files_api_v1_uploads_post: {
-            /** Files */
-            files: string[];
         };
         /** Code */
         Code: {
@@ -768,45 +746,12 @@ export interface operations {
             };
         };
     };
-    upload_files_api_v1_uploads_post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["Body_upload_files_api_v1_uploads_post"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            201: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    download_file_api_v1_uploads__filename__get: {
+    get_file_api_v1_uploads__name__get: {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                filename: string;
+                name: string;
             };
             cookie?: never;
         };
