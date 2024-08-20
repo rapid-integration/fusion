@@ -8,14 +8,16 @@ export type PreferencesContextValue = {
   set: SetStoreFunction<Settings>;
 };
 
+export const SYNC_BROADCAST_CHANNEL_NAME = "preferences_sync" as const;
+
 export const PreferencesContext = createContext<PreferencesContextValue>({} as PreferencesContextValue);
 
 export const PreferencesProvider: ParentComponent = (props) => {
-  const broadcast = new BroadcastChannel("pereferences");
+  const channel = new BroadcastChannel(SYNC_BROADCAST_CHANNEL_NAME);
   const [settings, set] = storage.makePersisted(createStore(getDefaultSettings()), PREFERENCES_COOKIE_OPTIONS);
 
-  broadcast.onmessage = (event) => set(event.data);
-  createEffect(() => broadcast.postMessage({ ...settings }), { defer: true });
+  channel.onmessage = (event) => set(event.data);
+  createEffect(() => channel.postMessage({ ...settings }), { defer: true });
 
   return <PreferencesContext.Provider value={{ settings, set }}>{props.children}</PreferencesContext.Provider>;
 };
