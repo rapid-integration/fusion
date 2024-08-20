@@ -18,6 +18,7 @@ export const LocaleSwitcher: Component = () => {
       options={[...Object.keys(SUPPORTED_CULTURES)]}
       allowDuplicateSelectionEvents={false}
       disallowEmptySelection={true}
+      value={i18n.locale()}
       defaultValue={i18n.locale()}
       onChange={i18n.setLocale}
       itemComponent={(props) => (
