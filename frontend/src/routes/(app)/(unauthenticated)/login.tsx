@@ -5,7 +5,7 @@ import { createForm, email, minLength, required } from "@modular-forms/solid";
 import { toast } from "solid-sonner";
 
 import { Button, FormControl, Link, Separator, Slogan, Title } from "~/components";
-import { LoginForm, login } from "~/lib/auth";
+import { LoginForm, authenticate } from "~/lib/auth";
 import { useI18n } from "~/lib/i18n";
 
 export default function Login() {
@@ -13,8 +13,8 @@ export default function Login() {
 
   const i18n = useI18n();
 
-  const action = useAction(login);
-  const submission = useSubmission(login);
+  const action = useAction(authenticate);
+  const submission = useSubmission(authenticate);
 
   const [form, Login] = createForm<LoginForm>();
 

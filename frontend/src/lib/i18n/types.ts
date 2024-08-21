@@ -158,6 +158,7 @@ export type DictionaryMap = {
     enjoy: string;
     explore: string;
   };
+  sessionExpired: string;
 };
 
 export type LocalizedDictionary = i18n.Flatten<DictionaryMap>;

@@ -1,8 +1,9 @@
-import { cache } from "@solidjs/router";
+import { cache, revalidate } from "@solidjs/router";
 import { formDataSerializer, getClient } from "~/lib/api";
 import { components } from "~/lib/api/schema";
+import { getSession, resetSession } from "./session";
 
-export const $login = async (username: string, password: string) => {
+export const $authenticate = async (username: string, password: string) => {
   "use server";
 
   const client = await getClient();
@@ -17,18 +18,24 @@ export const $login = async (username: string, password: string) => {
   });
 };
 
+export const $unauthenticate = async () => {
+  "use server";
+
+  await resetSession();
+};
+
 export const $requestVerification = async (email: string) => {
   "use server";
 
   const client = await getClient();
 
-  return (
-    await client.POST("/api/v1/verification/request", {
-      body: {
-        email: email,
-      },
-    })
-  ).data;
+  const { data } = await client.POST("/api/v1/verification/request", {
+    body: {
+      email: email,
+    },
+  });
+
+  return data;
 };
 
 export const $verifyCode = async (body: components["schemas"]["CodeVerify"]) => {
@@ -36,16 +43,14 @@ export const $verifyCode = async (body: components["schemas"]["CodeVerify"]) => 
 
   const client = await getClient();
 
-  return (
-    (
-      await client.POST("/api/v1/verification/verify", {
-        body: body,
-      })
-    ).response.status === 202
-  );
+  const { response } = await client.POST("/api/v1/verification/verify", {
+    body: body,
+  });
+
+  return response.status === 202;
 };
 
-export const $resetPassword = async (body: { password: string; email: string; code: number }) => {
+export const $resetPassword = async (body: components["schemas"]["UserPasswordReset"]) => {
   "use server";
 
   const client = await getClient();
@@ -57,7 +62,7 @@ export const $resetPassword = async (body: { password: string; email: string; co
   ).data;
 };
 
-export const userExists = cache(async (email: string) => {
+export const $userExists = cache(async (email: string) => {
   "use server";
 
   const client = await getClient();
@@ -69,9 +74,9 @@ export const userExists = cache(async (email: string) => {
   });
 
   return data;
-}, "userExists");
+}, "$userExists");
 
-export const getCurrentUser = cache(async () => {
+export const $getCurrentUser = cache(async () => {
   "use server";
 
   const client = await getClient();
@@ -79,4 +84,22 @@ export const getCurrentUser = cache(async () => {
   const { data } = await client.GET("/api/v1/users/me");
 
   return data;
-}, "currentUser");
+}, "$getCurrentUser");
+
+export const $getIsAuthenticated = cache(async () => {
+  "use server";
+
+  const session = await getSession();
+  const auth = session.data.auth;
+
+  return auth !== undefined && Date.parse(auth.expires_at) > Date.now();
+}, "$getIsAuthenticated");
+
+export const $getSessionExpirationDate = cache(async () => {
+  "use server";
+
+  const session = await getSession();
+  const auth = session.data.auth;
+
+  return auth ? Date.parse(auth.expires_at) : Date.now();
+}, "$getSessionExpiresAt");

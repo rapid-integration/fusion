@@ -6,13 +6,13 @@ import { pencilSquare, userCircle } from "solid-heroicons/solid-mini";
 
 import { Button, Heading, LocaleSwitcher, Separator, ThemeSwitcher, Title } from "~/components";
 import { formatResourceURL } from "~/lib/api/uploads";
-import { logout, useCurrentUser } from "~/lib/auth";
+import { unauthenticate, useCurrentUser } from "~/lib/auth";
 import { useI18n } from "~/lib/i18n";
 
 export default function Settings() {
   const i18n = useI18n();
   const currentUser = useCurrentUser();
-  const loggingOut = useSubmission(logout);
+  const loggingOut = useSubmission(unauthenticate);
 
   return (
     <>
@@ -102,7 +102,7 @@ export default function Settings() {
                     {i18n.t.routes.settings.sections.danger.fields.logout.description()}
                   </p>
                 </hgroup>
-                <form action={logout} method="post">
+                <form action={unauthenticate} method="post">
                   <Button type="submit" disabled={loggingOut.pending} aria-busy={loggingOut.pending}>
                     {i18n.t.routes.settings.sections.danger.fields.logout.action()}
                   </Button>

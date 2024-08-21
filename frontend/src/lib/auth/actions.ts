@@ -1,7 +1,7 @@
 import { action, redirect } from "@solidjs/router";
-import { $login, $resetPassword } from "~/lib/auth";
-import { changeSession, resetSession } from "~/lib/auth/session";
 import { components } from "~/lib/api/schema";
+import { $authenticate, $resetPassword, $unauthenticate } from "~/lib/auth";
+import { updateAuth } from "~/lib/auth/session";
 
 export type LoginForm = {
   email: string;
@@ -9,37 +9,37 @@ export type LoginForm = {
   redirect: string | undefined;
 };
 
-export const login = action(async (form: LoginForm) => {
+export const authenticate = action(async (form: LoginForm) => {
   "use server";
 
-  const { data, error, response } = await $login(form.email, form.password);
+  const { data, error, response } = await $authenticate(form.email, form.password);
 
   if (data) {
-    await changeSession({ token: data.access_token, expires_at: data.expires_at });
+    await updateAuth(data);
   }
   if (error) {
     return { error, code: response.status };
   }
 
-  throw redirect(form.redirect || "/settings");
+  throw redirect(form.redirect || "/");
+});
+
+export const unauthenticate = action(async () => {
+  "use server";
+
+  await $unauthenticate();
+
+  throw redirect("/");
 });
 
 export const resetPassword = action(async (body: components["schemas"]["UserPasswordReset"]) => {
   "use server";
 
-  const data = await $resetPassword({ password: body.password, email: body.email, code: body.code});
+  const data = await $resetPassword(body);
 
   if (data) {
-    await changeSession({ token: data.access_token, expires_at: data.expires_at });
-  } else {
-    return false;
+    await updateAuth(data);
+    return true;
   }
-  return true;
-});
-
-export const logout = action(async () => {
-  "use server";
-
-  await resetSession();
-  throw redirect("/");
+  return false;
 });

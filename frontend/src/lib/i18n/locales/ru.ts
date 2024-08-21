@@ -161,6 +161,7 @@ export const dict: DictionaryMap = {
     enjoy: "Наслаждайтесь",
     explore: "Исследуйте",
   },
+  sessionExpired: "Ваша сессия истекла!"
 };
 
 export default dict;
