@@ -44,7 +44,7 @@ export const LocaleSwitcher: Component = () => {
           <Icon path={chevronUpDown} width={14} />
         </Select.Icon>
       </Select.Trigger>
-      <Select.Content class="w-72" inert={i18n.isSettingLocale()}>
+      <Select.Content class="min-w-72" inert={i18n.isSettingLocale()}>
         <Select.ListBox class="outline-none" />
       </Select.Content>
     </Select>
