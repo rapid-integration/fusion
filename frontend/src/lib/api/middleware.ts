@@ -29,6 +29,5 @@ export const DEBUG_MIDDLEWARE: Middleware = {
     const icon = request.headers.has("Authorization") ? "🔓" : "🔒";
 
     logger.debug(`${method} ${route} ${status} ${icon}`);
-    logger.debug((await response.clone().text()))
   },
 };
