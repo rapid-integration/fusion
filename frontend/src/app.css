@@ -75,10 +75,6 @@
 }
 
 @layer base {
-  html {
-    scrollbar-gutter: stable;
-  }
-
   @media (prefers-color-scheme: light) {
     [data-theme="system"] {
       @mixin color-scheme-light;
