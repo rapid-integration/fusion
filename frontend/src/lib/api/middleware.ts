@@ -19,15 +19,16 @@ export const AUTH_MIDDLEWARE: Middleware = {
 };
 
 export const DEBUG_MIDDLEWARE: Middleware = {
-  onResponse: (options) => {
-    const method = colors.white(options.request.method);
-    const route = colors.cyan(colors.underline(options.request.url));
+  onResponse: async ({ request, response }) => {
+    const method = colors.white(request.method);
+    const route = colors.cyan(colors.underline(request.url));
 
-    const colorizeStatus = options.response.status >= 400 && options.response.status < 600 ? colors.red : colors.green;
-    const status = colorizeStatus(`${options.response.status} ${options.response.statusText}`);
+    const colorizeStatus = response.status >= 400 && response.status < 600 ? colors.red : colors.green;
+    const status = colorizeStatus(`${response.status} ${response.statusText}`);
 
-    const icon = options.request.headers.has("Authorization") ? "🔓" : "🔒";
+    const icon = request.headers.has("Authorization") ? "🔓" : "🔒";
 
     logger.debug(`${method} ${route} ${status} ${icon}`);
+    logger.debug((await response.clone().text()))
   },
 };
