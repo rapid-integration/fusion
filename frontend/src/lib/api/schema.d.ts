@@ -237,7 +237,7 @@ export interface components {
              * File
              * Format: binary
              */
-            file: string;
+            file: Blob;
         };
         /** Code */
         Code: {

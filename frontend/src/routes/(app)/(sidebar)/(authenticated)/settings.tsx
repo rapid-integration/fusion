@@ -1,18 +1,20 @@
-import { useSubmission } from "@solidjs/router";
+import { useAction, useSubmission } from "@solidjs/router";
 import { Show } from "solid-js";
 
 import { Icon } from "solid-heroicons";
-import { pencilSquare, userCircle } from "solid-heroicons/solid-mini";
+import { pencilSquare, trash, userCircle } from "solid-heroicons/solid-mini";
 
-import { Button, Heading, LocaleSwitcher, Separator, ThemeSwitcher, Title } from "~/components";
+import { Button, Dropdown, Heading, LocaleSwitcher, Separator, ThemeSwitcher, Title } from "~/components";
 import { formatResourceURL } from "~/lib/api/uploads";
 import { unauthenticate, useCurrentUser } from "~/lib/auth";
 import { useI18n } from "~/lib/i18n";
+import { deleteCurrentUserAvatar, updateCurrentUserAvatar } from "~/lib/api/users/me/actions";
 
 export default function Settings() {
   const i18n = useI18n();
   const currentUser = useCurrentUser();
   const loggingOut = useSubmission(unauthenticate);
+  const updateAvatar = useAction(updateCurrentUserAvatar);
 
   return (
     <>
@@ -35,11 +37,44 @@ export default function Settings() {
                   </p>
                 </hgroup>
                 <div class="size-8">
-                  <Show when={user().avatar_url} fallback={<Icon path={userCircle} />}>
-                    {(avatar_url) => (
-                      <img src={formatResourceURL(avatar_url())} alt="Profile picture" class="rounded-full" />
-                    )}
-                  </Show>
+                  <Dropdown gutter={2} placement="bottom">
+                    <Dropdown.Trigger>
+                      <Show when={user().avatar_url} fallback={<Icon class="size-8" path={userCircle} />}>
+                        {(avatar_url) => (
+                          <img
+                            src={formatResourceURL(avatar_url())}
+                            alt={i18n.t.routes.settings.sections.personal.fields.avatar.heading()}
+                            class="rounded-full"
+                          />
+                        )}
+                      </Show>
+                    </Dropdown.Trigger>
+                    <Dropdown.Content class="min-w-64">
+                      <Dropdown.Item as={"label"} for="avatar" class="justify-start gap-2">
+                        <input
+                          type="file"
+                          name="avatar"
+                          id="avatar"
+                          accept="image/*"
+                          class="sr-only"
+                          onChange={async (e) => await updateAvatar(e.currentTarget.files?.[0]!)}
+                        />
+                        <Icon class="size-3.5" path={pencilSquare} />
+                        Upload new avatar
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        as={"form"}
+                        method="post"
+                        action={deleteCurrentUserAvatar}
+                        disabled={user().avatar_url === null}
+                      >
+                        <button type="submit" class="flex size-full cursor-default items-center gap-2 text-red-600">
+                          <Icon class="size-3.5" path={trash} />
+                          Remove avatar
+                        </button>
+                      </Dropdown.Item>
+                    </Dropdown.Content>
+                  </Dropdown>
                 </div>
               </div>
 
