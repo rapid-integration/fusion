@@ -38,7 +38,7 @@ export interface LogEvent {
   /**
    * A descriptive message associated with the log event.
    */
-  message: any;
+  args: any[];
 }
 
 /**

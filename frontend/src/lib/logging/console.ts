@@ -32,7 +32,7 @@ export class ConsoleLogger extends Logger {
   protected format(event: LogEvent): any {
     const timestamp = colors.dim(new Date().toLocaleTimeString());
     const severity = colors.bold(ConsoleLogger.styles[event.level](`[${event.level}]`));
-    return `${timestamp} ${severity} ${event.message}`;
+    return `${timestamp} ${severity} ${event.args.join(" ")}`;
   }
 
   public static get instance(): ConsoleLogger {

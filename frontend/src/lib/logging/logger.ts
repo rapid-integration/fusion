@@ -5,7 +5,7 @@ import { LogLevel, type LogEvent, type LoggerEventMap } from "./types";
 /**
  * Abstract class representing a logger.
  */
-export abstract class Logger extends EventEmitter<LoggerEventMap> {
+export default abstract class Logger extends EventEmitter<LoggerEventMap> {
   /**
    * Abstract method to write a log event.
    *
@@ -16,39 +16,39 @@ export abstract class Logger extends EventEmitter<LoggerEventMap> {
   /**
    * Logs a message at the debug level.
    *
-   * @param message - The message to log. Can be of any type.
+   * @param args - The message to log.
    * @example
    * logger.debug("This is a debug message.");
    */
-  public debug(message: any): void {
-    this.log(LogLevel.Debug, message);
+  public debug(...args: any[]): void {
+    this.log(LogLevel.Debug, args);
   }
 
   /**
    * Logs a message at the info level.
    *
-   * @param message - The message to log.
+   * @param args - The message to log.
    */
-  public info(message: any): void {
-    this.log(LogLevel.Information, message);
+  public info(...args: any[]): void {
+    this.log(LogLevel.Information, args);
   }
 
   /**
    * Logs a message at the warn level.
    *
-   * @param message - The message to log.
+   * @param args - The message to log.
    */
-  public warn(message: any): void {
-    this.log(LogLevel.Warning, message);
+  public warn(...args: any[]): void {
+    this.log(LogLevel.Warning, args);
   }
 
   /**
    * Logs a message at the error level.
    *
-   * @param message - The message to log.
+   * @param args - The message to log.
    */
-  public error(message: any): void {
-    this.log(LogLevel.Error, message);
+  public error(...args: any): void {
+    this.log(LogLevel.Error, args);
   }
 
   /**
@@ -58,11 +58,9 @@ export abstract class Logger extends EventEmitter<LoggerEventMap> {
    * @param level - The log level for the message (e.g., debug, info, warn, error).
    * @param message - The message to log. Can be of any type.
    */
-  public log(level: LogLevel, message: any) {
-    const event: LogEvent = { level, message };
+  public log(level: LogLevel, ...args: any[]) {
+    const event: LogEvent = { level, args };
     this.write(event);
     this.emit("log", event);
   }
 }
-
-export default Logger;
