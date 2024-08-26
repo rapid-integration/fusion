@@ -9,11 +9,9 @@ export * from "./motion";
 export * from "./otp-field";
 export * from "./select";
 export * from "./separator";
-export * from "./slogan";
+export * from "./sidebar";
 export * from "./stepper";
-export * from "./sticker";
 export * from "./text-field";
+export * from "./tgs";
 export * from "./theme";
 export * from "./title";
-export * from "./typer";
-

@@ -6,9 +6,10 @@ import { pencilSquare, trash, userCircle } from "solid-heroicons/solid-mini";
 
 import { Button, Dropdown, Heading, LocaleSwitcher, Separator, ThemeSwitcher, Title } from "~/components";
 import { formatResourceURL } from "~/lib/api/uploads";
-import { unauthenticate, useCurrentUser } from "~/lib/auth";
+import { unauthenticate } from "~/lib/api/auth";
+import { useCurrentUser } from "~/lib/api/users/me";
 import { useI18n } from "~/lib/i18n";
-import { deleteCurrentUserAvatar, updateCurrentUserAvatar } from "~/lib/api/users/me/actions";
+import { removeCurrentUserAvatar, updateCurrentUserAvatar } from "~/lib/api/users/me/actions";
 
 export default function Settings() {
   const i18n = useI18n();
@@ -65,7 +66,7 @@ export default function Settings() {
                       <Dropdown.Item
                         as={"form"}
                         method="post"
-                        action={deleteCurrentUserAvatar}
+                        action={removeCurrentUserAvatar}
                         disabled={user().avatar_url === null}
                       >
                         <button type="submit" class="flex size-full cursor-default items-center gap-2 text-red-600">

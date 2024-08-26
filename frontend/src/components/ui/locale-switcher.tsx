@@ -10,7 +10,6 @@ export const LocaleSwitcher: Component = () => {
 
   const languageNames = () => new Intl.DisplayNames([i18n.locale()], { type: "language" });
   const getNativeLanguageName = (locale: Locale) => new Intl.DisplayNames([locale], { type: "language" }).of(locale);
-  const getFlagClass = (locale: Locale) => `fi fi-${SUPPORTED_CULTURES[locale].toLowerCase()}`;
 
   return (
     <Select
@@ -24,7 +23,6 @@ export const LocaleSwitcher: Component = () => {
       itemComponent={(props) => (
         <Select.Item item={props.item}>
           <Select.ItemLabel class="flex items-center gap-1.5 capitalize">
-            <span class={`${getFlagClass(props.item.rawValue)} rounded-sm ring-1 ring-bg-tertiary`} />
             <span>{getNativeLanguageName(props.item.rawValue)}</span>
             <span>—</span>
             <span class="text-fg-muted">{languageNames().of(props.item.rawValue)}</span>

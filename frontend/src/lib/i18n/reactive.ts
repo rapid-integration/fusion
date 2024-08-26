@@ -7,7 +7,7 @@ import { type Locale, type LocalizedTranslator, getLocalizedDictionary } from "~
  * @param locale A function that returns the current locale.
  * @returns A proxy translator function.
  */
-export function makeTranslator(locale: () => Locale): LocalizedTranslator {
+export function createTranslator(locale: () => Locale): LocalizedTranslator {
   const [dict] = createResource(locale, getLocalizedDictionary);
   const t = i18n.translator(() => dict()!, i18n.resolveTemplate);
   return i18n.proxyTranslator(t);

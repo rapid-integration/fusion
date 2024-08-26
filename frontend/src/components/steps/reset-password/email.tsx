@@ -1,16 +1,16 @@
 import { A } from "@solidjs/router";
-import { Button, Heading, Separator, Sticker } from "~/components";
-import { useI18n } from "~/lib/i18n";
-import { Verifier } from "../verification";
 import { Icon } from "solid-heroicons";
 import { arrowLeft } from "solid-heroicons/solid-mini";
+import { Button, Heading, Separator, LottiePresenter } from "~/components";
+import { useI18n } from "~/lib/i18n";
+import { Verifier } from "../verification";
 
 export const ResetPasswordEmailStep = () => {
   const i18n = useI18n();
 
   return (
     <div class="flex flex-col items-center justify-center">
-      <Sticker path="tgs/id.json" class="mb-4 size-24" />
+      <LottiePresenter path="tgs/envelope.json" class="mb-4 size-24" />
 
       <Heading>{i18n.t.routes.login.form.fields.password.forgot()}</Heading>
 

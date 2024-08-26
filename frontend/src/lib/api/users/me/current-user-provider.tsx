@@ -1,7 +1,7 @@
 import { createAsync } from "@solidjs/router";
 import { type Accessor, type ParentComponent, createContext, useContext } from "solid-js";
 import { type components } from "~/lib/api/schema";
-import { $getCurrentUser } from "~/lib/auth";
+import { $getCurrentUser } from "~/lib/api/users/me";
 
 export type CurrentUserContextValue = Accessor<components["schemas"]["CurrentUserResponse"] | undefined>;
 

@@ -1,5 +1,5 @@
 import { type Accessor, type ParentComponent, createContext, createEffect, useContext, useTransition } from "solid-js";
-import { getDefaultLocale, type Locale, type LocalizedTranslator, makeTranslator } from "~/lib/i18n";
+import { getDefaultLocale, type Locale, type LocalizedTranslator, createTranslator } from "~/lib/i18n";
 import { usePreferences } from "~/lib/preferences";
 
 export type I18nContextValue = {
@@ -35,7 +35,7 @@ export const I18nProvider: ParentComponent = (props) => {
   const setLocale = (locale: Locale) => startSettingLocale(() => preferences.set("locale", locale));
   const [isSettingLocale, startSettingLocale] = useTransition();
 
-  const t = makeTranslator(locale);
+  const t = createTranslator(locale);
 
   createEffect(() => {
     document.documentElement.lang = locale();

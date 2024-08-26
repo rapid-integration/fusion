@@ -1,10 +1,12 @@
 import { action } from "@solidjs/router";
-import { $deleteCurrentUserAvatar, $updateCurrentUserAvatar } from "./server";
+import { $removeCurrentUserAvatar, $updateCurrentUserAvatar } from "./service";
 
-export const deleteCurrentUserAvatar = action(async () => {
+// import { me } from ".";
+
+export const removeCurrentUserAvatar = action(async () => {
   "use server";
 
-  await $deleteCurrentUserAvatar();
+  await $removeCurrentUserAvatar();
 });
 
 export const updateCurrentUserAvatar = action(async (file: File) => {
@@ -12,4 +14,3 @@ export const updateCurrentUserAvatar = action(async (file: File) => {
 
   await $updateCurrentUserAvatar(file);
 });
-

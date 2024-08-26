@@ -1,9 +1,9 @@
 import { createForm, minLength, required } from "@modular-forms/solid";
 import { useAction } from "@solidjs/router";
 import { toast } from "solid-sonner";
-import { Button, FormControl, Heading, Stepper, Sticker } from "~/components";
+import { Button, FormControl, Heading, Stepper, LottiePresenter } from "~/components";
 import { Verifier } from "~/components/steps/verification";
-import { resetPassword } from "~/lib/auth";
+import { resetPassword } from "~/lib/api/auth";
 import { useI18n } from "~/lib/i18n";
 
 export type NewPasswordForm = {
@@ -37,7 +37,7 @@ export function NewPasswordStep() {
 
   return (
     <div class="flex w-full flex-col items-center justify-center gap-6 text-center">
-      <Sticker path="tgs/key.json" class="size-24" />
+      <LottiePresenter path="tgs/key.json" class="size-24" />
 
       <hgroup class="space-y-4">
         <Heading>{i18n.t.steps.resetPassword.password.heading()}</Heading>

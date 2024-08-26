@@ -2,13 +2,13 @@ import colors from "picocolors";
 
 import { type Middleware } from "openapi-fetch";
 
-import { getSession } from "~/lib/auth/session";
+import { getSession } from "~/lib/http/session";
 import logger from "~/lib/logging/console";
 
 export const AUTH_MIDDLEWARE: Middleware = {
   onRequest: async ({ request }) => {
     const session = await getSession();
-    const auth = session.data.auth;
+    const auth = session.data.jwt;
 
     if (auth && Date.parse(auth.expires_at) > Date.now()) {
       request.headers.set("Authorization", `${auth.token_type} ${auth.access_token}`);

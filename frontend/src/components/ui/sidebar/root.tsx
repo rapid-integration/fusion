@@ -3,7 +3,7 @@ import { Component, Show } from "solid-js";
 import { bookmark, cog, folder, home, userCircle } from "solid-heroicons/solid-mini";
 
 import { formatResourceURL } from "~/lib/api/uploads";
-import { useCurrentUser } from "~/lib/auth";
+import { useCurrentUser } from "~/lib/api/users/me";
 
 import { SidebarItem } from "./item";
 import { useI18n } from "~/lib/i18n";

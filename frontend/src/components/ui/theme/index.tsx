@@ -3,7 +3,7 @@ import { Repeat } from "@solid-primitives/range";
 import { Icon } from "solid-heroicons";
 import { check } from "solid-heroicons/solid-mini";
 import { For } from "solid-js";
-import { SUPPORTED_THEMES, Theme, useColorScheme } from "~/lib/color-scheme";
+import { SUPPORTED_THEMES, Theme, useTheme } from "~/lib/theme";
 import { useI18n } from "~/lib/i18n";
 import { merge } from "~/lib/utils/css/merge";
 
@@ -40,7 +40,7 @@ export const ThemeSwitcherOptionPreview = (props: { key: Theme }) => {
 
 export const ThemeSwitcher = () => {
   const i18n = useI18n();
-  const colorScheme = useColorScheme();
+  const colorScheme = useTheme();
 
   return (
     <RadioGroup value={colorScheme.theme()} onChange={(value) => colorScheme.setTheme(value as Theme)}>

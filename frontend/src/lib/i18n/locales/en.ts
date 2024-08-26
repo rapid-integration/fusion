@@ -11,6 +11,7 @@ export const dict: DictionaryMap = {
     login: {
       title: "Sign in",
       heading: "Log in to your account",
+      paragraph: "We're happy to see you again! Enter credentials in order to access your account:",
       form: {
         fields: {
           email: {
@@ -35,8 +36,8 @@ export const dict: DictionaryMap = {
         },
         submit: "Log in",
       },
-      footer:
-        "Your name and avatar are displayed to users who invite you to a workspace using your email. By continuing, you acknowledge that you understand and agree to the Terms & Conditions and Privacy Policy.",
+      footer: "Don't have an account? ",
+      signup: "Sign up for free",
     },
     resetPassword: {
       title: "Reset password",
@@ -153,13 +154,6 @@ export const dict: DictionaryMap = {
         incorrect: "The code you entered is incorrect!",
       },
     },
-  },
-  slogan: {
-    share: "Share it",
-    analyze: "Analyze it",
-    design: "Design it",
-    enjoy: "Enjoy it",
-    explore: "Explore it",
   },
   sessionExpired: "Your session has expired!"
 };

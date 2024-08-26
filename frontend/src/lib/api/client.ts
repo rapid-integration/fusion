@@ -1,5 +1,5 @@
 import createClient from "openapi-fetch";
-import { AUTH_MIDDLEWARE, DEBUG_MIDDLEWARE } from "~/lib/api";
+import { AUTH_MIDDLEWARE, DEBUG_MIDDLEWARE } from "~/lib/api/middleware";
 import type { paths } from "~/lib/api/schema";
 
 export const getClient = async () => {

@@ -2,12 +2,13 @@ import { makeEventListener } from "@solid-primitives/event-listener";
 import { createAsync, revalidate, RouteDefinition, RouteSectionProps } from "@solidjs/router";
 import { createEffect, createSignal, on, onCleanup, onMount } from "solid-js";
 import { toast } from "solid-sonner";
-import { $getCurrentUser, $getIsAuthenticated, $getSessionExpirationDate } from "~/lib/auth";
+import { $getIsLoggedIn, $getSessionExpirationDate } from "~/lib/http";
+import { $getCurrentUser } from "~/lib/api/users/me";
 import { useI18n } from "~/lib/i18n";
 
 export const route = {
   preload: () => {
-    $getIsAuthenticated();
+    $getIsLoggedIn();
     $getSessionExpirationDate();
   },
 } satisfies RouteDefinition;
@@ -17,7 +18,7 @@ export default function Auth(props: RouteSectionProps) {
 
   const i18n = useI18n();
 
-  const isAuthenticated = createAsync(() => $getIsAuthenticated(), { deferStream: true });
+  const isLoggedIn = createAsync(() => $getIsLoggedIn(), { deferStream: true });
   const sessionExpirationDate = createAsync(() => $getSessionExpirationDate(), { deferStream: true });
 
   const [revalidateTimeout, setRevalidateTimeout] = createSignal<NodeJS.Timeout | undefined>();
@@ -41,11 +42,11 @@ export default function Auth(props: RouteSectionProps) {
   };
 
   const revalidateSession = (): void => {
-    revalidate([$getIsAuthenticated.key, $getSessionExpirationDate.key, $getCurrentUser.key]);
+    revalidate([$getIsLoggedIn.key, $getSessionExpirationDate.key, $getCurrentUser.key]);
   };
 
   const toastSessionExpired = (): void => {
-    if (isAuthenticated() === false) {
+    if (isLoggedIn() === false) {
       toast.info(i18n.t.sessionExpired());
     }
   };
@@ -71,11 +72,11 @@ export default function Auth(props: RouteSectionProps) {
 
   createEffect(
     on(
-      isAuthenticated,
+      isLoggedIn,
       () => {
         syncBroadcastChannel.postMessage(true);
 
-        if (isAuthenticated() === false) {
+        if (isLoggedIn() === false) {
           clearRevalidateTimeout();
           if (document.hidden) {
             makeEventListener(document, "visibilitychange", toastSessionExpired, { once: true });

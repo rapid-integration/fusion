@@ -1,7 +1,7 @@
 import { getDefaultLocale } from "~/lib/i18n";
-import { Settings } from "~/lib/preferences";
+import { type Preferences } from "~/lib/preferences";
 
-export const getDefaultSettings = (): Settings => ({
+export const getDefaultSettings = (): Preferences => ({
   locale: getDefaultLocale(),
   theme: "system",
 });

@@ -1,5 +1,5 @@
 import * as i18n from "@solid-primitives/i18n";
-import { Theme } from "~/lib/color-scheme";
+import { Theme } from "~/lib/theme";
 import { SUPPORTED_CULTURES } from "~/lib/i18n";
 
 export type Locale = keyof typeof SUPPORTED_CULTURES;
@@ -15,6 +15,7 @@ export type DictionaryMap = {
     login: {
       title: string;
       heading: string;
+      paragraph: string;
       form: {
         fields: {
           email: {
@@ -40,6 +41,7 @@ export type DictionaryMap = {
         submit: string;
       };
       footer: string;
+      signup: string;
     };
     resetPassword: {
       title: string;
@@ -150,13 +152,6 @@ export type DictionaryMap = {
         };
       };
     };
-  };
-  slogan: {
-    share: string;
-    analyze: string;
-    design: string;
-    enjoy: string;
-    explore: string;
   };
   sessionExpired: string;
 };

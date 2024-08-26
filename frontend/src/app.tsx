@@ -4,8 +4,8 @@ import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
 import { Portal } from "solid-js/web";
 import { Toaster } from "solid-sonner";
-import { CurrentUserProvider } from "~/lib/auth";
-import { ColorSchemeProvider } from "~/lib/color-scheme";
+import { CurrentUserProvider } from "~/lib/api/users/me";
+import { ThemeProvider } from "~/lib/theme";
 import { I18nProvider } from "~/lib/i18n";
 import { PreferencesProvider } from "~/lib/preferences";
 import "./app.css";
@@ -19,13 +19,13 @@ export default function App() {
             <CurrentUserProvider>
               <PreferencesProvider>
                 <I18nProvider>
-                  <ColorSchemeProvider>
+                  <ThemeProvider>
                     {props.children}
 
                     <Portal>
                       <Toaster richColors />
                     </Portal>
-                  </ColorSchemeProvider>
+                  </ThemeProvider>
                 </I18nProvider>
               </PreferencesProvider>
             </CurrentUserProvider>

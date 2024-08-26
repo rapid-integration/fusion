@@ -7,10 +7,10 @@ import { paperAirplane } from "solid-heroicons/solid-mini";
 
 import { toast } from "solid-sonner";
 
-import { Button, Heading, Motion, OtpField, Sticker, TextField, Stepper } from "~/components";
+import { Button, Heading, Motion, OtpField, TextField, LottiePresenter, Stepper } from "~/components";
 import { useVerification } from "~/components/steps/verification/provider";
 
-import { $requestVerification, $verifyCode } from "~/lib/auth";
+import { $sendOtp, $isCorrectOtp } from "~/lib/api/otp";
 import { useI18n } from "~/lib/i18n";
 
 const OTP_LENGTH = 6;
@@ -20,7 +20,7 @@ type OtpForm = {
 };
 
 // TODO: extract add props.onComplete (after success verification) for more flexibility
-// Also more `stepper.moveForward();` to password reset stepper.
+// Also move `stepper.moveForward();` to password reset stepper.
 export const OtpStep = () => {
   const i18n = useI18n();
   const stepper = Stepper.useContext();
@@ -30,12 +30,12 @@ export const OtpStep = () => {
   const [otpInputRef, setOtpInputRef] = createSignal<HTMLInputElement>();
 
   const email = () => context.store.email;
-  const [resourse, { refetch }] = createResource(email, $requestVerification);
+  const [resourse, { refetch }] = createResource(email, $sendOtp);
 
   const onSubmit = async (form: OtpForm) => {
     const otp = Number(form.otp);
 
-    if (!(await $verifyCode({ email: email(), code: otp }))) {
+    if (!(await $isCorrectOtp({ email: email(), code: otp }))) {
       toast.error(i18n.t.steps.verification.otp.incorrect());
 
       reset();
@@ -59,7 +59,7 @@ export const OtpStep = () => {
 
   return (
     <Motion class="flex w-full flex-col items-center justify-center gap-6 text-center">
-      <Sticker path="tgs/mailbox.json" class="size-24" />
+      <LottiePresenter path="tgs/mailbox.json" class="size-24" />
 
       <hgroup class="w-full space-y-4">
         <Heading>{i18n.t.steps.verification.otp.heading()}</Heading>

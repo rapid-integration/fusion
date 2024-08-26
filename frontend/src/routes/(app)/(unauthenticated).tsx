@@ -1,22 +1,22 @@
 import { createAsync, Navigate, useSearchParams, type RouteDefinition, type RouteSectionProps } from "@solidjs/router";
 import { Match, Show, Switch } from "solid-js";
-import { $getIsAuthenticated } from "~/lib/auth";
+import { $getIsLoggedIn } from "~/lib/http";
 
 export const route = {
   preload: () => {
-    $getIsAuthenticated();
+    $getIsLoggedIn();
   },
 } satisfies RouteDefinition;
 
 export default function Unauthenticated(props: RouteSectionProps) {
   const [searchParams] = useSearchParams();
 
-  const isAuthenticated = createAsync(() => $getIsAuthenticated(), { deferStream: true });
+  const isLoggedIn = createAsync(() => $getIsLoggedIn(), { deferStream: true });
 
   return (
     <Switch>
-      <Match when={isAuthenticated() === false}>{props.children}</Match>
-      <Match when={isAuthenticated() === true}>
+      <Match when={isLoggedIn() === false}>{props.children}</Match>
+      <Match when={isLoggedIn() === true}>
         <Show when={searchParams.redirect} fallback={<Navigate href="/" />}>
           {(pathname) => <Navigate href={pathname()} />}
         </Show>
