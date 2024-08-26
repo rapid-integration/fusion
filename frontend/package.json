@@ -13,7 +13,8 @@
     "picocolors": "^1.0.1",
     "postcss-mixins": "^10.0.1",
     "prettier": "^3.3.3",
-    "prettier-plugin-tailwindcss": "^0.6.5"
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "@corvu/otp-field": "^0.1.2",
@@ -33,7 +34,7 @@
     "openapi-fetch": "^0.10.5",
     "postcss": "^8.4.40",
     "solid-heroicons": "^3.2.4",
-    "solid-js": "^1.8.19",
+    "solid-js": "^1.8.21",
     "solid-sonner": "^0.2.8",
     "solid-transition-group": "^0.2.3",
     "tailwind-merge": "^2.4.0",
