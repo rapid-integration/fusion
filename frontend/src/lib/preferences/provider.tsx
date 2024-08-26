@@ -13,11 +13,11 @@ export const PREFERENCES_COOKIE_NAME = "preferences"
 export const PreferencesContext = createContext<PreferencesContextValue>({} as PreferencesContextValue);
 
 export const PreferencesProvider: ParentComponent = (props) => {
-  const sync = new BroadcastChannel(PREFERENCES_COOKIE_NAME);
+  const sync = new BroadcastChannel("preferences_sync");
   
   // TODO: Use sync API
   const [settings, set] = storage.makePersisted(createStore(getDefaultSettings()), {
-    name: "preferences",
+    name: PREFERENCES_COOKIE_NAME,
     storage: storage.cookieStorage,
     storageOptions: {
       sameSite: "Lax",
