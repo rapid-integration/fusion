@@ -1,36 +1,43 @@
 import * as storage from "@solid-primitives/storage";
 import { type ParentComponent, createContext, createEffect, onCleanup, onMount, useContext } from "solid-js";
 import { createStore, SetStoreFunction } from "solid-js/store";
-import { type Settings, getDefaultSettings, PREFERENCES_COOKIE_OPTIONS } from "~/lib/preferences";
+import { type Settings, getDefaultSettings } from "~/lib/preferences";
 
 export type PreferencesContextValue = {
   settings: Settings;
   set: SetStoreFunction<Settings>;
 };
 
-export const SYNC_BROADCAST_CHANNEL_NAME = "preferences_sync" as const;
-
 export const PreferencesContext = createContext<PreferencesContextValue>({} as PreferencesContextValue);
 
 export const PreferencesProvider: ParentComponent = (props) => {
-  const syncBroadcastChannel = new BroadcastChannel(SYNC_BROADCAST_CHANNEL_NAME);
-  const [settings, set] = storage.makePersisted(createStore(getDefaultSettings()), PREFERENCES_COOKIE_OPTIONS);
+  const sync = new BroadcastChannel("preferences_sync");
+  
+  // TODO: Use sync API
+  const [settings, set] = storage.makePersisted(createStore(getDefaultSettings()), {
+    name: "preferences",
+    storage: storage.cookieStorage,
+    storageOptions: {
+      sameSite: "Lax",
+      secure: (/true/i).test(import.meta.env.VITE_SECURE_COOKIES),
+    },
+  });
 
   onMount(() => {
-    syncBroadcastChannel.onmessage = (event) => {
+    sync.onmessage = (event) => {
       set(event.data);
     };
   });
 
   createEffect(
     () => {
-      syncBroadcastChannel.postMessage({ ...settings });
+      sync.postMessage({ ...settings });
     },
     { defer: true },
   );
 
   onCleanup(() => {
-    syncBroadcastChannel.close();
+    sync.close();
   });
 
   return <PreferencesContext.Provider value={{ settings, set }}>{props.children}</PreferencesContext.Provider>;
