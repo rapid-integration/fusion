@@ -4,7 +4,7 @@ export type TextFieldProps = {
   name: string;
   type?: string | undefined;
   label?: string | undefined;
-  description?: string | Accessor<JSX.Element> | undefined;
+  description?: string | JSX.Element | undefined;
   placeholder?: string | undefined;
   value?: string | undefined;
   error?: string | undefined;

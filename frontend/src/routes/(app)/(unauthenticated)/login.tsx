@@ -85,14 +85,14 @@ export default function Login() {
                     type="password"
                     label={i18n.t.routes.login.form.fields.password.label()}
                     placeholder={i18n.t.routes.login.form.fields.password.placeholder()}
-                    description={() => (
+                    description={
                       <>
                         <span>{i18n.t.routes.login.form.fields.password.description()}</span>
                         <Link as={A} href="/reset-password">
                           {i18n.t.routes.login.form.fields.password.forgot()}
                         </Link>
                       </>
-                    )}
+                    }
                     value={field.value}
                     error={field.error}
                     required
