@@ -1,5 +1,5 @@
 import { A, useAction, useSearchParams, useSubmission } from "@solidjs/router";
-import { createEffect, on, Show } from "solid-js";
+import { createEffect, JSX, on, Show } from "solid-js";
 
 import { createForm, email, minLength, required } from "@modular-forms/solid";
 import { toast } from "solid-sonner";
@@ -86,12 +86,14 @@ export default function Login() {
                     label={i18n.t.routes.login.form.fields.password.label()}
                     placeholder={i18n.t.routes.login.form.fields.password.placeholder()}
                     description={
-                      <>
-                        <span>{i18n.t.routes.login.form.fields.password.description()}</span>
-                        <Link as={A} href="/reset-password">
-                          {i18n.t.routes.login.form.fields.password.forgot()}
-                        </Link>
-                      </>
+                      (() => (
+                        <>
+                          <span>{i18n.t.routes.login.form.fields.password.description()}</span>
+                          <Link as={A} href="/reset-password">
+                            {i18n.t.routes.login.form.fields.password.forgot()}
+                          </Link>
+                        </>
+                      )) as unknown as JSX.Element
                     }
                     value={field.value}
                     error={field.error}
