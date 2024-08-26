@@ -8,10 +8,12 @@ export type PreferencesContextValue = {
   set: SetStoreFunction<Settings>;
 };
 
+export const PREFERENCES_COOKIE_NAME = "preferences"
+
 export const PreferencesContext = createContext<PreferencesContextValue>({} as PreferencesContextValue);
 
 export const PreferencesProvider: ParentComponent = (props) => {
-  const sync = new BroadcastChannel("preferences_sync");
+  const sync = new BroadcastChannel(PREFERENCES_COOKIE_NAME);
   
   // TODO: Use sync API
   const [settings, set] = storage.makePersisted(createStore(getDefaultSettings()), {
