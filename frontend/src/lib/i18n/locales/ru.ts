@@ -45,54 +45,75 @@ export const dict: DictionaryMap = {
     settings: {
       heading: "Настройки",
       sections: {
-        personal: {
-          heading: "Личные",
-          fields: {
-            avatar: {
-              heading: "Аватарка",
-              description: "Картинка пользователя, видная всем.",
+        account: {
+          heading: "Учетная запись",
+          cards: {
+            account: {
+              heading: "Личный",
+              description: "Аватар, адрес электронной почты и пароль, управление учетной записью.",
             },
-            email: {
-              heading: "Электронная почта",
-              change: "Изменить адресс",
+            signout: {
+              heading: "Выход",
+              description: "Выйти из этой учетной записи на этом устройстве.",
             },
-            password: {
-              heading: "Пароль",
-              description: "Постоянный пароль для входа в ваш аккаунт.",
-              change: "Изменить пароль",
+          },
+        },
+        about: {
+          heading: "О приложении",
+          cards: {
+            app: {
+              description: "© 2024. Все права защищены.",
             },
           },
         },
         appearance: {
           heading: "Внешний вид",
-          fields: {
-            language: {
-              heading: "Язык",
-              description: "Используемый в пользовательском интерфейсе язык.",
-            },
+          cards: {
             theme: {
               heading: "Тема",
+              description: "Измените цветовую схему приложения.",
               options: {
                 light: "Светлая",
-                dark: "Тёмная",
+                dark: "Темная",
                 night: "Ночная",
                 system: "Системная",
               },
             },
+            locale: {
+              heading: "Язык",
+              description: "Измените язык, используемый в пользовательском интерфейсе.",
+            },
           },
         },
-        danger: {
-          heading: "Опасное",
-          fields: {
-            logout: {
-              heading: "Выход",
-              description: "Выйти из этого аккаунта на этом устройстве.",
-              action: "Выйти из системы",
+      },
+      account: {
+        heading: "Учетная запись",
+        sections: {
+          avatar: {
+            heading: "Аватар",
+            cards: {
+              change: {
+                heading: "Загрузить новый аватар",
+                description: "Измените текущее изображение профиля.",
+              },
+              remove: {
+                heading: "Удалить аватар",
+                description: "Удалить текущий загруженный аватар.",
+              },
             },
-            deactivate: {
-              heading: "Закрыть аккаунт",
-              description: "Удалить ваш аккаунт и все связанные с ним данные.",
-              action: "Удалить мой аккаунт",
+          },
+          security: {
+            heading: "Безопасность",
+            cards: {
+              email: {
+                heading: "Адрес электронной почты",
+                description:
+                  "Адрес, на который приходят уведомления и который используется для входа и восстановления доступа к учетной записи.",
+              },
+              password: {
+                heading: "Пароль",
+                description: "Постоянный пароль, используемый для входа в вашу учетную запись.",
+              },
             },
           },
         },
@@ -155,7 +176,7 @@ export const dict: DictionaryMap = {
       },
     },
   },
-  sessionExpired: "Ваша сессия истекла!"
+  sessionExpired: "Ваша сессия истекла!",
 };
 
 export default dict;

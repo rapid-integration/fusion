@@ -45,33 +45,33 @@ export const dict: DictionaryMap = {
     settings: {
       heading: "Settings",
       sections: {
-        personal: {
-          heading: "Personal",
-          fields: {
-            avatar: {
-              heading: "Avatar",
-              description: "Profile picture visible to everyone.",
+        account: {
+          heading: "Account",
+          cards: {
+            account: {
+              heading: "Personal",
+              description: "Avatar, email address and password, account management.",
             },
-            email: {
-              heading: "Email",
-              change: "Change email",
+            signout: {
+              heading: "Logout",
+              description: "Logout from this account on this device.",
             },
-            password: {
-              heading: "Password",
-              description: "Permanent password to login to your account.",
-              change: "Change password",
+          },
+        },
+        about: {
+          heading: "About",
+          cards: {
+            app: {
+              description: "© 2024. All rights reserved.",
             },
           },
         },
         appearance: {
           heading: "Appearance",
-          fields: {
-            language: {
-              heading: "Language",
-              description: "Change the language used in the user interface.",
-            },
+          cards: {
             theme: {
               heading: "Theme",
+              description: "Change the color scheme across the application.",
               options: {
                 light: "Light",
                 dark: "Dark",
@@ -79,20 +79,40 @@ export const dict: DictionaryMap = {
                 system: "System",
               },
             },
+            locale: {
+              heading: "Language",
+              description: "Change the language used in the user interface.",
+            },
           },
         },
-        danger: {
-          heading: "Danger",
-          fields: {
-            logout: {
-              heading: "Sign out",
-              description: "Logout from this account on this device.",
-              action: "Logout",
+      },
+      account: {
+        heading: "Account",
+        sections: {
+          avatar: {
+            heading: "Avatar",
+            cards: {
+              change: {
+                heading: "Upload new avatar",
+                description: "Change the current profile picture.",
+              },
+              remove: {
+                heading: "Remove avatar",
+                description: "Delete the current uploaded avatar.",
+              },
             },
-            deactivate: {
-              heading: "Close account",
-              description: "Delete your account and all the data.",
-              action: "Delete my account",
+          },
+          security: {
+            heading: "Security",
+            cards: {
+              email: {
+                heading: "Email address",
+                description: "The address that receive notifications and used to log in and recover account access.",
+              },
+              password: {
+                heading: "Password",
+                description: "Permanent password used to log in your account.",
+              },
             },
           },
         },
@@ -155,7 +175,7 @@ export const dict: DictionaryMap = {
       },
     },
   },
-  sessionExpired: "Your session has expired!"
+  sessionExpired: "Your session has expired!",
 };
 
 export default dict;

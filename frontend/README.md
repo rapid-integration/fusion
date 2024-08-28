@@ -68,3 +68,13 @@ Make sure `VITE_SECURE_COOKIES` is not set to `true` or you have a valid SSL (HT
 
 > [!NOTE]
 > You may also need to **re-build** the web app using `pnpm serve` or `pnpm build` to include newly configured options in `.env`.
+
+### Seroval issue
+
+```
+Error
+Seroval caught an error during the parsing process.
+
+TypeError
+Response.clone: Body has already been consumed.
+```

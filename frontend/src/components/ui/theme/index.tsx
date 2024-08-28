@@ -1,10 +1,9 @@
 import { RadioGroup } from "@kobalte/core/radio-group";
-import { Repeat } from "@solid-primitives/range";
 import { Icon } from "solid-heroicons";
 import { check } from "solid-heroicons/solid-mini";
-import { For } from "solid-js";
-import { SUPPORTED_THEMES, Theme, useTheme } from "~/lib/theme";
+import { For, JSX } from "solid-js";
 import { useI18n } from "~/lib/i18n";
+import { SUPPORTED_THEMES, Theme, useTheme } from "~/lib/theme";
 import { merge } from "~/lib/utils/css/merge";
 
 export type ThemeCardProps = {
@@ -17,40 +16,61 @@ export const ThemeSwitcherOptionPreview = (props: { key: Theme }) => {
     <div
       data-theme={props.key}
       class={merge(
-        "flex aspect-[4/3] h-24 w-full flex-col gap-2 overflow-hidden rounded-lg bg-bg-body p-3 ring-1 ring-inset",
-        "ring-bg-secondary transition-all group-active:scale-95 group-active:duration-0",
-        "hover:ring-bg-tertiary",
-        "peer-checked:group-[]:ring-2 peer-checked:group-[]:ring-ring-accent",
+        "relative flex h-20 w-32 overflow-clip rounded-lg bg-bg-body shadow transition-[color,transform]",
+        "group-active:scale-95 group-active:duration-0",
+        "after:absolute after:inset-0 after:rounded-lg after:transition-[box-shadow,color]",
+        "after:ring-1 after:ring-inset after:ring-bg-secondary",
+        "hover:after:ring-bg-tertiary",
+        "peer-checked:group-[]:after:ring-2 peer-checked:group-[]:after:ring-ring-accent",
       )}
     >
-      <div class="mb-1 flex h-3.5 w-full rounded bg-bg-secondary p-1">
-        <div class="h-1 w-10 rounded-sm bg-bg-tertiary" />
+      <div data-tailwind-bundle class="hidden w-4 w-6 w-7 w-8"></div>
+      <div class="flex w-14 flex-col gap-1 border-r border-bg-secondary bg-bg-default p-2">
+        <For each={["7", "4", "6"]}>
+          {(size) => (
+            <div class="flex w-full items-center gap-1">
+              <div class="aspect-square size-1.5 rounded-sm bg-bg-secondary" />
+              <div class={`h-1 w-${size} rounded-sm bg-bg-secondary`} />
+            </div>
+          )}
+        </For>
+        <div class="mt-auto flex w-full items-center gap-1">
+          <div class="aspect-square size-1.5 rounded-sm bg-bg-secondary" />
+          <div class="h-1 w-7 rounded-sm bg-bg-secondary" />
+        </div>
       </div>
-      <div class="flex-grow space-y-1">
-        <Repeat times={3}>
-          <div class="flex h-3.5 w-full gap-1 rounded bg-bg-default p-1">
-            <div class="size-1.5 rounded-sm bg-bg-secondary" />
-            <div class="h-1.5 w-10 rounded-sm bg-bg-secondary" />
-          </div>
-        </Repeat>
+      <div class="flex-grow space-y-0.5 p-2">
+        <div class="mb-1.5 h-1.5 w-11 rounded-sm bg-bg-tertiary" />
+        <For each={["7", "4", "8", "6"]}>
+          {(size) => (
+            <div class="flex h-3 w-full items-center justify-between gap-0.5 rounded bg-bg-default p-1">
+              <div class={`h-1 w-${size} rounded-sm bg-bg-secondary`} />
+              <div class="size-1.5 rounded-sm bg-bg-tertiary" />
+            </div>
+          )}
+        </For>
       </div>
     </div>
   );
 };
 
-export const ThemeSwitcher = () => {
+export const ThemeSwitcher = (props: JSX.StylableSVGAttributes) => {
   const i18n = useI18n();
   const colorScheme = useTheme();
 
   return (
-    <RadioGroup value={colorScheme.theme()} onChange={(value) => colorScheme.setTheme(value as Theme)}>
-      <RadioGroup.Label as={"h3"} class="mb-1 font-semibold">
-        {i18n.t.routes.settings.sections.appearance.fields.theme.heading()}
+    <RadioGroup
+      value={colorScheme.theme()}
+      onChange={(value) => colorScheme.setTheme(value as Theme)}
+      class={props.class}
+    >
+      <RadioGroup.Label as={"h3"} class="sr-only">
+        {i18n.t.routes.settings.sections.appearance.cards.theme.heading()}
       </RadioGroup.Label>
       <ul class="flex gap-4 overflow-x-auto">
         <For each={SUPPORTED_THEMES}>
           {(theme) => (
-            <RadioGroup.Item as={"li"} value={theme} class="w-full">
+            <RadioGroup.Item as={"li"} value={theme}>
               <RadioGroup.ItemInput class="peer" />
               <RadioGroup.ItemLabel class="group cursor-pointer space-y-1 peer-checked:cursor-default">
                 <ThemeSwitcherOptionPreview key={theme} />
@@ -64,7 +84,7 @@ export const ThemeSwitcher = () => {
                     )}
                   />
                   <span class="-translate-x-3.5 select-none transition-[transform,opacity] group-data-[checked]:translate-x-0">
-                    {i18n.t.routes.settings.sections.appearance.fields.theme.options[theme]()}
+                    {i18n.t.routes.settings.sections.appearance.cards.theme.options[theme]()}
                   </span>
                 </p>
               </RadioGroup.ItemLabel>

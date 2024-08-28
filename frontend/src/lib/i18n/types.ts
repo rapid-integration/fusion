@@ -49,49 +49,69 @@ export type DictionaryMap = {
     settings: {
       heading: string;
       sections: {
-        personal: {
+        account: {
           heading: string;
-          fields: {
-            avatar: {
+          cards: {
+            account: {
               heading: string;
               description: string;
             };
-            email: {
-              heading: string;
-              change: string;
-            };
-            password: {
+            signout: {
               heading: string;
               description: string;
-              change: string;
             };
           };
         };
         appearance: {
           heading: string;
-          fields: {
-            language: {
-              heading: string;
-              description: string;
-            };
+          cards: {
             theme: {
               heading: string;
+              description: string;
               options: { [K in Theme]: string };
+            };
+            locale: {
+              heading: string;
+              description: string;
             };
           };
         };
-        danger: {
+        about: {
           heading: string;
-          fields: {
-            logout: {
-              heading: string;
+          cards: {
+            app: {
               description: string;
-              action: string;
             };
-            deactivate: {
-              heading: string;
-              description: string;
-              action: string;
+          };
+        };
+      };
+      account: {
+        heading: string;
+        sections: {
+          avatar: {
+            heading: string;
+            cards: {
+              change: {
+                heading: string;
+                description: string;
+              };
+              remove: {
+                heading: string;
+                description: string;
+              };
+            };
+          };
+          security: {
+            heading: string;
+            cards: {
+              password: {
+                heading: string;
+                description: string;
+              };
+              email: {
+                heading: string;
+                description: string;
+              };
             };
           };
         };

@@ -3,7 +3,7 @@ import { tv } from "tailwind-variants";
 export const styles = tv({
   base: [
     "text-sm leading-none outline-none text-nowrap",
-    "transition-[opacity,box-shadow,border-color]",
+    "transition-[opacity,box-shadow,border-color,background-color]",
     "focus-visible:ring ring-ring-accent/50 active:hover:duration-0",
     "disabled:cursor-not-allowed disabled:opacity-75",
     "aria-busy:cursor-progress",
