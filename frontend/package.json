@@ -26,7 +26,7 @@
     "openapi-fetch": "^0.10.5",
     "postcss": "^8.4.40",
     "solid-heroicons": "^3.2.4",
-    "solid-js": "^1.8.21",
+    "solid-js": "^1.8.19",
     "solid-sonner": "^0.2.8",
     "solid-transition-group": "^0.2.3",
     "tailwind-merge": "^2.4.0",

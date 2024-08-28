@@ -15,7 +15,7 @@ export default function Unauthenticated(props: RouteSectionProps) {
 
   return (
     <Switch>
-      <Match when={isLoggedIn() === false}>{props.children}</Match>
+      <Match when={isLoggedIn() === false || isLoggedIn() === undefined}>{props.children}</Match>
       <Match when={isLoggedIn() === true}>
         <Show when={searchParams.redirect} fallback={<Navigate href="/" />}>
           {(pathname) => <Navigate href={pathname()} />}
