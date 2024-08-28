@@ -5,7 +5,7 @@ export const styles = tv({
     content: [
       "z-50 min-w-32",
       "origin-[var(--kb-select-content-transform-origin)] animate-content-hide data-[expanded]:animate-content-show",
-      "rounded-lg border border-bg-tertiary bg-bg-default/75 backdrop-blur-xl p-0.5 shadow-md",
+      "rounded-lg border border-bg-tertiary bg-bg-default backdrop-blur-xl p-0.5 shadow-md",
     ],
     item: [
       "flex cursor-default select-none items-center justify-between rounded-md px-2 py-1.5 text-sm outline-none",

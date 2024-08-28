@@ -14,7 +14,7 @@ export const styles = tv({
     },
     color: {
       default: [
-        "bg-bg border-bg-secondary",
+        "bg-bg-body border-bg-secondary",
         "hover:border-bg-secondary hover:bg-bg-default",
         "active:bg-bg-secondary active:border-bg-tertiary",
       ],
