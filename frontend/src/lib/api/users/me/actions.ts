@@ -1,7 +1,6 @@
 import { action } from "@solidjs/router";
-import { $removeCurrentUserAvatar, $updateCurrentUserAvatar } from "./service";
 
-// import { me } from ".";
+import { $removeCurrentUserAvatar, $updateCurrentUserAvatar } from "./service";
 
 export const removeCurrentUserAvatar = action(async () => {
   "use server";

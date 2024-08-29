@@ -13,7 +13,7 @@ export const authenticate = action(async (form: LoginForm) => {
     await updateSession(data);
   }
   if (error) {
-    return { error, code: response.status };
+    return { error, code: response.clone().status };
   }
 
   throw redirect(form.redirect || "/");

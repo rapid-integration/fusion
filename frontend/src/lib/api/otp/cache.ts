@@ -8,5 +8,5 @@ export const $isCorrectOtp = cache(async (body: components["schemas"]["CodeVerif
 
   const { response } = await $verifyOtp(body);
   
-  return response.status === 202;
+  return response.clone().status === 202;
 }, "$isCorrectOtp");

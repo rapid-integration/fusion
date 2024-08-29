@@ -5,7 +5,7 @@ import { getCurrentUser } from "./service";
 export const $getCurrentUser = cache(async () => {
   "use server";
 
-  const result = await getCurrentUser();
+  const { data } = await getCurrentUser();
 
-  return result.data;
+  return data;
 }, "$getCurrentUser");
