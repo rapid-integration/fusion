@@ -1,3 +1,4 @@
+import { Link } from "@solidjs/meta";
 import { type Accessor, type ParentComponent, createContext, createEffect, useContext, useTransition } from "solid-js";
 import { getDefaultLocale, type Locale, type LocalizedTranslator, createTranslator } from "~/lib/i18n";
 import { usePreferences } from "~/lib/preferences";
@@ -42,7 +43,10 @@ export const I18nProvider: ParentComponent = (props) => {
   });
 
   return (
-    <I18nContext.Provider value={{ locale, setLocale, isSettingLocale, t }}>{props.children}</I18nContext.Provider>
+    <I18nContext.Provider value={{ locale, setLocale, isSettingLocale, t }}>
+      <Link rel="manifest" href={`/manifest/${locale()}.json`} />
+      {props.children}
+    </I18nContext.Provider>
   );
 };
 
