@@ -6,12 +6,12 @@
   "description": "",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src": "/favicon.svg",
       "type": "image/svg+xml",
       "sizes": "any"
     },
     {
-      "src": "favicon.ico",
+      "src": "/favicon.ico",
       "type": "image/x-icon",
       "sizes": "72x72 96x96 128x128 256x256"
     }
