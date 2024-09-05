@@ -21,6 +21,7 @@ export const PreferencesProvider: ParentComponent = (props) => {
     storage: storage.cookieStorage,
     storageOptions: {
       secure: /true/i.test(import.meta.env.VITE_SECURE_COOKIES),
+      sameSite: "Lax",
     },
   });
 

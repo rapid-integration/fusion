@@ -14,6 +14,7 @@ export const SESSION_COOKIE_OPTIONS: SessionConfig = {
   password: import.meta.env.VITE_SESSION_SECRET,
   cookie: {
     secure: /true/i.test(import.meta.env.VITE_SECURE_COOKIES),
+    sameSite: "lax",
   },
 };
 
