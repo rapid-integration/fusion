@@ -15,8 +15,8 @@ importers:
         specifier: ^0.13.6
         version: 0.13.6(solid-js@1.8.22)
       '@modular-forms/solid':
-        specifier: ^0.22.1
-        version: 0.22.1(solid-js@1.8.22)(typescript@5.5.4)
+        specifier: ^0.23.0
+        version: 0.23.0(solid-js@1.8.22)(typescript@5.5.4)
       '@solid-primitives/event-listener':
         specifier: ^2.3.3
         version: 2.3.3(solid-js@1.8.22)
@@ -27,8 +27,8 @@ importers:
         specifier: ^2.1.6
         version: 2.1.6(solid-js@1.8.22)
       '@solid-primitives/storage':
-        specifier: ^4.0.0
-        version: 4.0.0(solid-js@1.8.22)
+        specifier: ^4.2.1
+        version: 4.2.1(solid-js@1.8.22)
       '@solidjs/meta':
         specifier: ^0.29.4
         version: 0.29.4(solid-js@1.8.22)
@@ -37,10 +37,10 @@ importers:
         version: 0.14.3(solid-js@1.8.22)
       '@solidjs/start':
         specifier: ^1.0.6
-        version: 1.0.6(rollup@4.20.0)(solid-js@1.8.22)(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))
+        version: 1.0.6(rollup@4.20.0)(solid-js@1.8.22)(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))
       autoprefixer:
         specifier: ^10.4.20
-        version: 10.4.20(postcss@8.4.41)
+        version: 10.4.20(postcss@8.4.45)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -48,11 +48,11 @@ importers:
         specifier: ^5.12.2
         version: 5.12.2
       openapi-fetch:
-        specifier: ^0.11.1
-        version: 0.11.1
+        specifier: ^0.12.0
+        version: 0.12.0
       postcss:
-        specifier: ^8.4.41
-        version: 8.4.41
+        specifier: ^8.4.45
+        version: 8.4.45
       solid-heroicons:
         specifier: ^3.2.4
         version: 3.2.4(solid-js@1.8.22)
@@ -76,17 +76,17 @@ importers:
         version: 3.4.10
       vinxi:
         specifier: ^0.4.2
-        version: 0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)
+        version: 0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)
     devDependencies:
       openapi-typescript:
-        specifier: ^7.3.0
-        version: 7.3.0(typescript@5.5.4)
+        specifier: ^7.4.0
+        version: 7.4.0(typescript@5.5.4)
       picocolors:
-        specifier: ^1.0.1
-        version: 1.0.1
+        specifier: ^1.1.0
+        version: 1.1.0
       postcss-mixins:
         specifier: ^10.0.1
-        version: 10.0.1(postcss@8.4.41)
+        version: 10.0.1(postcss@8.4.45)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -563,8 +563,8 @@ packages:
     resolution: {integrity: sha512-Yhlar6v9WQgUp/He7BdgzOz8lqMQ8sU+jkCq7Wx8Myc5YFJLbEe7lgui/V7G1qB1DJykHSGwreceSaD60Y0PUQ==}
     hasBin: true
 
-  '@modular-forms/solid@0.22.1':
-    resolution: {integrity: sha512-l6p/erp9k5bAFZDLVVLyyFTp+JQsp+wxsmuaT8n7BMllHDDVblkMlerB7PxmwXPnZbB5sTetVu2onzYq6rlMrQ==}
+  '@modular-forms/solid@0.23.0':
+    resolution: {integrity: sha512-6Nb0g01T275iszl96+JI/ozFZk9dD2TYxgFVTacVb9KXP/Yg4HgJnD94eMC70EYogbvcQU4O+XTi/wJhfNLPgg==}
     peerDependencies:
       solid-js: ^1.3.1
 
@@ -912,8 +912,8 @@ packages:
     peerDependencies:
       solid-js: ^1.6.12
 
-  '@solid-primitives/storage@4.0.0':
-    resolution: {integrity: sha512-Lq5otUGZw4tfv8OcBxU1r/ZkO38ibH5IqVLhF8sk7tObI8Hs5dRLxwKDIuk9hG03qeOZzH72Fc1NQij+UAQWaw==}
+  '@solid-primitives/storage@4.2.1':
+    resolution: {integrity: sha512-1XUJeaSlizH9Eam/+IbIpslHEnggJMNZXzfsr06AlbG6tJtQENMu0+94ZIvooxt4Cyw46wPzcnHYbSK7LzoQAA==}
     peerDependencies:
       '@tauri-apps/plugin-store': '*'
       solid-js: ^1.6.12
@@ -1225,6 +1225,9 @@ packages:
   chalk@5.3.0:
     resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+
+  change-case@5.4.4:
+    resolution: {integrity: sha512-HRQyTk2/YPEkt9TnUPbOpr64Uw3KOicFWPVBb+xiHvd6eBx/qPr9xqfBFDT8P2vWsvvz4jbEkfDe71W3VyNu2w==}
 
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -2129,18 +2132,18 @@ packages:
     resolution: {integrity: sha512-OS+QTnw1/4vrf+9hh1jc1jnYjzSG4ttTBB8UxOwAnInG3Uo4ssetzC1ihqaIHjLJnA5GGlRl6QlZXOTQhRBUvg==}
     engines: {node: '>=14.16'}
 
-  openapi-fetch@0.11.1:
-    resolution: {integrity: sha512-WtDQsrvxjXuCmo6u6WMQPfUaya8cLfL+ZCaXorPo9MMumqlU/Km/SrCXsEcJH234D4iykOkvJ6Q/iWBzK7+3rA==}
+  openapi-fetch@0.12.0:
+    resolution: {integrity: sha512-D/g5BUGiOAKqivR5s02veJ2+cMHzrkFJKberKP4Z8Vl2VhE6MMirI6wWOgpp8wlsYCRRK7CX0NCGVL/mt6l1fA==}
 
-  openapi-typescript-helpers@0.0.12:
-    resolution: {integrity: sha512-FO+5kTWO6KDutigamr2MRwciYkAUYhqdctlyVRrQOe2uxif2/O2+GcS07jNnP36AUK6ubSsGu3GeBiYIc6eQzA==}
+  openapi-typescript-helpers@0.0.13:
+    resolution: {integrity: sha512-z44WK2e7ygW3aUtAtiurfEACohf/Qt9g6BsejmIYgEoY4REHeRzgFJmO3ium0libsuzPc145I+8lE9aiiZrQvQ==}
 
   openapi-typescript@6.7.6:
     resolution: {integrity: sha512-c/hfooPx+RBIOPM09GSxABOZhYPblDoyaGhqBkD/59vtpN21jEuWKDlM0KYTvqJVlSYjKs0tBcIdeXKChlSPtw==}
     hasBin: true
 
-  openapi-typescript@7.3.0:
-    resolution: {integrity: sha512-EkljRjYWOPwGXiK++uI9MkGv2Y7uhbkZbi9V1z3r3EpmWVO6aFTHXSLNvxIWo6UT6LCTYgEYkUB3BWQjwwXthg==}
+  openapi-typescript@7.4.0:
+    resolution: {integrity: sha512-u4iVuTGkzKG4rHFUMA/IFXTks9tYVQzkowZsScMOdzJSvIF10qSNySWHTwnN2fD+MEeWFAM8i1f3IUBlgS92eQ==}
     hasBin: true
     peerDependencies:
       typescript: ^5.x
@@ -2188,8 +2191,8 @@ packages:
   perfect-debounce@1.0.0:
     resolution: {integrity: sha512-xCy9V055GLEqoFaHoC1SoLIaLmWctgCUaBaWxDZ7/Zx4CTyX7cJQLJOok/orfjZAh9kEYpjJa4d0KcJmCbctZA==}
 
-  picocolors@1.0.1:
-    resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
+  picocolors@1.1.0:
+    resolution: {integrity: sha512-TQ92mBOW0l3LeMeyLV6mzy/kWr8lkd/hp3mTg7wYK7zJhuBStmGMBG0BdeDZS/dZx1IukaX6Bk11zcln25o1Aw==}
 
   picomatch@2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
@@ -2259,8 +2262,8 @@ packages:
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
-  postcss@8.4.41:
-    resolution: {integrity: sha512-TesUflQ0WKZqAvg52PWL6kHgLKP6xB6heTOdoYM0Wt2UHyxNa4K25EZZMgKns3BH1RLVbZCREPpLY0rhnNoHVQ==}
+  postcss@8.4.45:
+    resolution: {integrity: sha512-7KTLTdzdZZYscUc65XmjFiB73vBhBfbPztCYdUNvlaso9PrzjzcmjqBPR0lNGkcVlcO4BjiO5rK/qNz+XAen1Q==}
     engines: {node: ^10 || ^12 || >=14}
 
   prettier-plugin-tailwindcss@0.6.6:
@@ -3019,7 +3022,7 @@ snapshots:
   '@babel/code-frame@7.24.7':
     dependencies:
       '@babel/highlight': 7.24.7
-      picocolors: 1.0.1
+      picocolors: 1.1.0
 
   '@babel/compat-data@7.25.2': {}
 
@@ -3104,7 +3107,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       chalk: 2.4.2
       js-tokens: 4.0.0
-      picocolors: 1.0.1
+      picocolors: 1.1.0
 
   '@babel/parser@7.25.3':
     dependencies:
@@ -3400,7 +3403,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@modular-forms/solid@0.22.1(solid-js@1.8.22)(typescript@5.5.4)':
+  '@modular-forms/solid@0.23.0(solid-js@1.8.22)(typescript@5.5.4)':
     dependencies:
       solid-js: 1.8.22
       valibot: 0.37.0(typescript@5.5.4)
@@ -3706,7 +3709,7 @@ snapshots:
       '@solid-primitives/utils': 6.2.3(solid-js@1.8.22)
       solid-js: 1.8.22
 
-  '@solid-primitives/storage@4.0.0(solid-js@1.8.22)':
+  '@solid-primitives/storage@4.2.1(solid-js@1.8.22)':
     dependencies:
       '@solid-primitives/utils': 6.2.3(solid-js@1.8.22)
       solid-js: 1.8.22
@@ -3732,11 +3735,11 @@ snapshots:
     dependencies:
       solid-js: 1.8.22
 
-  '@solidjs/start@1.0.6(rollup@4.20.0)(solid-js@1.8.22)(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))':
+  '@solidjs/start@1.0.6(rollup@4.20.0)(solid-js@1.8.22)(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))':
     dependencies:
-      '@vinxi/plugin-directives': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))
-      '@vinxi/server-components': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))
-      '@vinxi/server-functions': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))
+      '@vinxi/plugin-directives': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))
+      '@vinxi/server-components': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))
+      '@vinxi/server-functions': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))
       defu: 6.1.4
       error-stack-parser: 2.1.4
       glob: 10.4.5
@@ -3747,8 +3750,8 @@ snapshots:
       shikiji: 0.9.19
       source-map-js: 1.2.0
       terracotta: 1.0.5(solid-js@1.8.22)
-      vite-plugin-inspect: 0.7.42(rollup@4.20.0)(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))
-      vite-plugin-solid: 2.10.2(solid-js@1.8.22)(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))
+      vite-plugin-inspect: 0.7.42(rollup@4.20.0)(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))
+      vite-plugin-solid: 2.10.2(solid-js@1.8.22)(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))
     transitivePeerDependencies:
       - '@nuxt/kit'
       - '@testing-library/jest-dom'
@@ -3841,7 +3844,7 @@ snapshots:
     transitivePeerDependencies:
       - uWebSockets.js
 
-  '@vinxi/plugin-directives@0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))':
+  '@vinxi/plugin-directives@0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))':
     dependencies:
       '@babel/parser': 7.25.3
       acorn: 8.12.1
@@ -3852,29 +3855,29 @@ snapshots:
       magicast: 0.2.11
       recast: 0.23.9
       tslib: 2.6.3
-      vinxi: 0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)
+      vinxi: 0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)
 
-  '@vinxi/server-components@0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))':
+  '@vinxi/server-components@0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))':
     dependencies:
-      '@vinxi/plugin-directives': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))
+      '@vinxi/plugin-directives': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))
       acorn: 8.12.1
       acorn-loose: 8.4.0
       acorn-typescript: 1.4.13(acorn@8.12.1)
       astring: 1.8.6
       magicast: 0.2.11
       recast: 0.23.9
-      vinxi: 0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)
+      vinxi: 0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)
 
-  '@vinxi/server-functions@0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))':
+  '@vinxi/server-functions@0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))':
     dependencies:
-      '@vinxi/plugin-directives': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))
+      '@vinxi/plugin-directives': 0.4.1(vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))
       acorn: 8.12.1
       acorn-loose: 8.4.0
       acorn-typescript: 1.4.13(acorn@8.12.1)
       astring: 1.8.6
       magicast: 0.2.11
       recast: 0.23.9
-      vinxi: 0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)
+      vinxi: 0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)
 
   abbrev@1.1.1: {}
 
@@ -3980,14 +3983,14 @@ snapshots:
 
   async@3.2.5: {}
 
-  autoprefixer@10.4.20(postcss@8.4.41):
+  autoprefixer@10.4.20(postcss@8.4.45):
     dependencies:
       browserslist: 4.23.3
       caniuse-lite: 1.0.30001651
       fraction.js: 4.3.7
       normalize-range: 0.1.2
-      picocolors: 1.0.1
-      postcss: 8.4.41
+      picocolors: 1.1.0
+      postcss: 8.4.45
       postcss-value-parser: 4.2.0
 
   b4a@1.6.6: {}
@@ -4099,6 +4102,8 @@ snapshots:
       supports-color: 5.5.0
 
   chalk@5.3.0: {}
+
+  change-case@5.4.4: {}
 
   chokidar@3.6.0:
     dependencies:
@@ -5056,11 +5061,11 @@ snapshots:
       is-inside-container: 1.0.0
       is-wsl: 2.2.0
 
-  openapi-fetch@0.11.1:
+  openapi-fetch@0.12.0:
     dependencies:
-      openapi-typescript-helpers: 0.0.12
+      openapi-typescript-helpers: 0.0.13
 
-  openapi-typescript-helpers@0.0.12: {}
+  openapi-typescript-helpers@0.0.13: {}
 
   openapi-typescript@6.7.6:
     dependencies:
@@ -5071,10 +5076,11 @@ snapshots:
       undici: 5.28.4
       yargs-parser: 21.1.1
 
-  openapi-typescript@7.3.0(typescript@5.5.4):
+  openapi-typescript@7.4.0(typescript@5.5.4):
     dependencies:
       '@redocly/openapi-core': 1.19.0(supports-color@9.4.0)
       ansi-colors: 4.1.3
+      change-case: 5.4.4
       parse-json: 8.1.0
       supports-color: 9.4.0
       typescript: 5.5.4
@@ -5113,7 +5119,7 @@ snapshots:
 
   perfect-debounce@1.0.0: {}
 
-  picocolors@1.0.1: {}
+  picocolors@1.1.0: {}
 
   picomatch@2.3.1: {}
 
@@ -5129,36 +5135,36 @@ snapshots:
 
   pluralize@8.0.0: {}
 
-  postcss-import@15.1.0(postcss@8.4.41):
+  postcss-import@15.1.0(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
       postcss-value-parser: 4.2.0
       read-cache: 1.0.0
       resolve: 1.22.8
 
-  postcss-js@4.0.1(postcss@8.4.41):
+  postcss-js@4.0.1(postcss@8.4.45):
     dependencies:
       camelcase-css: 2.0.1
-      postcss: 8.4.41
+      postcss: 8.4.45
 
-  postcss-load-config@4.0.2(postcss@8.4.41):
+  postcss-load-config@4.0.2(postcss@8.4.45):
     dependencies:
       lilconfig: 3.1.2
       yaml: 2.5.0
     optionalDependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
 
-  postcss-mixins@10.0.1(postcss@8.4.41):
+  postcss-mixins@10.0.1(postcss@8.4.45):
     dependencies:
       fast-glob: 3.3.2
-      postcss: 8.4.41
-      postcss-js: 4.0.1(postcss@8.4.41)
-      postcss-simple-vars: 7.0.1(postcss@8.4.41)
-      sugarss: 4.0.1(postcss@8.4.41)
+      postcss: 8.4.45
+      postcss-js: 4.0.1(postcss@8.4.45)
+      postcss-simple-vars: 7.0.1(postcss@8.4.45)
+      sugarss: 4.0.1(postcss@8.4.45)
 
-  postcss-nested@6.2.0(postcss@8.4.41):
+  postcss-nested@6.2.0(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
       postcss-selector-parser: 6.1.1
 
   postcss-selector-parser@6.1.1:
@@ -5166,16 +5172,16 @@ snapshots:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
-  postcss-simple-vars@7.0.1(postcss@8.4.41):
+  postcss-simple-vars@7.0.1(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
 
   postcss-value-parser@4.2.0: {}
 
-  postcss@8.4.41:
+  postcss@8.4.45:
     dependencies:
       nanoid: 3.3.7
-      picocolors: 1.0.1
+      picocolors: 1.1.0
       source-map-js: 1.2.0
 
   prettier-plugin-tailwindcss@0.6.6(prettier@3.3.3):
@@ -5517,9 +5523,9 @@ snapshots:
       pirates: 4.0.6
       ts-interface-checker: 0.1.13
 
-  sugarss@4.0.1(postcss@8.4.41):
+  sugarss@4.0.1(postcss@8.4.45):
     dependencies:
-      postcss: 8.4.41
+      postcss: 8.4.45
 
   supports-color@5.5.0:
     dependencies:
@@ -5553,12 +5559,12 @@ snapshots:
       micromatch: 4.0.7
       normalize-path: 3.0.0
       object-hash: 3.0.0
-      picocolors: 1.0.1
-      postcss: 8.4.41
-      postcss-import: 15.1.0(postcss@8.4.41)
-      postcss-js: 4.0.1(postcss@8.4.41)
-      postcss-load-config: 4.0.2(postcss@8.4.41)
-      postcss-nested: 6.2.0(postcss@8.4.41)
+      picocolors: 1.1.0
+      postcss: 8.4.45
+      postcss-import: 15.1.0(postcss@8.4.45)
+      postcss-js: 4.0.1(postcss@8.4.45)
+      postcss-load-config: 4.0.2(postcss@8.4.45)
+      postcss-nested: 6.2.0(postcss@8.4.45)
       postcss-selector-parser: 6.1.1
       resolve: 1.22.8
       sucrase: 3.35.0
@@ -5726,7 +5732,7 @@ snapshots:
     dependencies:
       browserslist: 4.23.3
       escalade: 3.1.2
-      picocolors: 1.0.1
+      picocolors: 1.1.0
 
   uqr@0.1.2: {}
 
@@ -5744,7 +5750,7 @@ snapshots:
 
   validate-html-nesting@1.2.2: {}
 
-  vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5):
+  vinxi@0.4.2(@types/node@22.1.0)(ioredis@5.4.1)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5):
     dependencies:
       '@babel/core': 7.25.2
       '@babel/plugin-syntax-jsx': 7.24.7(@babel/core@7.25.2)
@@ -5778,7 +5784,7 @@ snapshots:
       unctx: 2.3.1
       unenv: 1.10.0
       unstorage: 1.10.2(ioredis@5.4.1)
-      vite: 5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)
+      vite: 5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)
       zod: 3.23.8
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -5812,7 +5818,7 @@ snapshots:
       - uWebSockets.js
       - xml2js
 
-  vite-plugin-inspect@0.7.42(rollup@4.20.0)(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)):
+  vite-plugin-inspect@0.7.42(rollup@4.20.0)(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
@@ -5820,14 +5826,14 @@ snapshots:
       error-stack-parser-es: 0.1.5
       fs-extra: 11.2.0
       open: 9.1.0
-      picocolors: 1.0.1
+      picocolors: 1.1.0
       sirv: 2.0.4
-      vite: 5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)
+      vite: 5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)
     transitivePeerDependencies:
       - rollup
       - supports-color
 
-  vite-plugin-solid@2.10.2(solid-js@1.8.22)(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)):
+  vite-plugin-solid@2.10.2(solid-js@1.8.22)(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)):
     dependencies:
       '@babel/core': 7.25.2
       '@types/babel__core': 7.20.5
@@ -5835,25 +5841,25 @@ snapshots:
       merge-anything: 5.1.7
       solid-js: 1.8.22
       solid-refresh: 0.6.3(solid-js@1.8.22)
-      vite: 5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)
-      vitefu: 0.2.5(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5))
+      vite: 5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)
+      vitefu: 0.2.5(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5))
     transitivePeerDependencies:
       - supports-color
 
-  vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5):
+  vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.4.41
+      postcss: 8.4.45
       rollup: 4.20.0
     optionalDependencies:
       '@types/node': 22.1.0
       fsevents: 2.3.3
-      sugarss: 4.0.1(postcss@8.4.41)
+      sugarss: 4.0.1(postcss@8.4.45)
       terser: 5.31.5
 
-  vitefu@0.2.5(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)):
+  vitefu@0.2.5(vite@5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)):
     optionalDependencies:
-      vite: 5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.41))(terser@5.31.5)
+      vite: 5.4.0(@types/node@22.1.0)(sugarss@4.0.1(postcss@8.4.45))(terser@5.31.5)
 
   webidl-conversions@3.0.1: {}
 
