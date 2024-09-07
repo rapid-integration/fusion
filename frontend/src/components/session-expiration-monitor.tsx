@@ -1,20 +1,15 @@
-import { makeEventListener } from "@solid-primitives/event-listener";
-import { createAsync, revalidate, RouteDefinition, RouteSectionProps } from "@solidjs/router";
-import { createEffect, createSignal, on, onCleanup, onMount } from "solid-js";
+import { createAsync, revalidate } from "@solidjs/router";
+import { createEffect, createSignal, on, onCleanup, onMount, ParentComponent } from "solid-js";
+
 import { toast } from "solid-sonner";
+
+import { makeEventListener } from "@solid-primitives/event-listener";
 import { getCurrentUser } from "~/lib/api/users/me";
 import { getIsLoggedIn, getSessionExpirationDate } from "~/lib/http";
 import { useI18n } from "~/lib/i18n";
 
-export const route = {
-  preload: () => {
-    getIsLoggedIn();
-    getSessionExpirationDate();
-  },
-} satisfies RouteDefinition;
-
-export default function Auth(props: RouteSectionProps) {
-  const syncBroadcastChannel = new BroadcastChannel("auth_sync");
+export const SessionExpirationMonitor: ParentComponent = (props) => {
+  const sync = new BroadcastChannel("auth_sync");
 
   const i18n = useI18n();
 
@@ -53,7 +48,7 @@ export default function Auth(props: RouteSectionProps) {
   };
 
   onMount(() => {
-    syncBroadcastChannel.onmessage = () => {
+    sync.onmessage = () => {
       revalidateSession();
     };
   });
@@ -72,25 +67,21 @@ export default function Auth(props: RouteSectionProps) {
   );
 
   createEffect(
-    on(
-      isLoggedIn,
-      () => {
-        syncBroadcastChannel.postMessage(true);
+    on(isLoggedIn, () => {
+      sync.postMessage(true);
 
-        if (isLoggedIn() === false) {
-          clearRevalidateTimeout();
-          if (document.hidden) {
-            makeEventListener(document, "visibilitychange", toastSessionExpired, { once: true });
-          }
+      if (isLoggedIn() === false && revalidateTimeout() !== undefined) {
+        clearRevalidateTimeout();
+        if (document.hidden) {
+          makeEventListener(document, "visibilitychange", toastSessionExpired, { once: true });
         }
-      },
-      { defer: true },
-    ),
+      }
+    }),
   );
 
   onCleanup(() => {
-    syncBroadcastChannel.close();
+    sync.close();
   });
 
   return props.children;
-}
+};
