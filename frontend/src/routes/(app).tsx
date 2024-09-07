@@ -45,6 +45,7 @@ export default function Auth(props: RouteSectionProps) {
     revalidate([$getIsLoggedIn.key, $getSessionExpirationDate.key, $getCurrentUser.key]);
   };
 
+  // BUG: When logging out, toast infinitely shows up on iOS until logged in.
   const toastSessionExpired = (): void => {
     if (isLoggedIn() === false) {
       toast.info(i18n.t.sessionExpired());
