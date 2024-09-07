@@ -19,7 +19,7 @@ export const LocaleSwitcher: Component = () => {
       disallowEmptySelection={true}
       value={i18n.locale()}
       defaultValue={i18n.locale()}
-      onChange={i18n.setLocale}
+      onChange={(value) => value && i18n.setLocale(value)}
       itemComponent={(props) => (
         <Select.Item item={props.item}>
           <Select.ItemLabel class="flex items-center gap-1.5 capitalize">
