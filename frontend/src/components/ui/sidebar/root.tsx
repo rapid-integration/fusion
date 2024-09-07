@@ -1,16 +1,17 @@
+import { createAsync } from "@solidjs/router";
 import { Component, Show } from "solid-js";
 
 import { bookmark, cog, folder, home, userCircle } from "solid-heroicons/solid-mini";
 
 import { formatResourceURL } from "~/lib/api/uploads";
-import { useCurrentUser } from "~/lib/api/users/me";
+import { getCurrentUser } from "~/lib/api/users/me";
+import { useI18n } from "~/lib/i18n";
 
 import { SidebarItem } from "./item";
-import { useI18n } from "~/lib/i18n";
 
 export const Sidebar: Component = () => {
   const i18n = useI18n();
-  const currentUser = useCurrentUser();
+  const currentUser = createAsync(() => getCurrentUser());
 
   return (
     <aside class="sticky z-10 flex w-full max-md:bottom-0 md:top-0 md:max-h-dvh md:min-h-dvh md:max-w-64">

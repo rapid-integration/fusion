@@ -1,19 +1,18 @@
 import { Breadcrumbs } from "@kobalte/core/breadcrumbs";
-import { A, useAction } from "@solidjs/router";
+import { A, createAsync, useAction } from "@solidjs/router";
 import { Icon } from "solid-heroicons";
 import { arrowUpTray, chevronRight, envelopeOpen, key, userCircle, xMark } from "solid-heroicons/solid-mini";
 import { Show } from "solid-js";
 import { Heading, Title } from "~/components";
 import { SettingsCard } from "~/components/ui/settings/card";
 import { SettingsGroup } from "~/components/ui/settings/group";
-import { removeCurrentUserAvatar, updateCurrentUserAvatar } from "~/lib/api/users/me";
 import { formatResourceURL } from "~/lib/api/uploads";
-import { useCurrentUser } from "~/lib/api/users/me";
+import { getCurrentUser, removeCurrentUserAvatar, updateCurrentUserAvatar } from "~/lib/api/users/me";
 import { useI18n } from "~/lib/i18n";
 
 export default function Account() {
   const i18n = useI18n();
-  const currentUser = useCurrentUser();
+  const currentUser = createAsync(() => getCurrentUser());
   const updateAvatar = useAction(updateCurrentUserAvatar);
 
   return (
