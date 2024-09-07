@@ -10,7 +10,7 @@ import { toast } from "solid-sonner";
 import { Button, Heading, Motion, OtpField, TextField, LottiePresenter, Stepper } from "~/components";
 import { useVerification } from "~/components/steps/verification/provider";
 
-import { $sendOtp, $isCorrectOtp } from "~/lib/api/otp";
+import { sendOtp, isCorrectOtp } from "~/lib/api/otp";
 import { useI18n } from "~/lib/i18n";
 
 const OTP_LENGTH = 6;
@@ -30,12 +30,12 @@ export const OtpStep = () => {
   const [otpInputRef, setOtpInputRef] = createSignal<HTMLInputElement>();
 
   const email = () => context.store.email;
-  const [resourse, { refetch }] = createResource(email, $sendOtp);
+  const [resourse, { refetch }] = createResource(email, sendOtp);
 
   const onSubmit = async (form: OtpForm) => {
     const otp = Number(form.otp);
 
-    if (!(await $isCorrectOtp({ email: email(), code: otp }))) {
+    if (!(await isCorrectOtp({ email: email(), code: otp }))) {
       toast.error(i18n.t.steps.verification.otp.incorrect());
 
       reset();

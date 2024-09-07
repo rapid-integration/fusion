@@ -1,9 +1,10 @@
 import { createForm, email, required } from "@modular-forms/solid";
 import { toast } from "solid-sonner";
 import { Button, FormControl, Stepper } from "~/components";
-import { $getUserExists } from "~/lib/api/users";
+// import { $getUserExists } from "~/lib/api/users";
 import { useI18n } from "~/lib/i18n";
 import { Verifier } from ".";
+import { getUserExists } from "~/lib/api/users";
 
 export function EmailStep() {
   const i18n = useI18n();
@@ -19,7 +20,7 @@ export function EmailStep() {
       return;
     }
 
-    const exists = await $getUserExists(data.email);
+    const exists = await getUserExists(data.email);
     if (!exists) {
       toast.error(i18n.t.steps.verification.email.notExists());
       return;

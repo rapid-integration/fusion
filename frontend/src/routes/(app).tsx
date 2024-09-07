@@ -2,14 +2,14 @@ import { makeEventListener } from "@solid-primitives/event-listener";
 import { createAsync, revalidate, RouteDefinition, RouteSectionProps } from "@solidjs/router";
 import { createEffect, createSignal, on, onCleanup, onMount } from "solid-js";
 import { toast } from "solid-sonner";
-import { $getIsLoggedIn, $getSessionExpirationDate } from "~/lib/http";
-import { $getCurrentUser } from "~/lib/api/users/me";
+import { getCurrentUser } from "~/lib/api/users/me";
+import { getIsLoggedIn, getSessionExpirationDate } from "~/lib/http";
 import { useI18n } from "~/lib/i18n";
 
 export const route = {
   preload: () => {
-    $getIsLoggedIn();
-    $getSessionExpirationDate();
+    getIsLoggedIn();
+    getSessionExpirationDate();
   },
 } satisfies RouteDefinition;
 
@@ -18,8 +18,8 @@ export default function Auth(props: RouteSectionProps) {
 
   const i18n = useI18n();
 
-  const isLoggedIn = createAsync(() => $getIsLoggedIn(), { deferStream: true });
-  const sessionExpirationDate = createAsync(() => $getSessionExpirationDate(), { deferStream: true });
+  const isLoggedIn = createAsync(() => getIsLoggedIn(), { deferStream: true });
+  const sessionExpirationDate = createAsync(() => getSessionExpirationDate(), { deferStream: true });
 
   const [revalidateTimeout, setRevalidateTimeout] = createSignal<NodeJS.Timeout | undefined>();
 
@@ -42,7 +42,7 @@ export default function Auth(props: RouteSectionProps) {
   };
 
   const revalidateSession = (): void => {
-    revalidate([$getIsLoggedIn.key, $getSessionExpirationDate.key, $getCurrentUser.key]);
+    revalidate([getIsLoggedIn.key, getSessionExpirationDate.key, getCurrentUser.key]);
   };
 
   // BUG: When logging out, toast infinitely shows up on iOS until logged in.

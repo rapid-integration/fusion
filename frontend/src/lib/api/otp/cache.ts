@@ -1,12 +1,19 @@
 import { cache } from "@solidjs/router";
 
-import { components } from "../schema";
-import { $verifyOtp } from "./service";
+import type { components } from "~/lib/api/schema";
+import { $verifyOtp, $sendOtp } from "./service";
 
-export const $isCorrectOtp = cache(async (body: components["schemas"]["CodeVerify"]) => {
+export const isCorrectOtp = cache(async (body: components["schemas"]["CodeVerify"]) => {
   "use server";
 
-  const { response } = await $verifyOtp(body);
-  
-  return response.clone().status === 202;
-}, "$isCorrectOtp");
+  const { status } = await $verifyOtp(body);
+  const isCorrect = status === 202;
+
+  return isCorrect;
+}, "isCorrectOtp");
+
+export const sendOtp = cache(async (email: string) => {
+  "use server";
+
+  return await $sendOtp(email);
+}, "otp");

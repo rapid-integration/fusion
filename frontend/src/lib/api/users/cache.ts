@@ -1,11 +1,12 @@
 import { cache } from "@solidjs/router";
 
-import { exists } from "./service";
+import { $getUserExists } from "./service";
 
-export const $getUserExists = cache(async (email: string): Promise<boolean> => {
+export const getUserExists = cache(async (email: string): Promise<boolean> => {
   "use server";
 
-  const result = await exists(email);
+  const result = await $getUserExists(email);
+  const userExists = result.data ?? false;
 
-  return result.data ?? false;
+  return userExists;
 }, "$getUserExists");

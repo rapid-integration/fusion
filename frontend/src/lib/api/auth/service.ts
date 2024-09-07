@@ -1,11 +1,11 @@
 import client from "~/lib/api/client";
-import { components } from "~/lib/api/schema";
 import { formDataSerializer } from "~/lib/api/serializers";
+import type { components } from "~/lib/api/schema";
 
 export const $authenticate = async (username: string, password: string) => {
   "use server";
 
-  return await client.POST("/api/v1/auth/login", {
+  const result = await client.POST("/api/v1/auth/login", {
     body: {
       scope: "auth",
       username: username,
@@ -13,12 +13,14 @@ export const $authenticate = async (username: string, password: string) => {
     },
     bodySerializer: formDataSerializer,
   });
+  return { data: result.data, status: result.response.status, error: result.error };
 };
 
 export const $resetPassword = async (body: components["schemas"]["UserPasswordReset"]) => {
   "use server";
 
-  return await client.PATCH("/api/v1/auth/reset-password", {
+  const result = await client.PATCH("/api/v1/auth/reset-password", {
     body: body,
   });
+  return { data: result.data };
 };

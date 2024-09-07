@@ -1,19 +1,21 @@
 import { action, redirect } from "@solidjs/router";
-import { components } from "~/lib/api/schema";
-import { $authenticate, $resetPassword } from "~/lib/api/auth/service";
-import { resetSession, updateSession } from "~/lib/http/session";
-import { LoginForm } from "./types";
+
+import { resetSession, updateSession } from "~/lib/http";
+import type { components } from "~/lib/api/schema";
+
+import type { LoginForm } from "./types";
+import { $authenticate, $resetPassword } from "./service";
 
 export const authenticate = action(async (form: LoginForm) => {
   "use server";
 
-  const { data, error, response } = await $authenticate(form.email, form.password);
+  const { data, error, status } = await $authenticate(form.email, form.password);
 
   if (data) {
     await updateSession(data);
   }
   if (error) {
-    return { error, code: response.clone().status };
+    return { error, code: status };
   }
 
   throw redirect(form.redirect || "/");

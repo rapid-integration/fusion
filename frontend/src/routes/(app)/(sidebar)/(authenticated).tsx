@@ -1,15 +1,15 @@
 import { createAsync, Navigate, type RouteDefinition, type RouteSectionProps } from "@solidjs/router";
 import { Match, Switch } from "solid-js";
-import { $getIsLoggedIn } from "~/lib/http";
+import { getIsLoggedIn } from "~/lib/http";
 
 export const route = {
   preload: () => {
-    $getIsLoggedIn();
+    getIsLoggedIn();
   },
 } satisfies RouteDefinition;
 
 export default function Authenticated(props: RouteSectionProps) {
-  const isLoggedIn = createAsync(() => $getIsLoggedIn(), { deferStream: true });
+  const isLoggedIn = createAsync(() => getIsLoggedIn(), { deferStream: true });
 
   return (
     <Switch>

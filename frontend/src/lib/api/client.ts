@@ -1,7 +1,7 @@
 import createClient from "openapi-fetch";
 
-import { AUTH_MIDDLEWARE, DEBUG_MIDDLEWARE } from "~/lib/api/middleware";
-import type { paths } from "~/lib/api/schema";
+import { AUTH_MIDDLEWARE, DEBUG_MIDDLEWARE } from "./middleware";
+import type { paths } from "./schema";
 
 const client = createClient<paths>({ baseUrl: import.meta.env.VITE_API_URL });
 
