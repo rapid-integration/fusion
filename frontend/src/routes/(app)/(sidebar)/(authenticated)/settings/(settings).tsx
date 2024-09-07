@@ -16,11 +16,7 @@ import {
 import { SettingsCard } from "~/components/ui/settings/card";
 import { SettingsExpander } from "~/components/ui/settings/expander";
 import { SettingsGroup } from "~/components/ui/settings/group";
-
-// TODO: USING INDEX IMPORT
 import { unauthenticate } from "~/lib/api/auth";
-
-// import { unauthenticate } from "~/lib/api/auth";
 import { useI18n } from "~/lib/i18n";
 import { useTheme } from "~/lib/theme";
 

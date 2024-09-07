@@ -9,7 +9,6 @@ export * from "./motion";
 export * from "./otp-field";
 export * from "./select";
 export * from "./separator";
-// export * from "./settings";
 export * from "./sidebar";
 export * from "./stepper";
 export * from "./text-field";

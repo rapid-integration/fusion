@@ -1,7 +1,6 @@
 import { createForm, email, required } from "@modular-forms/solid";
 import { toast } from "solid-sonner";
 import { Button, FormControl, Stepper } from "~/components";
-// import { $getUserExists } from "~/lib/api/users";
 import { useI18n } from "~/lib/i18n";
 import { Verifier } from ".";
 import { getUserExists } from "~/lib/api/users";

@@ -5,11 +5,8 @@ import { createForm, email, minLength, required } from "@modular-forms/solid";
 import { toast } from "solid-sonner";
 
 import { Button, FormControl, Heading, Link, LottiePresenter, Title } from "~/components";
+import { authenticate, LoginForm } from "~/lib/api/auth";
 import { useI18n } from "~/lib/i18n";
-
-// TODO: USING INDEX IMPORTS
-import { LoginForm } from "~/lib/api/auth";
-import { authenticate } from "~/lib/api/auth";
 
 export default function Login() {
   const [searchParams] = useSearchParams();

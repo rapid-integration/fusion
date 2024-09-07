@@ -9,7 +9,6 @@ import { SettingsGroup } from "~/components/ui/settings/group";
 import { removeCurrentUserAvatar, updateCurrentUserAvatar } from "~/lib/api/users/me";
 import { formatResourceURL } from "~/lib/api/uploads";
 import { useCurrentUser } from "~/lib/api/users/me";
-// import { removeCurrentUserAvatar, updateCurrentUserAvatar } from "~/lib/api/users/me/actions";
 import { useI18n } from "~/lib/i18n";
 
 export default function Account() {
