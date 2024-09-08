@@ -3,7 +3,7 @@ import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
 import { Toaster } from "solid-sonner";
-import { SessionExpirationMonitor } from "~/components";
+import { SessionExpirationObserver } from "~/components";
 import { I18nProvider } from "~/lib/i18n";
 import { PreferencesProvider } from "~/lib/preferences";
 import { ThemeProvider } from "~/lib/theme";
@@ -20,7 +20,7 @@ export default function App() {
                 <Suspense>{props.children}</Suspense>
 
                 <Toaster />
-                <SessionExpirationMonitor />
+                <SessionExpirationObserver />
               </ThemeProvider>
             </I18nProvider>
           </PreferencesProvider>

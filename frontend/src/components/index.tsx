@@ -1,2 +1,2 @@
 export * from "./ui";
-export * from "./session-expiration-monitor";
+export * from "./session-expiration-observer";

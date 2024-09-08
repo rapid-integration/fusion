@@ -8,7 +8,7 @@ import { getCurrentUser } from "~/lib/api/users/me";
 import { getIsLoggedIn, getSessionExpirationDate } from "~/lib/http";
 import { useI18n } from "~/lib/i18n";
 
-export const SessionExpirationMonitor: ParentComponent = (props) => {
+export const SessionExpirationObserver: ParentComponent = (props) => {
   const sync = new BroadcastChannel("auth_sync");
 
   const i18n = useI18n();
@@ -54,19 +54,6 @@ export const SessionExpirationMonitor: ParentComponent = (props) => {
   });
 
   createEffect(
-    on(sessionExpirationDate, () => {
-      const expirationDate = sessionExpirationDate();
-      if (!expirationDate) return;
-
-      const expiresAfterMs = expirationDate - Date.now();
-      if (expiresAfterMs <= 0) return;
-
-      const timeout = setTimeout(invalidateSession, expiresAfterMs);
-      rewriteRevalidateTimeout(timeout);
-    }),
-  );
-
-  createEffect(
     on(isLoggedIn, () => {
       sync.postMessage(true);
 
@@ -76,6 +63,19 @@ export const SessionExpirationMonitor: ParentComponent = (props) => {
           makeEventListener(document, "visibilitychange", toastSessionExpired, { once: true });
         }
       }
+    }),
+  );
+
+  createEffect(
+    on(sessionExpirationDate, () => {
+      const expirationDate = sessionExpirationDate();
+      if (!expirationDate) return;
+
+      const expiresAfterMs = expirationDate - Date.now();
+      if (expiresAfterMs <= 0) return;
+
+      const timeout = setTimeout(invalidateSession, expiresAfterMs);
+      rewriteRevalidateTimeout(timeout);
     }),
   );
 
