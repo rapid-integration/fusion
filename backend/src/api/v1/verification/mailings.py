@@ -24,12 +24,12 @@ def generate_code_expiration_timestamp() -> datetime:
 
 
 def generate_verification_message(recipient: str, code: int, expires_at: datetime) -> MessageSchema:
-    subject = "Verification request for your account"
+    subject = "Verification"
 
     template_body = {
-        "recipient": recipient,
         "code": code,
         "expires_at": expires_at,
+        "recipient": recipient,
     }
 
     return generate_message(subject, [recipient], template_body)
