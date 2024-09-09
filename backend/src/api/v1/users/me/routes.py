@@ -1,8 +1,7 @@
 from fastapi import APIRouter, File, HTTPException, UploadFile, status
 from PIL import Image
 
-from src.api.deps import Session
-from src.api.v1.users.deps import CurrentUser
+from src.api.v1.users.me.deps import CurrentUser
 from src.api.v1.users.me.schemas import CurrentUserResponse
 from src.api.v1.users.models import User
 from src.api.v1.users.schemas import UserEmail, UserPassword
@@ -17,6 +16,7 @@ from src.api.v1.users.service import (
 from src.api.v1.verification.schemas import Code
 from src.api.v1.verification.service import expire_code_if_correct
 from src.config import settings
+from src.db.deps import Session
 from src.storage import fs, mimetype
 
 router = APIRouter(prefix="/me")

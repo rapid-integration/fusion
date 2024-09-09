@@ -66,7 +66,7 @@ def get_system_path(name: str) -> str:
         str: The full system path for the specified file name.
     """
 
-    return os.path.join(settings.path.uploads, name)
+    return os.path.join(settings.path.media, name)
 
 
 def generate_unique_file_name(file: BinaryIO) -> str:

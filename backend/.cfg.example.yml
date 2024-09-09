@@ -3,13 +3,15 @@ debug: true
 app:
   name: "Fusion"
   version: "0.0.0"
+  organization: "Rapid Integration"
 
 api:
   max_avatar_size: 3_145_728 # 3 MB
 
 path:
   logs: "./logs"
-  uploads: "./media"
+  media: "./media"
+  locales: "./src/i18n/locales"
   templates: "./src/mail/templates"
 
 jwt:

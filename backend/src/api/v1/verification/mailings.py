@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta, timezone
 
-from fastapi_mail import MessageSchema
+from fastapi_mail import MessageSchema, MessageType
 
 from src.api.v1.verification.service import set_code
 from src.config import settings
-from src.mail.service import generate_message, send_message
+from src.i18n import gettext as _
+from src.mail import fm
+from src.template import render
 
 __VERIFICATION_TEMPLATE_FILENAME = "verification.jinja"
 
@@ -14,7 +16,7 @@ async def send_verification_message(recipient: str) -> datetime:
     expires_at = generate_code_expiration_timestamp()
     message = generate_verification_message(recipient, code, expires_at)
 
-    await send_message(message, __VERIFICATION_TEMPLATE_FILENAME)
+    await fm.send_message(message)
 
     return expires_at
 
@@ -24,12 +26,14 @@ def generate_code_expiration_timestamp() -> datetime:
 
 
 def generate_verification_message(recipient: str, code: int, expires_at: datetime) -> MessageSchema:
-    subject = "Verification"
+    subject = _("Verification")
 
-    template_body = {
+    context = {
         "code": code,
         "expires_at": expires_at,
         "recipient": recipient,
     }
 
-    return generate_message(subject, [recipient], template_body)
+    body = render(__VERIFICATION_TEMPLATE_FILENAME, context)
+
+    return MessageSchema(recipients=[recipient], subject=subject, body=body, subtype=MessageType.html)

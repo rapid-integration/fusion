@@ -2,12 +2,12 @@
 
 {% block main %}
 <p>
-  Your One-Time Password (OTP) is: <strong>{{ code }}</strong>. This code expires at
+  {{ _("Your One-Time Password (OTP) is:") }} <strong>{{ code }}</strong>. {{ _("This code expires at") }}
   <time datetime="{{ expires_at.strftime('%Y-%m-%dT%H:%M:%SZ') }}">{{ expires_at.strftime('%H:%M') }} UTC</time>.
-  Don't share it with anyone!
+  {{ _("Don't share it with anyone!") }}
 </p>
 
 <p>
-  In case if you didn't request a code, just ignore this message.
+  {{ _("In case if you didn't request a code, just ignore this message.") }}
 </p>
 {% endblock %}

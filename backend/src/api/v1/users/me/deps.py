@@ -3,11 +3,11 @@ from typing import Annotated
 import jwt
 from fastapi import Depends, HTTPException, status
 
-from src.api.deps import Session
 from src.api.v1.auth.deps import PasswordBearer
 from src.api.v1.auth.schemas import JWT
 from src.api.v1.users.models import User
 from src.config import settings
+from src.db.deps import Session
 
 
 def __get_current_user(session: Session, raw: PasswordBearer) -> User:

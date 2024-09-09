@@ -1,11 +1,11 @@
 from fastapi import APIRouter, HTTPException, status
 
-from src.api.deps import Session
 from src.api.v1.auth.deps import PasswordForm
 from src.api.v1.auth.schemas import Token
 from src.api.v1.users.schemas import UserCreate, UserPasswordReset
 from src.api.v1.users.service import create_user, get_user_by_email, is_email_registered, update_password
 from src.api.v1.verification.service import expire_code_if_correct
+from src.db.deps import Session
 from src.security import create_access_token, is_valid_password
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])

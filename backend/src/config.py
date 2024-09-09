@@ -7,11 +7,13 @@ from pydantic_core import MultiHostUrl
 from pydantic_settings import BaseSettings, PydanticBaseSettingsSource, SettingsConfigDict, YamlConfigSettingsSource
 
 GeneratedPath = NewPath | DirectoryPath
+LoggingSettings = dict[typing.Any, typing.Any]
 
 
 class AppSettings(BaseModel):
     name: str
     version: str
+    organization: str
 
 
 class ApiSettings(BaseModel):
@@ -20,12 +22,16 @@ class ApiSettings(BaseModel):
 
 class PathSettings(BaseModel):
     logs: GeneratedPath
-    uploads: GeneratedPath
+    media: GeneratedPath
+    locales: DirectoryPath
     templates: DirectoryPath
 
-    def model_post_init(self, __context: typing.Any) -> None:
-        for attr in (attr for attr, attr_type in self.__annotations__.items() if attr_type == GeneratedPath):
-            os.makedirs(getattr(self, attr), exist_ok=True)
+    def model_post_init(self, _: typing.Any) -> None:
+        attrs = self.__annotations__.items()
+        generated_path_attrs = (attr for attr, attr_type in attrs if attr_type == GeneratedPath)
+        for attr in generated_path_attrs:
+            pathname = getattr(self, attr)
+            os.makedirs(pathname, exist_ok=True)
 
 
 class JWTSettings(BaseModel):
@@ -99,6 +105,7 @@ class Settings(BaseSettings):
     redis: RedisSettings
     postgres: PostgresSettings
     smtp: SMTPSettings
+    logging: LoggingSettings
 
     @computed_field
     @property
@@ -113,12 +120,9 @@ class Settings(BaseSettings):
             MAIL_DEBUG=self.debug,
             MAIL_FROM=self.smtp.username,
             MAIL_FROM_NAME=self.app.name,
-            TEMPLATE_FOLDER=self.path.templates,
             USE_CREDENTIALS=self.smtp.use_credentials,
             VALIDATE_CERTS=self.smtp.validate_certs,
         )
-
-    logging: dict[typing.Any, typing.Any]
 
 
 settings = Settings()  # type: ignore
