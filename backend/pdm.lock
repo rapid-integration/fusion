@@ -15,7 +15,7 @@ name = "aiosmtplib"
 version = "2.0.2"
 requires_python = ">=3.7,<4.0"
 summary = "asyncio SMTP client"
-groups = ["default"]`
+groups = ["default"]
 files = [
     {file = "aiosmtplib-2.0.2-py3-none-any.whl", hash = "sha256:1e631a7a3936d3e11c6a144fb8ffd94bb4a99b714f2cb433e825d88b698e37bc"},
     {file = "aiosmtplib-2.0.2.tar.gz", hash = "sha256:138599a3227605d29a9081b646415e9e793796ca05322a78f69179f0135016a3"},
