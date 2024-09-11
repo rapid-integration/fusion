@@ -2,8 +2,12 @@ import colors from "picocolors";
 
 import { type Middleware } from "openapi-fetch";
 
+import { getRequestEvent } from "solid-js/web";
+import { getCookie } from "vinxi/http";
 import { getSession } from "~/lib/http/session";
+import { DEFAULT_LOCALE, getRequestLocale } from "~/lib/i18n";
 import logger from "~/lib/logging/console";
+import { Preferences, PREFERENCES_COOKIE_NAME } from "~/lib/preferences";
 
 export const AUTH_MIDDLEWARE: Middleware = {
   onRequest: async ({ request }) => {
@@ -13,6 +17,21 @@ export const AUTH_MIDDLEWARE: Middleware = {
     if (jwt && Date.parse(jwt.expires_at) > Date.now()) {
       request.headers.set("Authorization", `${jwt.token_type} ${jwt.access_token}`);
     }
+
+    return request;
+  },
+};
+
+export const I18N_MIDDLEWARE: Middleware = {
+  onRequest: async ({ request }) => {
+    const event = getRequestEvent();
+    if (!event) return;
+
+    const cookie = getCookie(event.nativeEvent, PREFERENCES_COOKIE_NAME);
+    const settings = JSON.parse(cookie ?? "{}") as Preferences;
+    const locale = settings.locale || getRequestLocale();
+
+    request.headers.set("Accept-Language", locale);
 
     return request;
   },
