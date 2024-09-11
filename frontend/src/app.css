@@ -24,11 +24,6 @@
   }
 
   @define-mixin color-scheme-dark {
-    --bg-default: theme("colors.zinc.900");
-    --bg-secondary: theme("colors.zinc.800");
-    --bg-tertiary: theme("colors.zinc.700");
-    --clr-body: theme("colors.zinc.100");
-    
     /** Foreground **/
     --fg-color-body: theme("colors.zinc.50");
     --fg-color-soft: theme("colors.zinc.400");
@@ -49,11 +44,6 @@
   }
 
   @define-mixin color-scheme-night {
-    --bg-default: theme("colors.black");
-    --bg-secondary: theme("colors.zinc.950");
-    --bg-tertiary: theme("colors.zinc.900");
-    --clr-body: theme("colors.zinc.100");
-    
     /** Foreground **/
     --fg-color-body: theme("colors.zinc.100");
     --fg-color-soft: theme("colors.zinc.400");
@@ -62,9 +52,9 @@
 
     /** Background **/
     --bg-color-body: theme("colors.black");
-    --bg-color-default: theme("colors.zinc.950");
-    --bg-color-secondary: theme("colors.zinc.900");
-    --bg-color-tertiary: theme("colors.zinc.800");
+    --bg-color-default: theme("colors.zinc.900");
+    --bg-color-secondary: theme("colors.zinc.800");
+    --bg-color-tertiary: theme("colors.zinc.700");
 
     /** Stroke **/
     --ring-color-accent: theme("colors.blue.700");
