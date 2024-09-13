@@ -27,7 +27,7 @@ export const LocaleSwitcher: Component = () => {
             <span>—</span>
             <span class="text-fg-muted">{languageNames().of(props.item.rawValue)}</span>
           </Select.ItemLabel>
-          <Select.ItemIndicator>
+          <Select.ItemIndicator class="text-fg-accent">
             <Icon path={check} width={14} />
           </Select.ItemIndicator>
         </Select.Item>
@@ -42,7 +42,7 @@ export const LocaleSwitcher: Component = () => {
           <Icon path={chevronUpDown} width={14} />
         </Select.Icon>
       </Select.Trigger>
-      <Select.Content class="min-w-72" inert={i18n.isSettingLocale()}>
+      <Select.Content inert={i18n.isSettingLocale()}>
         <Select.ListBox class="outline-none" />
       </Select.Content>
     </Select>
