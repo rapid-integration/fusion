@@ -1,14 +1,14 @@
 import { splitProps, type ValidComponent } from "solid-js";
 
-import { PolymorphicProps } from "@kobalte/core/polymorphic";
 import * as DropdownPrimitive from "@kobalte/core/dropdown-menu";
+import { PolymorphicProps } from "@kobalte/core/polymorphic";
 
 import { merge } from "~/lib/utils/css/merge";
 import { DropdownMenuContentProps, DropdownMenuItemProps } from "./dropdown.props";
 import { styles } from "./dropdown.styles";
 
 // TODO: Re-map more dropdown primitives.
-const SelectRoot = DropdownPrimitive.Root;
+const DropdownRoot = DropdownPrimitive.Root;
 const DropdownTrigger = DropdownPrimitive.Trigger;
 const DropdownArrow = DropdownPrimitive.Arrow;
 const DropdownItemLabel = DropdownPrimitive.ItemLabel;
@@ -32,7 +32,7 @@ const DropdownItem = <T extends ValidComponent = "div">(props: PolymorphicProps<
   return <DropdownPrimitive.Item class={merge(styles().item(), props.class)} {...rest} />;
 };
 
-export const Dropdown = Object.assign(SelectRoot, {
+export const Dropdown = Object.assign(DropdownRoot, {
   Trigger: DropdownTrigger,
   Content: DropdownContent,
   Item: DropdownItem,
