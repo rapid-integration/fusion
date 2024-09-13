@@ -11,6 +11,7 @@ import type {
   SettingsExpanderRootProps,
   SettingsExpanderTriggerProps,
 } from "./expander.props";
+import { Separator } from "../../separator";
 
 export const SettingsExpanderRoot = (props: SettingsExpanderRootProps) => {
   const [local, others] = splitProps(props, ["class"]);
@@ -32,15 +33,14 @@ export const SettingsExpanderIndicator = () => (
 );
 
 export const SettingsExpanderContent = (props: SettingsExpanderContentProps) => {
-  const [local, others] = splitProps(props, ["class"]);
+  const [local, others] = splitProps(props, ["class", "children"]);
   return (
     <Collapsible.Content
-      class={merge(
-        "overflow-hidden border-t border-bg-tertiary transition-[border-color]",
-        "data-[closed]:animate-collapse data-[expanded]:animate-expand",
-        local.class,
-      )}
+      class={merge("overflow-hidden data-[closed]:animate-collapse data-[expanded]:animate-expand", local.class)}
       {...others}
-    />
+    >
+      <Separator orientation="horizontal" />
+      {local.children}
+    </Collapsible.Content>
   );
 };

@@ -36,5 +36,5 @@ export const SettingsCardDescription = <T extends ValidComponent = "p">(
   props: PolymorphicProps<T, SettingsCardDescriptionProps>,
 ) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <Polymorphic as="p" class={merge("text-xs leading-none text-fg-muted", local.class)} {...others} />;
+  return <Polymorphic as="p" class={merge("text-xs text-fg-muted", local.class)} {...others} />;
 };
