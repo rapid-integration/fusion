@@ -1,4 +1,7 @@
 /**@type {import("tailwindcss").Config} */
+
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   content: ["./src/**/*.{ts,tsx}"],
   future: {
@@ -6,6 +9,10 @@ module.exports = {
   },
   theme: {
     extend: {
+      fontSize: {
+        "cqi-25": "25cqi",
+        "cqi-50": "50cqi",
+      },
       colors: {
         fg: {
           body: "var(--fg-color-body)",
@@ -60,5 +67,13 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.container-size': {
+          containerType: 'size',
+        }
+      })
+    })
+  ]
 }
