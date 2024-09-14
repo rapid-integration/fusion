@@ -13,7 +13,8 @@ export const $authenticate = async (username: string, password: string) => {
     },
     bodySerializer: formDataSerializer,
   });
-  return { data: result.data, status: result.response.status, error: result.error };
+
+  return { data: result.data, error: result.error };
 };
 
 export const $resetPassword = async (body: components["schemas"]["UserPasswordReset"]) => {
@@ -22,5 +23,6 @@ export const $resetPassword = async (body: components["schemas"]["UserPasswordRe
   const result = await client.PATCH("/api/v1/auth/reset-password", {
     body: body,
   });
-  return { data: result.data };
+
+  return { data: result.data, error: result.error };
 };

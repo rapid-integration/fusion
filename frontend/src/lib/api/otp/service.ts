@@ -18,5 +18,5 @@ export const $verifyOtp = async (body: components["schemas"]["CodeVerify"]) => {
   const result = await client.POST("/api/v1/verification/verify", {
     body: body,
   });
-  return { data: result.data, status: result.response.status };
+  return { data: result.data, error: result.error };
 };

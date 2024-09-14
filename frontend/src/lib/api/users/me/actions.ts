@@ -11,5 +11,9 @@ export const removeCurrentUserAvatar = action(async () => {
 export const updateCurrentUserAvatar = action(async (file: File) => {
   "use server";
 
-  await $updateCurrentUserAvatar(file);
+  const { error, status } = await $updateCurrentUserAvatar(file);
+
+  if (error) {
+    return { error, status };
+  }
 });

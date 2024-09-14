@@ -26,12 +26,12 @@ export function NewPasswordStep() {
       return;
     }
 
-    const changed = await reset({ email: context.store.email, code: context.store.otp, password: form.password });
+    const result = await reset({ email: context.store.email, code: context.store.otp, password: form.password });
 
-    if (changed) {
-      toast.success(i18n.t.steps.resetPassword.password.form.success());
+    if (result?.error) {
+      toast.error(result.error.detail?.toString());
     } else {
-      toast.error(i18n.t.steps.resetPassword.password.form.errors.unknown());
+      toast.success(i18n.t.steps.resetPassword.password.form.success());
     }
   };
 

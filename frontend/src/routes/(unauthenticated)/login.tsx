@@ -1,5 +1,5 @@
 import { A, useAction, useSearchParams, useSubmission } from "@solidjs/router";
-import { createEffect, JSX, on, Show } from "solid-js";
+import { JSX, Show } from "solid-js";
 
 import { createForm, email, minLength, required } from "@modular-forms/solid";
 import { toast } from "solid-sonner";
@@ -16,16 +16,13 @@ export default function Login() {
   const [, Login] = createForm<LoginForm>();
   const action = useAction(authenticate);
   const submission = useSubmission(authenticate);
-  const result = () => submission.result;
 
-  createEffect(
-    on(result, () => {
-      const code = result()?.code;
-      if (code === 401 || code === 404) {
-        toast.error(i18n.t.routes.login.form.errors[code]());
-      }
-    }),
-  );
+  const submit = async (form: LoginForm) => {
+    const result = await action(form);
+    if (result.error) {
+      toast.error(result.error.detail?.toString())
+    }
+  }
 
   return (
     <div class="m-auto max-w-xs space-y-6 py-6">
@@ -40,7 +37,7 @@ export default function Login() {
       </header>
 
       <main>
-        <Login.Form onSubmit={action} method="post">
+        <Login.Form onSubmit={submit} method="post">
           <fieldset disabled={submission.pending} class="space-y-4">
             <Login.Field
               name="email"

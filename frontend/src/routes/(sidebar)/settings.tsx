@@ -1,29 +1,20 @@
-import { A, useSubmission } from "@solidjs/router";
-import {
-  arrowRightOnRectangle,
-  chevronRight,
-  globeAlt,
-  informationCircle,
-  paintBrush,
-  userCircle,
-} from "solid-heroicons/solid-mini";
+import { A } from "@solidjs/router";
+import { chevronRight, globeAlt, informationCircle, paintBrush, userCircle } from "solid-heroicons/solid-mini";
 import {
   Heading,
   LocaleSwitcher,
+  SettingsCard,
+  SettingsExpander,
+  SettingsGroup,
   ThemeSwitcher,
   Title,
 } from "~/components";
-import { SettingsCard } from "~/components/ui/settings/card";
-import { SettingsExpander } from "~/components/ui/settings/expander";
-import { SettingsGroup } from "~/components/ui/settings/group";
-import { unauthenticate } from "~/lib/api/auth";
 import { useI18n } from "~/lib/i18n";
 import { useTheme } from "~/lib/theme";
 
 export default function Settings() {
   const i18n = useI18n();
   const theme = useTheme();
-  const unauthenticating = useSubmission(unauthenticate);
 
   return (
     <div class="space-y-6">
@@ -49,27 +40,6 @@ export default function Settings() {
             <SettingsCard.Icon path={chevronRight} class="size-4" />
           </SettingsCard>
         </SettingsGroup>
-
-        <SettingsGroup as="form" action={unauthenticate} method="post">
-          <SettingsCard
-            as={"button"}
-            type="submit"
-            disabled={unauthenticating.pending}
-            aria-busy={unauthenticating.pending}
-            variant="hover"
-          >
-            <SettingsCard.Icon path={arrowRightOnRectangle} class="size-4 text-red-600" />
-            <SettingsCard.HeaderGroup>
-              <SettingsCard.Header class="text-red-600">
-                {i18n.t.routes.settings.sections.account.cards.signout.heading()}
-              </SettingsCard.Header>
-              <SettingsCard.Description>
-                {i18n.t.routes.settings.sections.account.cards.signout.description()}
-              </SettingsCard.Description>
-            </SettingsCard.HeaderGroup>
-            <SettingsCard.Icon path={chevronRight} class="size-4" />
-          </SettingsCard>
-        </SettingsGroup>
       </section>
 
       <section class="space-y-3">
@@ -79,7 +49,7 @@ export default function Settings() {
 
         <SettingsGroup>
           <SettingsExpander>
-            <SettingsExpander.Trigger>
+            <SettingsExpander.Trigger class="rounded-t-md">
               <SettingsCard.Icon path={paintBrush} class="size-4" />
               <SettingsCard.HeaderGroup>
                 <SettingsCard.Header>

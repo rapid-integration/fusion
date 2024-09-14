@@ -30,10 +30,6 @@ export const dict: DictionaryMap = {
             minLength: "Ваш пароль должен содержать не менее {{ length }} символов.",
           },
         },
-        errors: {
-          401: "Неверный пароль",
-          404: "Пользователь с таким адресом электронной почты не зарегистрирован",
-        },
         submit: "Войти",
       },
       footer: "Нет аккаунта? ",
@@ -46,10 +42,10 @@ export const dict: DictionaryMap = {
       heading: "Настройки",
       sections: {
         account: {
-          heading: "Учетная запись",
+          heading: "Аккаунт",
           cards: {
             account: {
-              heading: "Личный",
+              heading: "Личное",
               description: "Аватар, адрес электронной почты и пароль, управление учетной записью.",
             },
             signout: {
@@ -87,21 +83,8 @@ export const dict: DictionaryMap = {
         },
       },
       account: {
-        heading: "Учетная запись",
+        heading: "Аккаунт",
         sections: {
-          avatar: {
-            heading: "Аватар",
-            cards: {
-              change: {
-                heading: "Загрузить новый аватар",
-                description: "Измените текущее изображение профиля.",
-              },
-              remove: {
-                heading: "Удалить аватар",
-                description: "Удалить текущий загруженный аватар.",
-              },
-            },
-          },
           security: {
             heading: "Безопасность",
             cards: {
@@ -168,7 +151,6 @@ export const dict: DictionaryMap = {
           },
           errors: {
             mismatch: "Введённые пароли не совпадают!",
-            unknown: "Что-то пошло не так. Попробуйте пройти все шаги снова.",
           },
           submit: "Обновить мой пароль",
           success: "Пароль успешно изменён.",
@@ -176,7 +158,17 @@ export const dict: DictionaryMap = {
       },
     },
   },
-  sessionExpired: "Ваша сессия истекла!",
+  components: {
+    sessionExpirationObserver: {
+      expired: "Ваша сессия истекла!",
+    },
+    avatarEdit: {
+      open: "Открыть оригинал",
+      update: "Изменить",
+      select: "Выбрать новый аватар",
+      remove: "Удалить этот аватар",
+    },
+  },
 };
 
 export default dict;

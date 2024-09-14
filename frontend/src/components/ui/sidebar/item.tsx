@@ -9,15 +9,15 @@ export const SidebarItemRoot: ParentComponent<AnchorProps> = (props) => {
   return (
     <A
       class={merge(
-        "text-fg-soft flex w-full items-center justify-center gap-1",
-        "transition-[opacity,color,background-color] active:duration-0",
+        "flex w-full select-none items-center justify-center gap-1 text-fg-soft",
+        "transition-[opacity,color] active:duration-0",
         "max-md:hover:opacity-75 max-md:active:opacity-50",
         "max-sm:flex-col",
         "md:flex-row md:justify-start md:gap-2 md:rounded-lg md:p-2 md:hover:bg-bg-secondary",
         local.class,
       )}
       activeClass={merge(
-        "max-md:text-fg-accent md:text-fg-body md:bg-bg-tertiary md:hover:bg-bg-tertiary",
+        "max-md:text-fg-accent md:text-fg-body md:bg-bg-tertiary md:hover:bg-bg-tertiary !transition-[opacity,color,background-color]",
         local.activeClass,
       )}
       end

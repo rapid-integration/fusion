@@ -34,10 +34,6 @@ export type DictionaryMap = {
             minLength: string;
           };
         };
-        errors: {
-          401: string;
-          404: string;
-        };
         submit: string;
       };
       footer: string;
@@ -88,19 +84,6 @@ export type DictionaryMap = {
       account: {
         heading: string;
         sections: {
-          avatar: {
-            heading: string;
-            cards: {
-              change: {
-                heading: string;
-                description: string;
-              };
-              remove: {
-                heading: string;
-                description: string;
-              };
-            };
-          };
           security: {
             heading: string;
             cards: {
@@ -165,7 +148,6 @@ export type DictionaryMap = {
           };
           errors: {
             mismatch: string;
-            unknown: string;
           };
           submit: string;
           success: string;
@@ -173,7 +155,17 @@ export type DictionaryMap = {
       };
     };
   };
-  sessionExpired: string;
+  components: {
+    sessionExpirationObserver: {
+      expired: string;
+    };
+    avatarEdit: {
+      open: string;
+      update: string;
+      select: string;
+      remove: string;
+    };
+  };
 };
 
 export type LocalizedDictionary = i18n.Flatten<DictionaryMap>;

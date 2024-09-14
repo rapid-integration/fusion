@@ -34,10 +34,10 @@ export const OtpStep = () => {
 
   const onSubmit = async (form: OtpForm) => {
     const otp = Number(form.otp);
+    const result = await isCorrectOtp({ email: email(), code: otp });
 
-    if (!(await isCorrectOtp({ email: email(), code: otp }))) {
-      toast.error(i18n.t.steps.verification.otp.incorrect());
-
+    if (result.error) {
+      toast.error(result.error.detail?.toString());
       reset();
     } else {
       context.setStore("otp", otp);

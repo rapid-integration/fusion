@@ -30,10 +30,6 @@ export const dict: DictionaryMap = {
             minLength: "Your password must have 8 characters or more.",
           },
         },
-        errors: {
-          401: "Incorrect password",
-          404: "User with such email not found",
-        },
         submit: "Log in",
       },
       footer: "Don't have an account? ",
@@ -89,19 +85,6 @@ export const dict: DictionaryMap = {
       account: {
         heading: "Account",
         sections: {
-          avatar: {
-            heading: "Avatar",
-            cards: {
-              change: {
-                heading: "Upload new avatar",
-                description: "Change the current profile picture.",
-              },
-              remove: {
-                heading: "Remove avatar",
-                description: "Delete the current uploaded avatar.",
-              },
-            },
-          },
           security: {
             heading: "Security",
             cards: {
@@ -147,7 +130,6 @@ export const dict: DictionaryMap = {
           },
           errors: {
             mismatch: "The entered passwords don't match!",
-            unknown: "Something went wrong. Try all the steps again.",
           },
           submit: "Update my password",
           success: "Password changed successfully.",
@@ -175,7 +157,17 @@ export const dict: DictionaryMap = {
       },
     },
   },
-  sessionExpired: "Your session has expired!",
+  components: {
+    sessionExpirationObserver: {
+      expired: "Your session has expired!",
+    },
+    avatarEdit: {
+      open: "Open original",
+      update: "Update",
+      select: "Select new avatar",
+      remove: "Remove this avatar",
+    },
+  },
 };
 
 export default dict;

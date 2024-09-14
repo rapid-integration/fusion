@@ -13,6 +13,9 @@ module.exports = {
         "cqi-25": "25cqi",
         "cqi-50": "50cqi",
       },
+      transitionProperty: {
+        "filter": "filter",
+      },
       colors: {
         fg: {
           body: "var(--fg-color-body)",

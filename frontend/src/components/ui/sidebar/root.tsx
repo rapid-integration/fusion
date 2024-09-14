@@ -1,13 +1,14 @@
 import { createAsync } from "@solidjs/router";
-import { Component, Show } from "solid-js";
+import { Component, Show, splitProps } from "solid-js";
 
-import { bookmark, cog, folder, home, userCircle } from "solid-heroicons/solid-mini";
+import { bookmark, cog, folder, home } from "solid-heroicons/solid-mini";
 
-import { formatResourceURL } from "~/lib/api/uploads";
 import { getCurrentUser } from "~/lib/api/users/me";
 import { useI18n } from "~/lib/i18n";
 
+import { Avatar } from "../avatar";
 import { SidebarItem } from "./item";
+import { merge } from "~/lib/utils/css/merge";
 
 export const Sidebar: Component = () => {
   const i18n = useI18n();
@@ -28,31 +29,24 @@ export const Sidebar: Component = () => {
           <SidebarItem.Icon path={folder} />
           <SidebarItem.Label>Library</SidebarItem.Label>
         </SidebarItem>
-        <Show
-          when={currentUser()}
-          fallback={
-            <SidebarItem href="/login" class="flex md:mt-auto">
-              <SidebarItem.Icon path={userCircle} />
-              <SidebarItem.Label>{i18n.t.routes.login.title()}</SidebarItem.Label>
-            </SidebarItem>
-          }
-        >
-          {(user) => (
-            <SidebarItem href="/settings" class="flex md:mt-auto" activeClass="max-md:[&>img]:ring-blue-500">
-              <Show when={user().avatar_url} fallback={<SidebarItem.Icon path={cog} />}>
-                {(avatar_url) => (
-                  <SidebarItem.Icon
-                    as={"img"}
-                    src={formatResourceURL(avatar_url())}
-                    class="rounded-full ring-1 max-md:ring-bg-tertiary max-md:transition-shadow"
-                  />
-                )}
-              </Show>
+        <SidebarItem href="/settings" class="group md:mt-auto">
+          <Show when={currentUser()} fallback={<SidebarItem.Icon path={cog} />}>
+            {(user) => (
+              <SidebarItem.Icon
+                as={(props) => {
+                  const [local, rest] = splitProps(props, ["class"]);
+                  return (
+                    <Avatar class={merge("group-aria-[current='page']:max-md:ring-fg-accent", local.class)} {...rest}>
+                      <Avatar.Img src={user().avatar_url} alt={user().email} />
+                    </Avatar>
+                  );
+                }}
+              />
+            )}
+          </Show>
 
-              <SidebarItem.Label>{i18n.t.routes.settings.heading()}</SidebarItem.Label>
-            </SidebarItem>
-          )}
-        </Show>
+          <SidebarItem.Label>{i18n.t.routes.settings.heading()}</SidebarItem.Label>
+        </SidebarItem>
       </nav>
     </aside>
   );

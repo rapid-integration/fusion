@@ -24,5 +24,5 @@ export const $updateCurrentUserAvatar = async (file: File) => {
     },
     bodySerializer: formDataSerializer,
   });
-  return { data: result.data };
+  return { data: result.data, error: result.error, status: result.response.status };
 };
