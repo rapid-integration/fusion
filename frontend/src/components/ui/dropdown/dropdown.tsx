@@ -6,11 +6,13 @@ import { PolymorphicProps } from "@kobalte/core/polymorphic";
 import { merge } from "~/lib/utils/css/merge";
 import { DropdownMenuContentProps, DropdownMenuItemProps } from "./dropdown.props";
 import { styles } from "./dropdown.styles";
+import { Icon } from "solid-heroicons";
 
 // TODO: Re-map more dropdown primitives.
 const DropdownRoot = DropdownPrimitive.Root;
 const DropdownTrigger = DropdownPrimitive.Trigger;
 const DropdownArrow = DropdownPrimitive.Arrow;
+const DropdownItemIcon = Icon;
 const DropdownItemLabel = DropdownPrimitive.ItemLabel;
 const DropdownItemIndicator = DropdownPrimitive.ItemIndicator;
 const DropdownIcon = DropdownPrimitive.Icon;
@@ -37,6 +39,7 @@ export const Dropdown = Object.assign(DropdownRoot, {
   Content: DropdownContent,
   Item: DropdownItem,
   Arrow: DropdownArrow,
+  ItemIcon: DropdownItemIcon,
   ItemLabel: DropdownItemLabel,
   ItemIndicator: DropdownItemIndicator,
   Icon: DropdownIcon,
