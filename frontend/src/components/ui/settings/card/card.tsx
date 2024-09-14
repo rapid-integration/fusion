@@ -9,6 +9,7 @@ import type {
   SettingsCardHeaderGroupProps,
   SettingsCardHeaderProps,
   SettingsCardProps,
+  SettingsCardValueProps,
 } from "./card.props";
 
 import { styles } from "./card.styles";
@@ -36,5 +37,28 @@ export const SettingsCardDescription = <T extends ValidComponent = "p">(
   props: PolymorphicProps<T, SettingsCardDescriptionProps>,
 ) => {
   const [local, others] = splitProps(props, ["class"]);
-  return <Polymorphic as="p" class={merge("text-xs text-fg-muted", local.class)} {...others} />;
+  return (
+    <Polymorphic
+      as="p"
+      class={merge("text-xs text-fg-muted max-md:hidden max-md:leading-none", local.class)}
+      {...others}
+    />
+  );
+};
+
+export const SettingsCardValue = <T extends ValidComponent = "span">(
+  props: PolymorphicProps<T, SettingsCardValueProps>,
+) => {
+  const [local, others] = splitProps(props, ["class"]);
+  return (
+    <Polymorphic
+      as="span"
+      class={merge(
+        "text-xs text-fg-muted max-md:leading-none",
+        "transition-[opacity,color] group-data-[expanded]/collapsible:opacity-0",
+        local.class,
+      )}
+      {...others}
+    />
+  );
 };

@@ -61,7 +61,7 @@ export default function Account() {
                       {i18n.t.routes.settings.account.sections.security.cards.email.description()}
                     </SettingsCard.Description>
                   </SettingsCard.HeaderGroup>
-                  <SettingsCard.Description>{user().email}</SettingsCard.Description>
+                  <SettingsCard.Value>{user().email}</SettingsCard.Value>
                   <SettingsCard.Icon path={chevronRight} class="size-4" />
                 </SettingsCard>
 

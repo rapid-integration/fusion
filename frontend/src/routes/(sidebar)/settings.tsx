@@ -59,9 +59,9 @@ export default function Settings() {
                   {i18n.t.routes.settings.sections.appearance.cards.theme.description()}
                 </SettingsCard.Description>
               </SettingsCard.HeaderGroup>
-              <SettingsCard.Description class="transition-all group-data-[expanded]/collapsible:opacity-0">
+              <SettingsCard.Value>
                 {i18n.t.routes.settings.sections.appearance.cards.theme.options[theme.theme()]()}
-              </SettingsCard.Description>
+              </SettingsCard.Value>
               <SettingsExpander.Indicator />
             </SettingsExpander.Trigger>
             <SettingsExpander.Content>
@@ -97,7 +97,7 @@ export default function Settings() {
                 {i18n.t.routes.settings.sections.about.cards.app.description()}
               </SettingsCard.Description>
             </SettingsCard.HeaderGroup>
-            <SettingsCard.Description as="code">{import.meta.env.VITE_APP_VERSION}</SettingsCard.Description>
+            <SettingsCard.Value as="code">{import.meta.env.VITE_APP_VERSION}</SettingsCard.Value>
           </SettingsCard>
         </SettingsGroup>
       </section>
