@@ -15,26 +15,26 @@ export default function Account() {
   const unauthenticating = useSubmission(unauthenticate);
 
   return (
-    <>
+    <div class="space-y-6">
       <Title>{i18n.t.routes.settings.account.heading()}</Title>
+
+      <Breadcrumbs separator={<Icon class="size-5" path={chevronRight} />}>
+        <ol class="flex select-none items-center gap-1 text-fg-muted">
+          <li>
+            <Breadcrumbs.Link as={A} href="/settings">
+              <Heading>{i18n.t.routes.settings.heading()}</Heading>
+            </Breadcrumbs.Link>
+          </li>
+          <Breadcrumbs.Separator />
+          <li class="text-fg-body">
+            <Heading>{i18n.t.routes.settings.account.heading()}</Heading>
+          </li>
+        </ol>
+      </Breadcrumbs>
 
       <Show when={currentUser()}>
         {(user) => (
-          <div class="space-y-6">
-            <Breadcrumbs separator={<Icon class="size-5" path={chevronRight} />}>
-              <ol class="flex select-none items-center gap-1 text-fg-muted">
-                <li>
-                  <Breadcrumbs.Link as={A} href="/settings">
-                    <Heading>{i18n.t.routes.settings.heading()}</Heading>
-                  </Breadcrumbs.Link>
-                </li>
-                <Breadcrumbs.Separator />
-                <li class="text-fg-body">
-                  <Heading>{i18n.t.routes.settings.account.heading()}</Heading>
-                </li>
-              </ol>
-            </Breadcrumbs>
-
+          <>
             <section class="flex flex-col items-center justify-center gap-3 px-2 py-1 text-center">
               <AvatarEdit user={user()} />
               <hgroup>
@@ -51,7 +51,6 @@ export default function Account() {
               </Heading>
 
               <SettingsGroup>
-                
                 <SettingsCard variant="hover">
                   <SettingsCard.Icon path={envelopeOpen} class="size-4" />
                   <SettingsCard.HeaderGroup>
@@ -78,7 +77,6 @@ export default function Account() {
                   </SettingsCard.HeaderGroup>
                   <SettingsCard.Icon path={chevronRight} class="size-4" />
                 </SettingsCard>
-                
               </SettingsGroup>
 
               <SettingsGroup as="form" action={unauthenticate} method="post">
@@ -102,9 +100,9 @@ export default function Account() {
                 </SettingsCard>
               </SettingsGroup>
             </section>
-          </div>
+          </>
         )}
       </Show>
-    </>
+    </div>
   );
 }
