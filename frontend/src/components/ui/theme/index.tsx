@@ -67,7 +67,7 @@ export const ThemeSwitcher = (props: JSX.StylableSVGAttributes) => {
       <RadioGroup.Label as={"h3"} class="sr-only">
         {i18n.t.routes.settings.sections.appearance.cards.theme.heading()}
       </RadioGroup.Label>
-      <ul class="flex gap-4 overflow-x-auto">
+      <ul class="flex gap-4 overflow-x-auto pb-4">
         <For each={SUPPORTED_THEMES}>
           {(theme) => (
             <RadioGroup.Item as={"li"} value={theme}>
