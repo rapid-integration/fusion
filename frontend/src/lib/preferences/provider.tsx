@@ -15,13 +15,14 @@ export const PreferencesContext = createContext<PreferencesContextValue>({} as P
 export const PreferencesProvider: ParentComponent = (props) => {
   const sync = new BroadcastChannel("preferences_sync");
 
-  // TODO: Use sync API
+  // TODO: Use sync @solid-primitives/storage's API
   const [settings, set] = storage.makePersisted(createStore(getDefaultSettings()), {
     name: PREFERENCES_COOKIE_NAME,
     storage: storage.cookieStorage,
     storageOptions: {
       secure: /true/i.test(import.meta.env.VITE_SECURE_COOKIES),
       sameSite: "Lax",
+      path: "/",
     },
   });
 
