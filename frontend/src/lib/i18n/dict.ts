@@ -1,5 +1,7 @@
 import * as i18n from "@solid-primitives/i18n";
-import { type Locale, type LocalizedDictionary, type DictionaryMap } from "~/lib/i18n";
+import type { DictionaryMap, Locale, LocalizedDictionary } from "~/lib/i18n";
+
+const cache = new Map<Locale, DictionaryMap | undefined>();
 
 /**
  * Asynchronously retrieves the localized dictionary for a specific locale.
@@ -10,7 +12,13 @@ import { type Locale, type LocalizedDictionary, type DictionaryMap } from "~/lib
 export async function getLocalizedDictionary(locale: Locale): Promise<LocalizedDictionary> | never {
   try {
     // TODO: Replace empty strings with values from English dict.
-    return i18n.flatten((await import(`~/lib/i18n/locales/${locale}.ts`)).dict as DictionaryMap);
+    let dict = cache.get(locale);
+    if (!dict) {
+      const file = await import(`~/lib/i18n/locales/${locale}.ts`);
+      dict = file.dict as DictionaryMap;
+      cache.set(locale, dict);
+    }
+    return i18n.flatten(dict);
   } catch (error) {
     throw new ReferenceError(`Cannot fetch dictionary for locale: '${locale}'.`);
   }
