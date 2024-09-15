@@ -12,7 +12,7 @@ export const getIsLoggedIn = cache(async () => {
   const isLoggedIn = jwt !== undefined && Date.parse(jwt.expires_at) > Date.now();
 
   return isLoggedIn;
-}, "$getIsLoggedIn");
+}, "isLoggedIn");
 
 /**
  * Retrieves the session expiration date.
@@ -25,4 +25,4 @@ export const getSessionExpirationDate = cache(async () => {
   const sessionExpirationDate = jwt ? Date.parse(jwt.expires_at) : Date.now();
 
   return sessionExpirationDate;
-}, "$getSessionExpiresAt");
+}, "sessionExpirationDate");
